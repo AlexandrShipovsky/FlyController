@@ -79,8 +79,6 @@ void HAL_MspInit(void)
   /* USER CODE END MspInit 1 */
 }
 
-static uint32_t HAL_RCC_CAN1_CLK_ENABLED=0;
-
 /**
 * @brief CAN MSP Initialization
 * This function configures the hardware resources used in this example
@@ -96,10 +94,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
 
   /* USER CODE END CAN1_MspInit 0 */
     /* Peripheral clock enable */
-    HAL_RCC_CAN1_CLK_ENABLED++;
-    if(HAL_RCC_CAN1_CLK_ENABLED==1){
-      __HAL_RCC_CAN1_CLK_ENABLE();
-    }
+    __HAL_RCC_CAN1_CLK_ENABLE();
   
     __HAL_RCC_GPIOD_CLK_ENABLE();
     /**CAN1 GPIO Configuration    
@@ -116,35 +111,6 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
   /* USER CODE BEGIN CAN1_MspInit 1 */
 
   /* USER CODE END CAN1_MspInit 1 */
-  }
-  else if(hcan->Instance==CAN2)
-  {
-  /* USER CODE BEGIN CAN2_MspInit 0 */
-
-  /* USER CODE END CAN2_MspInit 0 */
-    /* Peripheral clock enable */
-    __HAL_RCC_CAN3_CLK_ENABLE();
-    __HAL_RCC_CAN2_CLK_ENABLE();
-    HAL_RCC_CAN1_CLK_ENABLED++;
-    if(HAL_RCC_CAN1_CLK_ENABLED==1){
-      __HAL_RCC_CAN1_CLK_ENABLE();
-    }
-  
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    /**CAN2 GPIO Configuration    
-    PB12     ------> CAN2_RX
-    PB6     ------> CAN2_TX 
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_6;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF9_CAN2;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /* USER CODE BEGIN CAN2_MspInit 1 */
-
-  /* USER CODE END CAN2_MspInit 1 */
   }
 
 }
@@ -174,29 +140,6 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan)
   /* USER CODE BEGIN CAN1_MspDeInit 1 */
 
   /* USER CODE END CAN1_MspDeInit 1 */
-  }
-  else if(hcan->Instance==CAN2)
-  {
-  /* USER CODE BEGIN CAN2_MspDeInit 0 */
-
-  /* USER CODE END CAN2_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_CAN3_CLK_DISABLE();
-    __HAL_RCC_CAN2_CLK_DISABLE();
-    HAL_RCC_CAN1_CLK_ENABLED--;
-    if(HAL_RCC_CAN1_CLK_ENABLED==0){
-      __HAL_RCC_CAN1_CLK_DISABLE();
-    }
-  
-    /**CAN2 GPIO Configuration    
-    PB12     ------> CAN2_RX
-    PB6     ------> CAN2_TX 
-    */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_12|GPIO_PIN_6);
-
-  /* USER CODE BEGIN CAN2_MspDeInit 1 */
-
-  /* USER CODE END CAN2_MspDeInit 1 */
   }
 
 }
@@ -241,6 +184,71 @@ void HAL_CRC_MspDeInit(CRC_HandleTypeDef* hcrc)
   /* USER CODE BEGIN CRC_MspDeInit 1 */
 
   /* USER CODE END CRC_MspDeInit 1 */
+  }
+
+}
+
+/**
+* @brief I2C MSP Initialization
+* This function configures the hardware resources used in this example
+* @param hi2c: I2C handle pointer
+* @retval None
+*/
+void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  if(hi2c->Instance==I2C4)
+  {
+  /* USER CODE BEGIN I2C4_MspInit 0 */
+
+  /* USER CODE END I2C4_MspInit 0 */
+  
+    __HAL_RCC_GPIOF_CLK_ENABLE();
+    /**I2C4 GPIO Configuration    
+    PF14     ------> I2C4_SCL
+    PF15     ------> I2C4_SDA 
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_14|GPIO_PIN_15;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C4;
+    HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+    /* Peripheral clock enable */
+    __HAL_RCC_I2C4_CLK_ENABLE();
+  /* USER CODE BEGIN I2C4_MspInit 1 */
+
+  /* USER CODE END I2C4_MspInit 1 */
+  }
+
+}
+
+/**
+* @brief I2C MSP De-Initialization
+* This function freeze the hardware resources used in this example
+* @param hi2c: I2C handle pointer
+* @retval None
+*/
+void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
+{
+  if(hi2c->Instance==I2C4)
+  {
+  /* USER CODE BEGIN I2C4_MspDeInit 0 */
+
+  /* USER CODE END I2C4_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_I2C4_CLK_DISABLE();
+  
+    /**I2C4 GPIO Configuration    
+    PF14     ------> I2C4_SCL
+    PF15     ------> I2C4_SDA 
+    */
+    HAL_GPIO_DeInit(GPIOF, GPIO_PIN_14|GPIO_PIN_15);
+
+  /* USER CODE BEGIN I2C4_MspDeInit 1 */
+
+  /* USER CODE END I2C4_MspDeInit 1 */
   }
 
 }
