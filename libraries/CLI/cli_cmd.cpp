@@ -21,24 +21,24 @@
 void CLI_CommandsParser(const TCLI_IO *const io, char *ps, CLI_InputStrLen_t len)
 {
 
-	CLI_IF_CMD("LED", "Commands for switching LED PC13") // ������� ���������� ����������� PC13
+	CLI_IF_CMD("LED", "Commands for switching LD2") // ������� ���������� ����������� PC13
 	{
 		CLI_NEXT_WORD();
 		CLI_IF_CMD("ON", "LED ON")
 		{
-			HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 			ok;
 			return;
 		}
 		CLI_IF_CMD("OFF", "LED OFF")
 		{
-			HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
 			ok;
 			return;
 		}
 		CLI_IF_CMD("SWITCH", "LED SWITCH")
 		{
-			HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+			HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 			ok;
 			return;
 		}
@@ -48,6 +48,7 @@ void CLI_CommandsParser(const TCLI_IO *const io, char *ps, CLI_InputStrLen_t len
 
 	CLI_IF_CMD("CANTX", "Send CAN")
 	{
+		/*
 		CAN_TxHeaderTypeDef TxHeader;
 		extern CAN_HandleTypeDef hcan1;
 
@@ -67,6 +68,7 @@ void CLI_CommandsParser(const TCLI_IO *const io, char *ps, CLI_InputStrLen_t len
 		{
 			Error_Handler();
 		}
+		*/
 		return;
 	}
 

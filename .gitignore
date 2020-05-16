@@ -1,2 +1,6 @@
 .vscode/iar.json
 .vscode/tasks.json
+.vscode/BROWSE.DB-shm
+.vscode/BROWSE.DB-wal
+.vscode/BROWSE.DB-shm
+.vscode/BROWSE.DB-wal
