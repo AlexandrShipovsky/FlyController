@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "cli.h"
+#include "api.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -137,7 +138,7 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 512);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 4096);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of cliTask */
@@ -497,12 +498,71 @@ void StartDefaultTask(void const * argument)
   /* init code for LWIP */
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for(;;)
+  extern struct netif gnetif;
+  int8_t res;
+  uint8_t net_state = 0;
+  struct netconn *nc;
+  //struct netconn *in_nc;
+  struct netbuf *nb;
+  volatile uint16_t len;
+  char buf[1024];
+  ip_addr_t local_ip;
+  ip_addr_t remote_ip;
+  while (gnetif.ip_addr.addr == 0)
   {
-    HAL_GPIO_TogglePin(LD1_GPIO_Port,LD1_Pin);
-    
-    osDelay(300);
+    osDelay(1);
+  }
+  local_ip = gnetif.ip_addr;
+  ip4addr_aton("192.168.168.106", &remote_ip);
+
+  nc = netconn_new(NETCONN_TCP);
+  if (nc == NULL)
+  {
+    while (1)
+    {
+      osDelay(1);
+    }
+  }
+
+  res = netconn_bind(nc, &local_ip,0);
+  if (res != 0)
+  {
+    Error_Handler();
+  }
+
+  
+  /* Infinite loop */
+  for (;;)
+  {
+    if (net_state == 0)
+    {
+      HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+      res = netconn_connect(nc, &remote_ip, 8889);
+      while (res != 0)
+      {
+        osDelay(1);
+        res = netconn_connect(nc, &remote_ip, 8889);
+      }
+      net_state = 1;
+ 
+    }
+    else
+    {
+      HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+      res = netconn_recv(nc, &nb);
+      if (res != 0)
+      {
+        Error_Handler();
+        //net_state = 0;
+       // netconn_close(nc);
+      }
+      len = netbuf_len(nb);
+      netbuf_copy(nb,buf,len);
+      netbuf_delete(nb);
+
+    }
+
+    osDelay(1);
   }
   /* USER CODE END 5 */ 
 }
@@ -518,9 +578,10 @@ __weak void StartCliTask(void const * argument)
 {
   /* USER CODE BEGIN StartCliTask */
   /* Infinite loop */
-  for(;;)
+  for (;;)
   {
-    osDelay(1);
+    HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+    osDelay(300);
   }
   /* USER CODE END StartCliTask */
 }
@@ -554,7 +615,7 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin,GPIO_PIN_SET);
+  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
   /* USER CODE END Error_Handler_Debug */
 }
 
