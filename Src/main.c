@@ -56,6 +56,8 @@ UART_HandleTypeDef huart3;
 
 osThreadId defaultTaskHandle;
 osThreadId cliTaskHandle;
+osThreadId ConGroundStatioHandle;
+osThreadId myTask04Handle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -70,6 +72,8 @@ static void MX_CRC_Init(void);
 static void MX_I2C4_Init(void);
 void StartDefaultTask(void const * argument);
 void StartCliTask(void const * argument);
+void StartConGroundStation(void const * argument);
+void StartTask04(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -138,12 +142,20 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 4096);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityLow, 0, 512);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of cliTask */
   osThreadDef(cliTask, StartCliTask, osPriorityIdle, 0, 512);
   cliTaskHandle = osThreadCreate(osThread(cliTask), NULL);
+
+  /* definition and creation of ConGroundStatio */
+  osThreadDef(ConGroundStatio, StartConGroundStation, osPriorityLow, 0, 2048);
+  ConGroundStatioHandle = osThreadCreate(osThread(ConGroundStatio), NULL);
+
+  /* definition and creation of myTask04 */
+  osThreadDef(myTask04, StartTask04, osPriorityIdle, 0, 128);
+  myTask04Handle = osThreadCreate(osThread(myTask04), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -490,7 +502,7 @@ static void MX_GPIO_Init(void)
   * @retval None
   */
 /* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void const * argument)
+__weak void StartDefaultTask(void const * argument)
 {
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
@@ -498,72 +510,16 @@ void StartDefaultTask(void const * argument)
   /* init code for LWIP */
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
-  extern struct netif gnetif;
-  int8_t res;
-  uint8_t net_state = 0;
-  struct netconn *nc;
-  //struct netconn *in_nc;
-  struct netbuf *nb;
-  volatile uint16_t len;
-  char buf[1024];
-  ip_addr_t local_ip;
-  ip_addr_t remote_ip;
-  while (gnetif.ip_addr.addr == 0)
-  {
-    osDelay(1);
-  }
-  local_ip = gnetif.ip_addr;
-  ip4addr_aton("192.168.168.106", &remote_ip);
-
-  nc = netconn_new(NETCONN_TCP);
-  if (nc == NULL)
-  {
-    while (1)
-    {
-      osDelay(1);
-    }
-  }
-
-  res = netconn_bind(nc, &local_ip,0);
-  if (res != 0)
-  {
-    Error_Handler();
-  }
-
   
+  
+  //taskEXIT_CRITICAL();
   /* Infinite loop */
   for (;;)
   {
-    if (net_state == 0)
-    {
-      HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-      res = netconn_connect(nc, &remote_ip, 8889);
-      while (res != 0)
-      {
-        osDelay(1);
-        res = netconn_connect(nc, &remote_ip, 8889);
-      }
-      net_state = 1;
- 
-    }
-    else
-    {
-      HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-      res = netconn_recv(nc, &nb);
-      if (res != 0)
-      {
-        Error_Handler();
-        //net_state = 0;
-       // netconn_close(nc);
-      }
-      len = netbuf_len(nb);
-      netbuf_copy(nb,buf,len);
-      netbuf_delete(nb);
+  
+    osDelay(1000);
+  };
 
-    }
-
-    osDelay(1);
-  }
   /* USER CODE END 5 */ 
 }
 
@@ -580,10 +536,46 @@ __weak void StartCliTask(void const * argument)
   /* Infinite loop */
   for (;;)
   {
-    HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
-    osDelay(300);
+    //HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+    osDelay(1);
   }
   /* USER CODE END StartCliTask */
+}
+
+/* USER CODE BEGIN Header_StartConGroundStation */
+/**
+* @brief Function implementing the ConGroundStatio thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartConGroundStation */
+__weak void StartConGroundStation(void const * argument)
+{
+  /* USER CODE BEGIN StartConGroundStation */
+  /* Infinite loop */
+  for (;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartConGroundStation */
+}
+
+/* USER CODE BEGIN Header_StartTask04 */
+/**
+* @brief Function implementing the myTask04 thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTask04 */
+void StartTask04(void const * argument)
+{
+  /* USER CODE BEGIN StartTask04 */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartTask04 */
 }
 
  /**
@@ -616,6 +608,16 @@ void Error_Handler(void)
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+  osDelay(100);
+  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+  osDelay(100);
+  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+  osDelay(100);
+  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+  osDelay(100);
+  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+  osDelay(100);
+  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
   /* USER CODE END Error_Handler_Debug */
 }
 

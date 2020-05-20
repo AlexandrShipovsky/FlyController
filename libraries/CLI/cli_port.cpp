@@ -13,11 +13,12 @@
 #include "cli_base.h"
 #include "cli_cmd.h"
 #include "usbd_cdc_if.h"
+#include "FreeRTOS.h"
 
 using namespace cli;
 
 extern uint8_t UserRxBufferFS[];
-SemaphoreHandle_t CliMutex;
+//SemaphoreHandle_t CliMutex;
 //#####################################################################################################
 
 void cli::cli_sleep(uint32_t time_ms)
@@ -65,7 +66,7 @@ extern "C" void DbgUSBPutChar(char val)
 extern "C" int DbgPrintf(const char *format, ...)
 {
 	static char USB_printf_buff[CLI_PRINTF_WORK_BUFFER_SIZE] = {};
-	xSemaphoreTake(CliMutex, 100);
+	//xSemaphoreTake(CliMutex, 100);
 	__Va_list ap;
 
 	va_start(ap, format);
@@ -91,7 +92,7 @@ extern "C" int DbgPrintf(const char *format, ...)
 			DbgUSBPutChar(USB_printf_buff[i]);
 		}
 	}
-	xSemaphoreGive(CliMutex);
+	//xSemaphoreGive(CliMutex);
 	return len;
 }
 
@@ -119,7 +120,7 @@ extern "C" bool DbgUSBReadChar(char *const val, uint32_t timeout)
 extern "C" int DbgScanf(const char *format, ...)
 {
 	static char USB_scanf_buff[CLI_SCANF_WORK_BUFFER_SIZE];
-	xSemaphoreTake(CliMutex, 100);
+	//xSemaphoreTake(CliMutex, 100);
 
 	int result;
 	uint32_t buf_index = 0;
@@ -131,7 +132,7 @@ extern "C" int DbgScanf(const char *format, ...)
 
 		if (tmp == '\r' || tmp == '\n')
 		{
-			xSemaphoreGive(CliMutex);
+			//xSemaphoreGive(CliMutex);
 			break;
 		}
 		DbgUSBPutChar(tmp);
@@ -152,7 +153,7 @@ extern "C" int DbgScanf(const char *format, ...)
 	va_start(ap, format);
 	result = vsscanf(USB_scanf_buff, format, ap);
 	va_end(ap);
-	xSemaphoreGive(CliMutex);
+	//xSemaphoreGive(CliMutex);
 	return result;
 }
 
