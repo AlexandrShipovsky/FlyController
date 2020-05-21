@@ -14,11 +14,31 @@
 #define __PROTHAWK_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
+#define NUMCOMMANDS (uint16_t)512
+    typedef enum
+    {
+        PreFlightTestRequest = 1,
+        PreFlightTestResponse = 2,
+        WingCalibrationRequest = 3,
+        WingCalibrationResponse = 4,
+        PilotCommand = 5,
+        PilotCommandResponse = 6,
+        PING = 7
+    } HawkCommandsTypeDef;
 
+    typedef struct
+    {
+        int16_t Pitch;
+        int16_t Roll;
+        int16_t Accel;
+    }
+    PitchRollAccelTypeDef;
 
+    PitchRollAccelTypeDef f[5];
 
 #ifdef __cplusplus
 }

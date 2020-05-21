@@ -57,7 +57,7 @@ UART_HandleTypeDef huart3;
 osThreadId defaultTaskHandle;
 osThreadId cliTaskHandle;
 osThreadId ConGroundStatioHandle;
-osThreadId myTask04Handle;
+osThreadId ParserGroundStaHandle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -73,9 +73,10 @@ static void MX_I2C4_Init(void);
 void StartDefaultTask(void const * argument);
 void StartCliTask(void const * argument);
 void StartConGroundStation(void const * argument);
-void StartTask04(void const * argument);
+void StartParserGroundStationTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
+
 
 /* USER CODE END PFP */
 
@@ -137,7 +138,7 @@ int main(void)
   /* USER CODE END RTOS_TIMERS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
-  /* add queues, ... */
+  
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -153,9 +154,9 @@ int main(void)
   osThreadDef(ConGroundStatio, StartConGroundStation, osPriorityLow, 0, 2048);
   ConGroundStatioHandle = osThreadCreate(osThread(ConGroundStatio), NULL);
 
-  /* definition and creation of myTask04 */
-  osThreadDef(myTask04, StartTask04, osPriorityIdle, 0, 128);
-  myTask04Handle = osThreadCreate(osThread(myTask04), NULL);
+  /* definition and creation of ParserGroundSta */
+  osThreadDef(ParserGroundSta, StartParserGroundStationTask, osPriorityLow, 0, 512);
+  ParserGroundStaHandle = osThreadCreate(osThread(ParserGroundSta), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -560,22 +561,22 @@ __weak void StartConGroundStation(void const * argument)
   /* USER CODE END StartConGroundStation */
 }
 
-/* USER CODE BEGIN Header_StartTask04 */
+/* USER CODE BEGIN Header_StartParserGroundStationTask */
 /**
-* @brief Function implementing the myTask04 thread.
+* @brief Function implementing the ParserGroundSta thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartTask04 */
-void StartTask04(void const * argument)
+/* USER CODE END Header_StartParserGroundStationTask */
+__weak void StartParserGroundStationTask(void const * argument)
 {
-  /* USER CODE BEGIN StartTask04 */
+  /* USER CODE BEGIN StartParserGroundStationTask */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END StartTask04 */
+  /* USER CODE END StartParserGroundStationTask */
 }
 
  /**

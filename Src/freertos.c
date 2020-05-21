@@ -24,14 +24,17 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */     
+/* USER CODE BEGIN Includes */
+//#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
 #include "cli.h"
 #include "api.h"
 #include "lwip.h"
+#include "string.h"
 
 #include "confighawk.h"
+#include "prothawk.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,7 +44,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define BUFSIZE 256 // Размер буфера для принимаемых пакетов
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -51,7 +54,10 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-uint8_t net_state = 0; // Состояние подключения
+uint8_t net_state = 0;                            // Состояние подключения
+xQueueHandle GroundStationDataQueueHandle = NULL; // Очередь передачи принятых байт от задачи приема к задаче парсинга
+struct netconn *nc;
+struct netbuf *nb;
 /* USER CODE END Variables */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -60,7 +66,7 @@ uint8_t net_state = 0; // Состояние подключения
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -92,16 +98,18 @@ void StartDefaultTask(void const *argument)
 
   /* init code for LWIP */
 
+  GroundStationDataQueueHandle = xQueueCreate(16, BUFSIZE);
+
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
   extern struct netif gnetif;
   uint8_t PhyStat;
-  
+
   /* Infinite loop */
   for (;;)
   {
     PhyStat = gnetif.flags; //  Статистика подключения
-    if(PhyStat != 15)
+    if (PhyStat != 15)
     {
       HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
     }
@@ -125,11 +133,11 @@ void StartDefaultTask(void const *argument)
 void StartNetTest(void const *argument)
 {
   /* USER CODE BEGIN StartNetTest */
-  
+
   /* Infinite loop */
   for (;;)
   {
-   
+
     vTaskDelay(200);
   }
 
@@ -173,10 +181,9 @@ void StartConGroundStation(void const *argument)
   /* USER CODE BEGIN StartConGroundStation */
 
   int8_t res;
-  struct netconn *nc;
-  struct netbuf *nb;
+
   volatile uint16_t len;
-  char buf[1024];
+  uint8_t buf[BUFSIZE];
 
   extern struct netif gnetif;
 
@@ -203,6 +210,17 @@ void StartConGroundStation(void const *argument)
         len = netbuf_len(nb);
         netbuf_copy(nb, buf, len);
         netbuf_delete(nb);
+        if (GroundStationDataQueueHandle != NULL)
+        {
+          if (xQueueSendToBack(GroundStationDataQueueHandle,
+                               (void *)buf,
+                               (TickType_t)10) != pdPASS)
+          {
+            /* Failed to post the message, even after 10 ticks. */
+          }
+        }
+
+        memset(buf, 0x00, sizeof(buf));
       }
     }
     else
@@ -214,14 +232,14 @@ void StartConGroundStation(void const *argument)
         vTaskDelay(1);
       }
       local_ip = gnetif.ip_addr;
-      ip4addr_aton("192.168.168.106", &remote_ip);
+      ip4addr_aton(IpGroundStation, &remote_ip);
       nc = netconn_new(NETCONN_TCP);
       if (nc != NULL)
       {
-        res = netconn_bind(nc, &local_ip, 8889);
+        res = netconn_bind(nc, &local_ip, PortGroundStation);
         if (res == ERR_OK)
         {
-          res = netconn_connect(nc, &remote_ip, 8889);
+          res = netconn_connect(nc, &remote_ip, PortGroundStation);
           if (res == ERR_OK)
           {
 
@@ -234,6 +252,71 @@ void StartConGroundStation(void const *argument)
   }
 }
 /* USER CODE END StartConGroundStation */
+
+/* USER CODE BEGIN Header_StartParserGroundStationTask */
+/**
+* @brief Function implementing the ParserGroundSta thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartParserGroundStationTask */
+void StartParserGroundStationTask(void const *argument)
+{
+  /* USER CODE BEGIN StartParserGroundStationTask */
+  uint8_t pbuf[BUFSIZE];
+  memset(pbuf, 0x00, sizeof(pbuf));
+  /* Infinite loop */
+  for (;;)
+  {
+
+    if (GroundStationDataQueueHandle != NULL)
+    {
+      if (xQueueReceive(GroundStationDataQueueHandle,
+                        pbuf,
+                        (TickType_t)0) == pdPASS)
+      {
+        /* *pxRxedPointer now points to xMessage. */
+      }
+    }
+    uint16_t i = 0;
+    char pingbuf[9];
+    volatile int8_t res;
+    while (pbuf[i] != 0x00)
+    {
+      switch (pbuf[i])
+      {
+      case PreFlightTestRequest:
+        break;
+      case PreFlightTestResponse:
+        break;
+      case WingCalibrationRequest:
+        break;
+      case WingCalibrationResponse:
+        break;
+      case PilotCommand:
+        break;
+      case PilotCommandResponse:
+        break;
+      case PING:
+        
+        for (uint8_t j = 0; j < 9; j++)
+        {
+          pingbuf[j] = (char)pbuf[j];
+        }
+        res = netconn_write(nc,(char const *)pingbuf,9,NETCONN_COPY);
+        if(res != ERR_OK)
+        {
+        }
+        break;
+      }
+      break;
+    }
+    memset(pbuf, 0x00, sizeof(pbuf)); // Очистить буфер
+    vTaskDelay(1);
+  }
+}
+/* USER CODE END StartParserGroundStationTask */
+
 /* USER CODE BEGIN Header_StartCliTask */
 /**
 * @brief Function implementing the cliTask thread.

@@ -17,7 +17,11 @@
 extern "C" {
 #endif
 
+#define IpGroundStation "192.168.168.106"
+#define PortGroundStation (u16_t)8889
 
+#define IpRaspberry "192.168.168.125"
+#define PortRaspberry (u16_t)8889
 
 
 #ifdef __cplusplus
