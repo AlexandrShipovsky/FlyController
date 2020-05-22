@@ -18,7 +18,7 @@ extern "C"
 {
 #endif
 
-#define NUMCOMMANDS (uint16_t)512
+#include "stdint.h"
     typedef enum
     {
         PreFlightTestRequest = 1,
@@ -27,7 +27,10 @@ extern "C"
         WingCalibrationResponse = 4,
         PilotCommand = 5,
         PilotCommandResponse = 6,
-        PING = 7
+        PING = 7,
+        TelemetryRequest = 8,
+        TelemetryResponse = 9,
+        ENDCOMMAND
     } HawkCommandsTypeDef;
 
     typedef struct
@@ -35,10 +38,20 @@ extern "C"
         int16_t Pitch;
         int16_t Roll;
         int16_t Accel;
-    }
-    PitchRollAccelTypeDef;
+    } PitchRollAccelTypeDef;
 
-    PitchRollAccelTypeDef f[5];
+    const uint8_t CommandSize[ENDCOMMAND] = {
+        /*zero*/0,
+        /*commands[PreFlightTestRequest] = */ 0,
+        /*commands[PreFlightTestResponse] = */ 0,
+        /*commands[WingCalibrationRequest] = */ 9,
+        /*commands[WingCalibrationResponse] = */ 2,
+        /*commands[PilotCommand] = */ 7,
+        /*commands[PilotCommandResponse] = */ 7,
+        /*commands[PING] = */ 9,
+        /*commands[TelemetryRequest] = */ 1,
+        /*commands[TelemetryResponse] = */ 15
+        };
 
 #ifdef __cplusplus
 }

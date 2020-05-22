@@ -1349,6 +1349,9 @@
                 <name>$PROJ_DIR$\..\libraries\common\confighawk.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\libraries\common\prothawk.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\libraries\common\prothawk.h</name>
             </file>
         </group>

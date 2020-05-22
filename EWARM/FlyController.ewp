@@ -1164,6 +1164,9 @@
         <name>$PROJ_DIR$\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_ll_usb.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$/../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_can.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_crc.c</name>
       </file>
       <file>
@@ -1216,6 +1219,9 @@
       <name>common</name>
       <file>
         <name>$PROJ_DIR$\..\libraries\common\confighawk.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\libraries\common\prothawk.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\libraries\common\prothawk.h</name>

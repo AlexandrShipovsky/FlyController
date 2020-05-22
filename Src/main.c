@@ -45,6 +45,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+CAN_HandleTypeDef hcan1;
 
 CRC_HandleTypeDef hcrc;
 
@@ -58,6 +59,7 @@ osThreadId defaultTaskHandle;
 osThreadId cliTaskHandle;
 osThreadId ConGroundStatioHandle;
 osThreadId ParserGroundStaHandle;
+osThreadId CANTaskHandle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -65,6 +67,7 @@ osThreadId ParserGroundStaHandle;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_CAN1_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_UART5_Init(void);
 static void MX_UART8_Init(void);
@@ -74,6 +77,7 @@ void StartDefaultTask(void const * argument);
 void StartCliTask(void const * argument);
 void StartConGroundStation(void const * argument);
 void StartParserGroundStationTask(void const * argument);
+void StartCANTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -116,6 +120,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_CAN1_Init();
   MX_USART3_UART_Init();
   MX_UART5_Init();
   MX_UART8_Init();
@@ -157,6 +162,10 @@ int main(void)
   /* definition and creation of ParserGroundSta */
   osThreadDef(ParserGroundSta, StartParserGroundStationTask, osPriorityLow, 0, 512);
   ParserGroundStaHandle = osThreadCreate(osThread(ParserGroundSta), NULL);
+
+  /* definition and creation of CANTask */
+  osThreadDef(CANTask, StartCANTask, osPriorityLow, 0, 512);
+  CANTaskHandle = osThreadCreate(osThread(CANTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -239,6 +248,66 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief CAN1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_CAN1_Init(void)
+{
+
+  /* USER CODE BEGIN CAN1_Init 0 */
+
+  /* USER CODE END CAN1_Init 0 */
+
+  /* USER CODE BEGIN CAN1_Init 1 */
+
+  /* USER CODE END CAN1_Init 1 */
+  hcan1.Instance = CAN1;
+  hcan1.Init.Prescaler = 12;
+  hcan1.Init.Mode = CAN_MODE_NORMAL;
+  hcan1.Init.SyncJumpWidth = CAN_SJW_2TQ;
+  hcan1.Init.TimeSeg1 = CAN_BS1_13TQ;
+  hcan1.Init.TimeSeg2 = CAN_BS2_2TQ;
+  hcan1.Init.TimeTriggeredMode = DISABLE;
+  hcan1.Init.AutoBusOff = DISABLE;
+  hcan1.Init.AutoWakeUp = DISABLE;
+  hcan1.Init.AutoRetransmission = ENABLE;
+  hcan1.Init.ReceiveFifoLocked = DISABLE;
+  hcan1.Init.TransmitFifoPriority = DISABLE;
+  if (HAL_CAN_Init(&hcan1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CAN1_Init 2 */
+  /* USER CODE BEGIN CAN_Init 2 */
+  CAN_FilterTypeDef CAN_Filter;
+  CAN_Filter.FilterBank = 0;
+  CAN_Filter.FilterMode = CAN_FILTERMODE_IDMASK;
+  CAN_Filter.FilterScale = CAN_FILTERSCALE_32BIT;
+  CAN_Filter.FilterMaskIdHigh = 0x0000;
+  CAN_Filter.FilterMaskIdLow = 0x0000;
+  CAN_Filter.FilterFIFOAssignment = CAN_RX_FIFO0;
+  CAN_Filter.FilterActivation = ENABLE;
+
+  if (HAL_CAN_ConfigFilter(&hcan1, &CAN_Filter) != HAL_OK)
+  {
+    //Ошибка
+  }
+
+   if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
+  {
+    //Ошибка
+  }
+
+  if (HAL_CAN_Start(&hcan1) != HAL_OK)
+  {
+    //Ошибка
+  }
+  /* USER CODE END CAN1_Init 2 */
+
 }
 
 /**
@@ -577,6 +646,24 @@ __weak void StartParserGroundStationTask(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartParserGroundStationTask */
+}
+
+/* USER CODE BEGIN Header_StartCANTask */
+/**
+* @brief Function implementing the CANTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartCANTask */
+__weak void StartCANTask(void const * argument)
+{
+  /* USER CODE BEGIN StartCANTask */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartCANTask */
 }
 
  /**

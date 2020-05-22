@@ -58,11 +58,15 @@ uint8_t net_state = 0;                            // Состояние подк
 xQueueHandle GroundStationDataQueueHandle = NULL; // Очередь передачи принятых байт от задачи приема к задаче парсинга
 struct netconn *nc;
 struct netbuf *nb;
+
+PitchRollAccelTypeDef PitchRollAccel; // Структура со значениями положения двигателей
+
 /* USER CODE END Variables */
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-
+void PingHandler(uint8_t *pbuf);         // Обработчик команды PING
+void PilotCommandHandler(uint8_t *pbuf); // Обработчик команды
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
@@ -123,26 +127,7 @@ void StartDefaultTask(void const *argument)
 
   /* USER CODE END 5 */
 }
-/* USER CODE BEGIN Header_StartNetTest */
-/**
-* @brief Function implementing the NetTestTask thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_StartNetTest */
-void StartNetTest(void const *argument)
-{
-  /* USER CODE BEGIN StartNetTest */
 
-  /* Infinite loop */
-  for (;;)
-  {
-
-    vTaskDelay(200);
-  }
-
-  /* USER CODE END StartNetTest */
-}
 void ethernetif_notify_conn_changed(struct netif *netif)
 {
   /* NOTE : This is function could be implemented in user file 
@@ -279,43 +264,81 @@ void StartParserGroundStationTask(void const *argument)
       }
     }
     uint16_t i = 0;
-    char pingbuf[9];
-    volatile int8_t res;
     while (pbuf[i] != 0x00)
     {
       switch (pbuf[i])
       {
       case PreFlightTestRequest:
+        i += CommandSize[PreFlightTestRequest];
         break;
+
       case PreFlightTestResponse:
+        i += CommandSize[PreFlightTestResponse];
         break;
+
       case WingCalibrationRequest:
+        i += CommandSize[WingCalibrationRequest];
         break;
+
       case WingCalibrationResponse:
+        i += CommandSize[WingCalibrationResponse];
         break;
+
       case PilotCommand:
+        PilotCommandHandler(&pbuf[i]);
+        i += CommandSize[PilotCommand];
         break;
+
       case PilotCommandResponse:
+        i += CommandSize[PilotCommandResponse];
         break;
+
       case PING:
-        
-        for (uint8_t j = 0; j < 9; j++)
-        {
-          pingbuf[j] = (char)pbuf[j];
-        }
-        res = netconn_write(nc,(char const *)pingbuf,9,NETCONN_COPY);
-        if(res != ERR_OK)
-        {
-        }
+        PingHandler(&pbuf[i]);
+        i += CommandSize[PING];
         break;
       }
-      break;
     }
     memset(pbuf, 0x00, sizeof(pbuf)); // Очистить буфер
     vTaskDelay(1);
   }
 }
 /* USER CODE END StartParserGroundStationTask */
+/* USER CODE BEGIN Header_StartCANTask */
+/**
+* @brief Function implementing the CANTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartCANTask */
+void StartCANTask(void const *argument)
+{
+  /* USER CODE BEGIN StartCANTask */
+  extern CAN_HandleTypeDef hcan1;
+  uint8_t buf[8] = {'5', 0xAA, 0xAA, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+  uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
+  /* Infinite loop */
+  for (;;)
+  {
+    CAN_TxHeaderTypeDef TxHeader;
+    TxHeader.DLC = 8;
+    TxHeader.StdId = 0x0000;
+    TxHeader.RTR = CAN_RTR_DATA;
+    TxHeader.IDE = CAN_ID_STD;
+    TxHeader.TransmitGlobalTime = DISABLE;
+
+    // if (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) > 0U)
+    // {
+    taskENTER_CRITICAL();
+    if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, buf, &TxMailBox) != HAL_OK)
+    {
+      //Error_Handler();
+    }
+    taskEXIT_CRITICAL();
+    vTaskDelay(500);
+  }
+  /* USER CODE END StartCANTask */
+}
 
 /* USER CODE BEGIN Header_StartCliTask */
 /**
@@ -334,6 +357,33 @@ void StartCliTask(void const *argument)
     vTaskDelay(10);
   }
   /* USER CODE END StartCliTask */
+}
+
+/******************************************************************/
+/*Обработчики команд*/
+void PingHandler(uint8_t *pbuf)
+{
+  int8_t res;
+  res = netconn_write(nc, (char const *)pbuf, CommandSize[PING], NETCONN_COPY);
+  if (res != ERR_OK)
+  {
+  }
+}
+/*
+*
+*
+*
+*/
+void PilotCommandHandler(uint8_t *pbuf)
+{
+  //int8_t res;
+  uint8_t i = 1;
+
+  memcpy(&PitchRollAccel.Pitch, &pbuf[i], sizeof(PitchRollAccel.Pitch));
+  i += 2;
+  memcpy(&PitchRollAccel.Roll, &pbuf[i], sizeof(PitchRollAccel.Roll));
+  i += 2;
+  memcpy(&PitchRollAccel.Accel, &pbuf[i], sizeof(PitchRollAccel.Accel));
 }
 /* USER CODE END Application */
 
