@@ -331,10 +331,12 @@ void StartCANTask(void const *argument)
         /* *pxRxedPointer now points to xMessage. */
       }
       switch(pbuf[0])
+      {
       case PitchRollCommand:
       memcpy(&ElMotorUnitParameters.Pitch, &pbuf[1], sizeof(ElMotorUnitParameters.Pitch));
       memcpy(&ElMotorUnitParameters.Roll, &pbuf[1], sizeof(ElMotorUnitParameters.Roll));
       break;
+      }
     }
     vTaskDelay(1);
   }
@@ -348,6 +350,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
   {
     uint8_t buf[8];
     CAN_RxHeaderTypeDef RxHeader;
+    BaseType_t xHigherPriorityTaskWoken;
+    xHigherPriorityTaskWoken = pdFALSE;
 
     if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, buf) != HAL_OK)
     {
@@ -357,12 +361,10 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
     {
       if (ElMotorCANQueueHandle != NULL)
         {
-          if (xQueueSendToBack(ElMotorCANQueueHandle,
+          xQueueSendToBackFromISR(ElMotorCANQueueHandle,
                                (void *)buf,
-                               (TickType_t)10) != pdPASS)
-          {
-            /* Failed to post the message, even after 10 ticks. */
-          }
+                               &xHigherPriorityTaskWoken);
+         
         }
     }
     

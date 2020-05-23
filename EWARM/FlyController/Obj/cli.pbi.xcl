@@ -57,6 +57,8 @@ C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мот
 -I
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\..\libraries\common
 -I
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\..\libraries\units
+-I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\inc\c
@@ -114,6 +116,8 @@ C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мот
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\system\arch
 -I
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\libraries\common
+-I
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\libraries\units
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
