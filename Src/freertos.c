@@ -35,6 +35,7 @@
 
 #include "confighawk.h"
 #include "prothawk.h"
+#include "ElMotorUnit.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,11 +57,13 @@
 /* USER CODE BEGIN Variables */
 uint8_t net_state = 0;                            // Состояние подключения
 xQueueHandle GroundStationDataQueueHandle = NULL; // Очередь передачи принятых байт от задачи приема к задаче парсинга
+xQueueHandle ElMotorCANQueueHandle = NULL; // Очередь передачи принятых по CAN1 байт
 struct netconn *nc;
 struct netbuf *nb;
 
 PitchRollAccelTypeDef PitchRollAccel; // Структура со значениями положения двигателей
 
+ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с параметрами блока управления приводами
 /* USER CODE END Variables */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -103,6 +106,7 @@ void StartDefaultTask(void const *argument)
   /* init code for LWIP */
 
   GroundStationDataQueueHandle = xQueueCreate(16, BUFSIZE);
+  ElMotorCANQueueHandle = xQueueCreate(8,8);
 
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
@@ -314,32 +318,57 @@ void StartParserGroundStationTask(void const *argument)
 void StartCANTask(void const *argument)
 {
   /* USER CODE BEGIN StartCANTask */
-  extern CAN_HandleTypeDef hcan1;
-  uint8_t buf[8] = {'5', 0xAA, 0xAA, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-  uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
+  uint8_t pbuf[8];
   /* Infinite loop */
   for (;;)
   {
-    CAN_TxHeaderTypeDef TxHeader;
-    TxHeader.DLC = 8;
-    TxHeader.StdId = 0x0000;
-    TxHeader.RTR = CAN_RTR_DATA;
-    TxHeader.IDE = CAN_ID_STD;
-    TxHeader.TransmitGlobalTime = DISABLE;
-
-    // if (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) > 0U)
-    // {
-    taskENTER_CRITICAL();
-    if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, buf, &TxMailBox) != HAL_OK)
+    if (ElMotorCANQueueHandle != NULL)
     {
-      //Error_Handler();
+      if (xQueueReceive(ElMotorCANQueueHandle,
+                        pbuf,
+                        (TickType_t)0) == pdPASS)
+      {
+        /* *pxRxedPointer now points to xMessage. */
+      }
+      switch(pbuf[0])
+      case PitchRollCommand:
+      memcpy(&ElMotorUnitParameters.Pitch, &pbuf[1], sizeof(ElMotorUnitParameters.Pitch));
+      memcpy(&ElMotorUnitParameters.Roll, &pbuf[1], sizeof(ElMotorUnitParameters.Roll));
+      break;
     }
-    taskEXIT_CRITICAL();
-    vTaskDelay(500);
+    vTaskDelay(1);
   }
   /* USER CODE END StartCANTask */
 }
 
+/*CAN1 Callback*/
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+  if (hcan->Instance == CAN1)
+  {
+    uint8_t buf[8];
+    CAN_RxHeaderTypeDef RxHeader;
+
+    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, buf) != HAL_OK)
+    {
+      //Ошибка
+    }
+    else
+    {
+      if (ElMotorCANQueueHandle != NULL)
+        {
+          if (xQueueSendToBack(ElMotorCANQueueHandle,
+                               (void *)buf,
+                               (TickType_t)10) != pdPASS)
+          {
+            /* Failed to post the message, even after 10 ticks. */
+          }
+        }
+    }
+    
+    
+  }
+}
 /* USER CODE BEGIN Header_StartCliTask */
 /**
 * @brief Function implementing the cliTask thread.
@@ -376,14 +405,46 @@ void PingHandler(uint8_t *pbuf)
 */
 void PilotCommandHandler(uint8_t *pbuf)
 {
-  //int8_t res;
+  int8_t res;
   uint8_t i = 1;
+  uint8_t SendTCPBuf[32];
+  extern CAN_HandleTypeDef hcan1;
 
+  uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
+  CAN_TxHeaderTypeDef TxHeader;
+
+  // Получение данных от наземной станции
   memcpy(&PitchRollAccel.Pitch, &pbuf[i], sizeof(PitchRollAccel.Pitch));
   i += 2;
   memcpy(&PitchRollAccel.Roll, &pbuf[i], sizeof(PitchRollAccel.Roll));
   i += 2;
   memcpy(&PitchRollAccel.Accel, &pbuf[i], sizeof(PitchRollAccel.Accel));
+
+  // Передача на блок управления приводами
+  TxHeader.DLC = 5;
+  TxHeader.StdId = 0x0000;
+  TxHeader.RTR = CAN_RTR_DATA;
+  TxHeader.IDE = CAN_ID_STD;
+  TxHeader.TransmitGlobalTime = DISABLE;
+
+  taskENTER_CRITICAL();
+  if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, pbuf, &TxMailBox) != HAL_OK)
+  {
+    //Error_Handler();
+  }
+  taskEXIT_CRITICAL();
+
+  SendTCPBuf[0] = PilotCommandResponse;
+  SendTCPBuf[1] = (uint8_t)(ElMotorUnitParameters.Pitch & 0xFF);
+  SendTCPBuf[2] = (uint8_t)(ElMotorUnitParameters.Pitch >> 8);
+  SendTCPBuf[3] = (uint8_t)(ElMotorUnitParameters.Roll & 0xFF);
+  SendTCPBuf[4] = (uint8_t)(ElMotorUnitParameters.Roll >> 8);
+  SendTCPBuf[5] = 0x00;
+  SendTCPBuf[6] = 0x00;
+  res = netconn_write(nc, (char const *)SendTCPBuf, CommandSize[PilotCommandResponse], NETCONN_COPY);
+  if (res != ERR_OK)
+  {
+  }
 }
 /* USER CODE END Application */
 

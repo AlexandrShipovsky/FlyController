@@ -863,7 +863,7 @@
                     <item>net_state</item>
                     <item>res</item>
                     <item>PitchRollAccel</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

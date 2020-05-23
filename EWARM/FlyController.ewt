@@ -1244,6 +1244,9 @@
                 <name>$PROJ_DIR$\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_can.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_cortex.c</name>
             </file>
             <file>
@@ -1353,6 +1356,12 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\libraries\common\prothawk.h</name>
+            </file>
+        </group>
+        <group>
+            <name>units</name>
+            <file>
+                <name>$PROJ_DIR$\..\libraries\units\ElMotorUnit.h</name>
             </file>
         </group>
     </group>

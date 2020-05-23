@@ -33,6 +33,12 @@ extern "C"
         ENDCOMMAND
     } HawkCommandsTypeDef;
 
+    typedef enum
+    {
+        PitchRollCommand = 5,
+        VBATCommand = 6
+    } ElMotorCommandsTypeDef;
+
     typedef struct
     {
         int16_t Pitch;
