@@ -1,443 +1,159 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.30.1.114/W32 for ARM                  23/May/2020  16:31:39
+# IAR ELF Linker V8.30.1.114/W32 for ARM                  24/May/2020  16:58:13
 # Copyright 2007-2018 IAR Systems AB.
 #
 #    Output file  =  
-#        C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Exe\FlyController.out
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Exe\FlyController.out
 #    Map file     =  
-#        C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\List\FlyController.map
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\List\FlyController.map
 #    Command line =  
-#        -f C:\Users\A146~1\AppData\Local\Temp\EW91A6.tmp
-#        ("C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\altcp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\altcp_alloc.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\altcp_tcp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\api_lib.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\api_msg.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\auth.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\autoip.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\bridgeif.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\bridgeif_fdb.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ccp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\chap-md5.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\chap-new.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\chap_ms.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\cli.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\cli_cmd.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\cli_port.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\cmsis_os.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\croutine.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\def.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\demand.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\dhcp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\dhcp6.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\dns.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\eap.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ecp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\err.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\etharp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ethernet.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ethernetif.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ethip6.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\eui64.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\event_groups.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\freertos.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\fsm.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\heap_4.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\icmp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\icmp6.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\if_api.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\igmp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\inet6.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\inet_chksum.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\init.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ip.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ip4.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ip4_addr.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ip4_frag.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ip6.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ip6_addr.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ip6_frag.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ipcp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ipv6cp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\lcp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\list.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\lowpan6.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\lowpan6_ble.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\lowpan6_common.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\lwip.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\magic.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\main.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\mem.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\memp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\mld6.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\mppe.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\mqtt.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\multilink.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\nd6.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\netbuf.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\netdb.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\netif.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\netifapi.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\pbuf.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\port.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\portasm.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\ppp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\pppapi.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\pppcrypt.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\pppoe.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\pppol2tp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\pppos.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\prothawk.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\queue.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\raw.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\slipif.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\sockets.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\startup_stm32f767xx.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stats.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_can.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_cortex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_crc.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_crc_ex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_dma.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_dma_ex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_eth.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_exti.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_flash.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_flash_ex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_gpio.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_i2c.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_i2c_ex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_msp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_pcd.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_pcd_ex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_pwr.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_pwr_ex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_rcc.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_rcc_ex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_tim.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_tim_ex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_timebase_tim.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_uart.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_uart_ex.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_it.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_ll_usb.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\stream_buffer.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\sys.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\sys_arch.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\system_stm32f7xx.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\tasks.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\tcp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\tcp_in.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\tcp_out.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\tcpip.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\timeouts.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\timers.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\udp.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\upap.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\usb_device.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\usbd_cdc.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\usbd_cdc_if.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\usbd_conf.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\usbd_core.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\usbd_ctlreq.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\usbd_desc.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\usbd_ioreq.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\utils.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\vj.o"
-#        "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Obj\zepif.o"
+#        -f C:\Users\Jumper\AppData\Local\Temp\EW905.tmp
+#        (C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\altcp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\altcp_alloc.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\altcp_tcp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\api_lib.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\api_msg.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\auth.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\autoip.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\bridgeif.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\bridgeif_fdb.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ccp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\chap-md5.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\chap-new.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\chap_ms.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\cli.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\cli_cmd.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\cli_port.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\cmsis_os.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\croutine.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\def.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\demand.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\dhcp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\dhcp6.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\dns.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\eap.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ecp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\err.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\etharp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ethernet.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ethernetif.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ethip6.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\eui64.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\event_groups.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\freertos.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\fsm.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\heap_4.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\icmp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\icmp6.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\if_api.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\igmp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\inet6.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\inet_chksum.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\init.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ip.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ip4.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ip4_addr.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ip4_frag.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ip6.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ip6_addr.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ip6_frag.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ipcp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ipv6cp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\lcp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\list.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\lowpan6.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\lowpan6_ble.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\lowpan6_common.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\lwip.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\magic.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\main.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\mem.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\memp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\mld6.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\mppe.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\mqtt.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\multilink.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\nd6.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\netbuf.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\netdb.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\netif.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\netifapi.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\pbuf.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\port.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\portasm.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\ppp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\pppapi.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\pppcrypt.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\pppoe.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\pppol2tp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\pppos.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\prothawk.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\queue.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\raw.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\slipif.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\sockets.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\startup_stm32f767xx.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stats.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_can.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_cortex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_crc.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_crc_ex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_dma.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_dma_ex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_eth.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_exti.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_flash.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_flash_ex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_gpio.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_i2c.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_i2c_ex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_msp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_pcd.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_pcd_ex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_pwr.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_pwr_ex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_rcc.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_rcc_ex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_tim.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_tim_ex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_timebase_tim.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_uart.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_hal_uart_ex.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_it.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stm32f7xx_ll_usb.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\stream_buffer.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\sys.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\sys_arch.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\system_stm32f7xx.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\tasks.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\tcp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\tcp_in.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\tcp_out.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\tcpip.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\timeouts.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\timers.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\udp.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\upap.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\usb_device.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\usbd_cdc.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\usbd_cdc_if.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\usbd_conf.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\usbd_core.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\usbd_ctlreq.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\usbd_desc.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\usbd_ioreq.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\utils.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\vj.o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj\zepif.o
 #        --redirect _Printf=_PrintfFull --redirect _Scanf=_ScanfFull
-#        --no_out_extension -o "C:\Users\Чистое
-#        небо\Desktop\Э.01.00.00 Беспилотный
-#        мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\Exe\FlyController.out"
-#        --map "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM\FlyController\List\FlyController.map"
-#        --config "C:\Users\Чистое небо\Desktop\Э.01.00.00
-#        Беспилотный мотодельтаплан\Полетный
-#        контроллер\firmware\FlyController\EWARM/stm32f767xx_flash.icf"
+#        --no_out_extension -o
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Exe\FlyController.out
+#        --map
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\List\FlyController.map
+#        --config
+#        C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/stm32f767xx_flash.icf
 #        --semihosting --entry __iar_program_start --vfe --text_out locale)
 #
 ###############################################################################
@@ -482,7 +198,7 @@ initialize by copy { rw };
   .intvec                ro code   0x800'0000    0x1f8  startup_stm32f767xx.o [1]
                                  - 0x800'01f8    0x1f8
 
-"P1":                                          0x15a0e
+"P1":                                          0x15a14
   .text                  ro code   0x800'01f8   0x14e0  dlmalloc.o [2]
   .text                  ro code   0x800'16d8      0x6  abort.o [2]
   .text                  ro code   0x800'16de     0x7a  lz77_init_single.o [5]
@@ -627,30 +343,28 @@ initialize by copy { rw };
   .text                  ro code   0x801'525c     0x20  vsscanf.o [2]
   .text                  ro code   0x801'527c    0x1e8  cli_cmd.o [1]
   .text                  ro code   0x801'5464    0x10e  cli.o [1]
-  .text                  ro code   0x801'5574    0x14c  usbd_desc.o [1]
-  .rodata                const     0x801'56c0     0x9c  memp.o [1]
-  .rodata                const     0x801'575c     0x3c  main.o [1]
-  .text                  ro code   0x801'5798     0x34  stm32f7xx_it.o [1]
-  .text                  ro code   0x801'57cc     0x2c  system_stm32f7xx.o [1]
-  .text                  ro code   0x801'57f8     0x28  data_init.o [5]
-  .text                  ro code   0x801'5820     0x22  fpinit_M.o [4]
-  .iar.init_table        const     0x801'5844     0x24  - Linker created -
-  .text                  ro code   0x801'5868     0x20  cmain_call_ctors.o [5]
-  .text                  ro code   0x801'5888     0x18  cppinit.o [2]
-  .text                  ro code   0x801'58a0     0x1e  cmain.o [5]
-  .text                  ro code   0x801'58be      0x4  low_level_init.o [2]
-  .text                  ro code   0x801'58c2      0x4  exit.o [2]
-  .text                  ro code   0x801'58c8      0xa  cexit.o [5]
-  .text                  ro code   0x801'58d4     0x10  startup_stm32f767xx.o [1]
-  .text                  ro code   0x801'58e4      0xc  cstartup_M.o [5]
-  .rodata                const     0x801'58f0      0x8  ethernet.o [1]
-  .rodata                const     0x801'58f8      0x8  ethernetif.o [1]
-  .rodata                const     0x801'5900      0x8  ip4_addr.o [1]
-  .rodata                const     0x801'5908      0x8  lwip.o [1]
-  .rodata                const     0x801'5910      0x8  system_stm32f7xx.o [1]
-  .rodata                const     0x801'5918      0x6  xlocale_c.o [2]
-  .text                  ro code   0x801'591e      0x4  startup_stm32f767xx.o [1]
-  .text                  ro code   0x801'5922      0x4  startup_stm32f767xx.o [1]
+  .text                  ro code   0x801'5574    0x154  usbd_desc.o [1]
+  .rodata                const     0x801'56c8     0x9c  memp.o [1]
+  .rodata                const     0x801'5764     0x3c  main.o [1]
+  .text                  ro code   0x801'57a0     0x34  stm32f7xx_it.o [1]
+  .text                  ro code   0x801'57d4     0x2c  system_stm32f7xx.o [1]
+  .text                  ro code   0x801'5800     0x28  data_init.o [5]
+  .text                  ro code   0x801'5828     0x22  fpinit_M.o [4]
+  .iar.init_table        const     0x801'584c     0x24  - Linker created -
+  .text                  ro code   0x801'5870     0x20  cmain_call_ctors.o [5]
+  .text                  ro code   0x801'5890     0x18  cppinit.o [2]
+  .text                  ro code   0x801'58a8     0x1e  cmain.o [5]
+  .text                  ro code   0x801'58c6      0x4  low_level_init.o [2]
+  .text                  ro code   0x801'58ca      0x4  exit.o [2]
+  .text                  ro code   0x801'58d0      0xa  cexit.o [5]
+  .text                  ro code   0x801'58dc     0x10  startup_stm32f767xx.o [1]
+  .text                  ro code   0x801'58ec      0xc  cstartup_M.o [5]
+  .rodata                const     0x801'58f8      0x8  ethernet.o [1]
+  .rodata                const     0x801'5900      0x8  ethernetif.o [1]
+  .rodata                const     0x801'5908      0x8  ip4_addr.o [1]
+  .rodata                const     0x801'5910      0x8  lwip.o [1]
+  .rodata                const     0x801'5918      0x8  system_stm32f7xx.o [1]
+  .rodata                const     0x801'5920      0x6  xlocale_c.o [2]
   .text                  ro code   0x801'5926      0x4  startup_stm32f767xx.o [1]
   .text                  ro code   0x801'592a      0x4  startup_stm32f767xx.o [1]
   .text                  ro code   0x801'592e      0x4  startup_stm32f767xx.o [1]
@@ -753,14 +467,16 @@ initialize by copy { rw };
   .text                  ro code   0x801'5ab2      0x4  startup_stm32f767xx.o [1]
   .text                  ro code   0x801'5ab6      0x4  startup_stm32f767xx.o [1]
   .text                  ro code   0x801'5aba      0x4  startup_stm32f767xx.o [1]
-  SHT$$PREINIT_ARRAY               0x801'5ac0      0x0  <Block>
-  SHT$$INIT_ARRAY                  0x801'5ac0      0x4  <Block>
-    .init_array          const     0x801'5ac0      0x4  cli_port.o [1]
-  __iar_tls$$INIT_ARRAY            0x801'5ac4      0x0  <Block>
-  .rodata                const     0x801'5ac4      0x0  zero_init3.o [5]
-  .rodata                const     0x801'5ac4      0x0  lz77_init_single.o [5]
-  Initializer bytes      const     0x801'5ac4    0x142  <for P2-1>
-                                 - 0x801'5c06  0x15a0e
+  .text                  ro code   0x801'5abe      0x4  startup_stm32f767xx.o [1]
+  .text                  ro code   0x801'5ac2      0x4  startup_stm32f767xx.o [1]
+  SHT$$PREINIT_ARRAY               0x801'5ac8      0x0  <Block>
+  SHT$$INIT_ARRAY                  0x801'5ac8      0x4  <Block>
+    .init_array          const     0x801'5ac8      0x4  cli_port.o [1]
+  __iar_tls$$INIT_ARRAY            0x801'5acc      0x0  <Block>
+  .rodata                const     0x801'5acc      0x0  zero_init3.o [5]
+  .rodata                const     0x801'5acc      0x0  lz77_init_single.o [5]
+  Initializer bytes      const     0x801'5acc    0x140  <for P2-1>
+                                 - 0x801'5c0c  0x15a14
 
 "P2", part 1 of 3:                               0x25e
   P2-1                            0x2000'0000    0x25e  <Init block>
@@ -863,7 +579,7 @@ Unused ranges:
 
          From           To       Size
          ----           --       ----
-   0x801'5c06   0x81f'ffff  0x1e'a3fa
+   0x801'5c0c   0x81f'ffff  0x1e'a3f4
   0x2000'025e  0x2000'025f        0x2
   0x2004'a410  0x2007'ffff   0x3'5bf0
 
@@ -879,8 +595,8 @@ Zero (__iar_zero_init3)
           0x2000'0260  0x49baf
 
 Copy/lz77 (__iar_lz77_init_single3)
-    1 source range, total size 0x142 (53% of destination):
-           0x801'5ac4    0x142
+    1 source range, total size 0x140 (52% of destination):
+           0x801'5acc    0x140
     1 destination range, total size 0x25e:
           0x2000'0000    0x25e
 
@@ -898,7 +614,7 @@ command line/config:
     -------------------------------------------------------
     Total:
 
-C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj: [1]
+C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj: [1]
     api_lib.o                       1 098
     api_msg.o                       2 792
     cli.o                             270
@@ -955,22 +671,22 @@ C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный конт
     sys_arch.o                        548                 4
     system_stm32f7xx.o                 44       10        4
     tasks.o                         3 300               296
-    tcp.o                           3 672       17       31
+    tcp.o                           3 672       16       31
     tcp_in.o                        4 528                52
     tcp_out.o                       3 994
     tcpip.o                           468                16
     timeouts.o                        464                12
     udp.o                           1 188        4        8
     usb_device.o                       84               720
-    usbd_cdc.o                        826      145      272
-    usbd_cdc_if.o                     116       10    4 116
+    usbd_cdc.o                        826      143      272
+    usbd_cdc_if.o                     116       11    4 116
     usbd_conf.o                       832             1 028
     usbd_core.o                       754
     usbd_ctlreq.o                   1 538                 1
-    usbd_desc.o                       332       51      608
+    usbd_desc.o                       340       51      608
     usbd_ioreq.o                      156
     -------------------------------------------------------
-    Total:                         68 430    1 374  301 832
+    Total:                         68 438    1 372  301 832
 
 dl7M_tlf.a: [2]
     abort.o                             6
@@ -995,14 +711,14 @@ dl7M_tlf.a: [2]
     xencoding_8859_1.o                 38
     xfail_s.o                          64                 4
     xgetmemchunk.o                     44                 4
-    xlocale_c.o                       260       74      128
+    xlocale_c.o                       260       73      128
     xmbcurmax.o                        10
     xprintffull.o                   3 962
     xscanffull.o                    3 768
     xsprout.o                          10
     xsscin.o                           30
     -------------------------------------------------------
-    Total:                         15 844       78      772
+    Total:                         15 844       77      772
 
 dlpp7M_tl_fc.a: [3]
     -------------------------------------------------------
@@ -1056,9 +772,9 @@ shb_l.a: [6]
     Total:                             20        1
 
     Gaps                               47        2        1
-    Linker created                              36    1 536
+    Linker created                              37    1 536
 -----------------------------------------------------------
-    Grand Total:                   87 601    1 491  304 141
+    Grand Total:                   87 609    1 489  304 141
 
 
 *******************************************************************************
@@ -1067,14 +783,14 @@ shb_l.a: [6]
 
 Entry                       Address     Size  Type      Object
 -----                       -------     ----  ----      ------
-.iar.init_table$$Base    0x801'5844            --   Gb  - Linker created -
-.iar.init_table$$Limit   0x801'5868            --   Gb  - Linker created -
-?main                    0x801'58a1           Code  Gb  cmain.o [5]
-AHBPrescTable            0x801'57e8     0x10  Data  Gb  system_stm32f7xx.o [1]
-APBPrescTable            0x801'5910      0x8  Data  Gb  system_stm32f7xx.o [1]
-BusFault_Handler         0x801'579f      0x2  Code  Gb  stm32f7xx_it.o [1]
-CAN1_RX0_IRQHandler      0x801'57a5      0x6  Code  Gb  stm32f7xx_it.o [1]
-CANTaskHandle           0x2004'8dcc      0x4  Data  Gb  main.o [1]
+.iar.init_table$$Base    0x801'584c            --   Gb  - Linker created -
+.iar.init_table$$Limit   0x801'5870            --   Gb  - Linker created -
+?main                    0x801'58a9           Code  Gb  cmain.o [5]
+AHBPrescTable            0x801'57f0     0x10  Data  Gb  system_stm32f7xx.o [1]
+APBPrescTable            0x801'5918      0x8  Data  Gb  system_stm32f7xx.o [1]
+BusFault_Handler         0x801'57a7      0x2  Code  Gb  stm32f7xx_it.o [1]
+CAN1_RX0_IRQHandler      0x801'57ad      0x6  Code  Gb  stm32f7xx_it.o [1]
+CANTaskHandle           0x2004'8dc8      0x4  Data  Gb  main.o [1]
 CDC_Control_FS           0x801'51db      0x4  Code  Lc  usbd_cdc_if.o [1]
 CDC_DeInit_FS            0x801'51d7      0x4  Code  Lc  usbd_cdc_if.o [1]
 CDC_Init_FS              0x801'51b5     0x22  Code  Lc  usbd_cdc_if.o [1]
@@ -1089,7 +805,8 @@ CLI_STR_UNKNOWN_COMMAND
 CSTACK$$Base            0x2004'9e10            --   Gb  - Linker created -
 CSTACK$$Limit           0x2004'a210            --   Gb  - Linker created -
 CacheMore                0x800'8a35     0x24  Code  Lc  xlocale_c.o [2]
-ConGroundStatioHandle   0x2004'8dc4      0x4  Data  Gb  main.o [1]
+CliTaskHandle           0x2004'8dcc      0x4  Data  Gb  main.o [1]
+ConGndStatTaskHandle    0x2004'8dc0      0x4  Data  Gb  main.o [1]
 DBG_CLI_IOStruct         0x801'511c     0x10  Data  Lc  cli_port.o [1]
 DBG_CLI_UART            0x2004'6f38    0x5d0  Data  Gb  cli_port.o [1]
 DBG_CLI_USB             0x2004'6968    0x5d0  Data  Gb  cli_port.o [1]
@@ -1103,10 +820,10 @@ DbgScanf::USB_scanf_buff
                         0x2004'9c08     0x40  Data  Lc  cli_port.o [1]
 DbgUSBPutChar            0x801'4ec3     0x24  Code  Gb  cli_port.o [1]
 DbgUSBReadChar           0x801'4f79     0x34  Code  Gb  cli_port.o [1]
-DebugMon_Handler         0x801'57a3      0x2  Code  Gb  stm32f7xx_it.o [1]
+DebugMon_Handler         0x801'57ab      0x2  Code  Gb  stm32f7xx_it.o [1]
 Dtentox                  0x801'4311    0x14e  Code  Lc  strto64.o [4]
 ETH_FlushTransmitFIFO    0x800'bf75     0x2c  Code  Lc  stm32f7xx_hal_eth.o [1]
-ETH_IRQHandler           0x801'57b1      0x6  Code  Gb  stm32f7xx_it.o [1]
+ETH_IRQHandler           0x801'57b9      0x6  Code  Gb  stm32f7xx_it.o [1]
 ETH_MACDMAConfig         0x800'be41     0xf6  Code  Lc  stm32f7xx_hal_eth.o [1]
 ElMotorCANQueueHandle   0x2004'9d34      0x4  Data  Gb  freertos.o [1]
 ElMotorUnitParameters   0x2004'9d24      0x8  Data  Gb  freertos.o [1]
@@ -1230,43 +947,43 @@ HAL_UART_Init            0x800'f90d     0x62  Code  Gb  stm32f7xx_hal_uart.o [1]
 HAL_UART_MspInit         0x800'eacf    0x13a  Code  Gb  stm32f7xx_hal_msp.o [1]
 HEAP$$Base              0x2004'a210            --   Gb  - Linker created -
 HEAP$$Limit             0x2004'a410            --   Gb  - Linker created -
-HardFault_Handler        0x801'579b      0x2  Code  Gb  stm32f7xx_it.o [1]
+HardFault_Handler        0x801'57a3      0x2  Code  Gb  stm32f7xx_it.o [1]
 LoadInt                  0x801'1f1f     0x7a  Code  Lc  xprintffull.o [2]
 MX_GPIO_Init             0x800'd8f5    0x14a  Code  Lc  main.o [1]
 MX_LWIP_Init             0x800'c0b5     0x8e  Code  Gb  lwip.o [1]
 MX_USB_DEVICE_Init       0x800'c061     0x54  Code  Gb  usb_device.o [1]
-MemManage_Handler        0x801'579d      0x2  Code  Gb  stm32f7xx_it.o [1]
-NMI_Handler              0x801'5799      0x2  Code  Gb  stm32f7xx_it.o [1]
+MemManage_Handler        0x801'57a5      0x2  Code  Gb  stm32f7xx_it.o [1]
+NMI_Handler              0x801'57a1      0x2  Code  Gb  stm32f7xx_it.o [1]
 Netif_LinkSemaphore     0x2004'9bf8      0x4  Data  Gb  lwip.o [1]
-OTG_FS_IRQHandler        0x801'57b7      0x6  Code  Gb  stm32f7xx_it.o [1]
+OTG_FS_IRQHandler        0x801'57bf      0x6  Code  Gb  stm32f7xx_it.o [1]
 PCD_EP_OutXfrComplete_int
                          0x801'1179     0xc2  Code  Lc  stm32f7xx_hal_pcd.o [1]
 PCD_WriteEmptyTxFifo     0x801'10d3     0xa6  Code  Lc  stm32f7xx_hal_pcd.o [1]
-ParserGroundStaHandle   0x2004'8dc8      0x4  Data  Gb  main.o [1]
+ParsGndStTaskHandle     0x2004'8dc4      0x4  Data  Gb  main.o [1]
 PendSV_Handler           0x800'bfad           Code  Gb  portasm.o [1]
 PitchRollAccel          0x2004'9d40      0x8  Data  Gb  freertos.o [1]
-Region$$Table$$Base      0x801'5844            --   Gb  - Linker created -
-Region$$Table$$Limit     0x801'5868            --   Gb  - Linker created -
+Region$$Table$$Base      0x801'584c            --   Gb  - Linker created -
+Region$$Table$$Limit     0x801'5870            --   Gb  - Linker created -
 Rx_Buff                 0x2004'03c4   0x17d0  Data  Gb  ethernetif.o [1]
-SHT$$INIT_ARRAY$$Base    0x801'5ac0            --   Gb  - Linker created -
-SHT$$INIT_ARRAY$$Limit   0x801'5ac4            --   Gb  - Linker created -
+SHT$$INIT_ARRAY$$Base    0x801'5ac8            --   Gb  - Linker created -
+SHT$$INIT_ARRAY$$Limit   0x801'5acc            --   Gb  - Linker created -
 SHT$$PREINIT_ARRAY$$Base
-                         0x801'5ac0            --   Gb  - Linker created -
+                         0x801'5ac8            --   Gb  - Linker created -
 SHT$$PREINIT_ARRAY$$Limit
-                         0x801'5ac0            --   Gb  - Linker created -
+                         0x801'5ac8            --   Gb  - Linker created -
 SVC_Handler              0x800'c009           Code  Gb  portasm.o [1]
 StartCANTask             0x800'b013     0x3c  Code  Gb  freertos.o [1]
 StartCliTask             0x800'b081      0xc  Code  Gb  freertos.o [1]
 StartConGroundStation    0x800'ae2d     0xda  Code  Gb  freertos.o [1]
 StartDefaultTask         0x800'ad89     0x5c  Code  Gb  freertos.o [1]
-StartParserGroundStationTask
+StartParserGroundStation
                          0x800'af09    0x10a  Code  Gb  freertos.o [1]
 SysTick_Handler          0x800'aa81     0x2e  Code  Gb  port.o [1]
 SystemClock_Config       0x800'd81f     0xd6  Code  Gb  main.o [1]
 SystemCoreClock         0x2000'0028      0x4  Data  Gb  system_stm32f7xx.o [1]
-SystemInit               0x801'57cd     0x16  Code  Gb  system_stm32f7xx.o [1]
+SystemInit               0x801'57d5     0x16  Code  Gb  system_stm32f7xx.o [1]
 TIM8_TRG_COM_TIM14_IRQHandler
-                         0x801'57ab      0x6  Code  Gb  stm32f7xx_it.o [1]
+                         0x801'57b3      0x6  Code  Gb  stm32f7xx_it.o [1]
 TIM_Base_SetConfig       0x801'0759     0xbe  Code  Gb  stm32f7xx_hal_tim.o [1]
 Tx_Buff                 0x2004'1b94   0x17d0  Data  Gb  ethernetif.o [1]
 UART_AdvFeatureConfig    0x800'fc11     0xcc  Code  Gb  stm32f7xx_hal_uart.o [1]
@@ -1398,7 +1115,7 @@ USB_SetCurrentMode       0x801'14cb     0x34  Code  Gb  stm32f7xx_ll_usb.o [1]
 USB_SetDevAddress        0x801'1bd3     0x1c  Code  Gb  stm32f7xx_ll_usb.o [1]
 USB_SetTurnaroundTime    0x801'13f5     0xbe  Code  Gb  stm32f7xx_ll_usb.o [1]
 USB_WritePacket          0x801'1b25     0x2a  Code  Gb  stm32f7xx_ll_usb.o [1]
-UsageFault_Handler       0x801'57a1      0x2  Code  Gb  stm32f7xx_it.o [1]
+UsageFault_Handler       0x801'57a9      0x2  Code  Gb  stm32f7xx_it.o [1]
 UserRxBufferFS          0x2004'5968    0x800  Data  Gb  usbd_cdc_if.o [1]
 UserTxBufferFS          0x2004'6168    0x800  Data  Gb  usbd_cdc_if.o [1]
 _Encoding_8859_1_Mbrlen
@@ -1451,8 +1168,8 @@ __aeabi_memcpy4          0x800'4849           Code  Gb  ABImemcpy.o [5]
 __aeabi_memcpy8          0x800'4849           Code  Gb  ABImemcpy.o [5]
 __aeabi_ui2d             0x801'3017      0xe  Code  Gb  U32ToDbl.o [4]
 __aeabi_uldivmod         0x800'eccd           Code  Gb  I64DivMod.o [5]
-__call_ctors             0x801'5889     0x18  Code  Gb  cppinit.o [2]
-__cmain                  0x801'58a1           Code  Gb  cmain.o [5]
+__call_ctors             0x801'5891     0x18  Code  Gb  cppinit.o [2]
+__cmain                  0x801'58a9           Code  Gb  cmain.o [5]
 __data_GetMemChunk       0x800'1759     0x2c  Code  Gb  xgetmemchunk.o [2]
 __data_GetMemChunk::start
                         0x2004'9e08      0x4  Data  Lc  xgetmemchunk.o [2]
@@ -1473,8 +1190,8 @@ __iar_Stoxflt::digits    0x801'4b04     0x18  Data  Lc  iar_Stoxflt.o [2]
 __iar_Stoxflt::vals      0x801'4b1c     0x18  Data  Lc  iar_Stoxflt.o [2]
 __iar_Strchr             0x801'2cd9           Code  Gb  strchr.o [5]
 __iar_cstart_call_ctors
-                         0x801'5869     0x20  Code  Gb  cmain_call_ctors.o [5]
-__iar_data_init3         0x801'57f9     0x28  Code  Gb  data_init.o [5]
+                         0x801'5871     0x20  Code  Gb  cmain_call_ctors.o [5]
+__iar_data_init3         0x801'5801     0x28  Code  Gb  data_init.o [5]
 __iar_debug_exceptions   0x800'48ce      0x1  Data  Gb  unwind_debug.o [6]
 __iar_dlfree             0x800'11d7    0x4f6  Code  Gb  dlmalloc.o [2]
 __iar_dlmalloc           0x800'0f21    0x2b6  Code  Gb  dlmalloc.o [2]
@@ -1483,11 +1200,11 @@ __iar_frexp64            0x801'2ddd           Code  Gb  frexp.o [4]
 __iar_frexpl             0x801'2e01           Code  Gb  frexp.o [4]
 __iar_globLocale        0x2000'0214     0x48  Data  Lc  xlocale_c.o [2]
 __iar_global_Locale      0x800'8a31      0x4  Code  Gb  xlocale_c.o [2]
-__iar_init_vfp           0x801'5821           Code  Gb  fpinit_M.o [4]
+__iar_init_vfp           0x801'5829           Code  Gb  fpinit_M.o [4]
 __iar_ldexp64            0x801'2ed9           Code  Gb  ldexp.o [4]
 __iar_lz77_init_single3
                          0x800'16df     0x7a  Code  Gb  lz77_init_single.o [5]
-__iar_program_start      0x801'58e5           Code  Gb  cstartup_M.o [5]
+__iar_program_start      0x801'58ed           Code  Gb  cstartup_M.o [5]
 __iar_scalbln64          0x801'2ed9           Code  Gb  ldexp.o [4]
 __iar_scalbn64           0x801'2ed9           Code  Gb  ldexp.o [4]
 __iar_softfp___iar_Sto64
@@ -1509,15 +1226,15 @@ __iar_softfp_scalblnl    0x801'2ec5           Code  Gb  ldexp.o [4]
 __iar_softfp_scalbn      0x801'2ec5           Code  Gb  ldexp.o [4]
 __iar_softfp_scalbnl     0x801'2ec5           Code  Gb  ldexp.o [4]
 __iar_tls$$INIT_ARRAY$$Base
-                         0x801'5ac4            --   Gb  - Linker created -
+                         0x801'5acc            --   Gb  - Linker created -
 __iar_tls$$INIT_ARRAY$$Limit
-                         0x801'5ac4            --   Gb  - Linker created -
+                         0x801'5acc            --   Gb  - Linker created -
 __iar_zero_init3         0x800'29a7     0x3a  Code  Gb  zero_init3.o [5]
-__low_level_init         0x801'58bf      0x4  Code  Gb  low_level_init.o [2]
+__low_level_init         0x801'58c7      0x4  Code  Gb  low_level_init.o [2]
 __sti__routine           0x801'4e95     0x2e  Code  Lc  cli_port.o [1]
 __vector_table           0x800'0000           Data  Gb  startup_stm32f767xx.o [1]
-_call_main               0x801'58ad           Code  Gb  cmain.o [5]
-_exit                    0x801'58c9           Code  Gb  cexit.o [5]
+_call_main               0x801'58b5           Code  Gb  cmain.o [5]
+_exit                    0x801'58d1           Code  Gb  cexit.o [5]
 _gLocale_mblen           0x800'8ad7      0x4  Code  Gb  xlocale_c.o [2]
 _gLocale_mblenInt        0x800'8a59     0x2c  Code  Gb  xlocale_c.o [2]
 _gLocale_mbtowc          0x800'8adb      0xc  Code  Gb  xlocale_c.o [2]
@@ -1525,14 +1242,13 @@ _gLocale_mbtowcInt       0x800'8a85     0x42  Code  Gb  xlocale_c.o [2]
 _gLocale_wctomb          0x800'8ae7      0x4  Code  Gb  xlocale_c.o [2]
 _gLocale_wctombInt       0x800'8ad3      0x4  Code  Gb  xlocale_c.o [2]
 _gm_                    0x2004'8fd0    0x1d8  Data  Lc  dlmalloc.o [2]
-_main                    0x801'58bb           Code  Gb  cmain.o [5]
+_main                    0x801'58c3           Code  Gb  cmain.o [5]
 abort                    0x800'16d9      0x6  Code  Gb  abort.o [2]
 ackno                   0x2004'9cf0      0x4  Data  Lc  tcp_in.o [1]
 add_segment              0x800'05c1    0x1f2  Code  Lc  dlmalloc.o [2]
 arp_table               0x2004'9644     0xf0  Data  Lc  etharp.o [1]
 cli::TT_CLI<(int)64, (signed char)8>::TT_CLI(TCLI_IO const *, char const *, void (*)(TCLI_IO const *, char *, int))
                          0x801'512d     0x88  Code  Gb  cli_port.o [1]
-cliTaskHandle           0x2004'8dc0      0x4  Data  Gb  main.o [1]
 cli_cmd_cmp              0x801'5465     0x3c  Code  Gb  cli.o [1]
 cli_seek_next_word       0x801'54a1     0xd2  Code  Gb  cli.o [1]
 current_timeout_due_time
@@ -1594,8 +1310,8 @@ ethernetif_notify_conn_changed
 ethernetif_set_link      0x800'a6f5     0x4a  Code  Gb  ethernetif.o [1]
 ethernetif_update_config
                          0x800'a73f     0xae  Code  Gb  ethernetif.o [1]
-ethzero                  0x801'58f0      0x8  Data  Gb  ethernet.o [1]
-exit                     0x801'58c3      0x4  Code  Gb  exit.o [2]
+ethzero                  0x801'58f8      0x8  Data  Gb  ethernet.o [1]
+exit                     0x801'58cb      0x4  Code  Gb  exit.o [2]
 flags                   0x2004'9cd8      0x1  Data  Lc  tcp_in.o [1]
 free                     0x801'0591      0x4  Code  Gb  heaptramp0.o [2]
 frexp                    0x801'2ddd           Code  Gb  frexp.o [4]
@@ -1627,8 +1343,8 @@ ip4_output_if_src        0x800'4685     0xa8  Code  Gb  ip4.o [1]
 ip4_reass                0x800'5f09    0x1fc  Code  Gb  ip4_frag.o [1]
 ip4_route                0x800'4459     0x64  Code  Gb  ip4.o [1]
 ip4addr_aton             0x800'415d    0x134  Code  Gb  ip4_addr.o [1]
-ip_addr_any              0x801'5900      0x4  Data  Gb  ip4_addr.o [1]
-ip_addr_broadcast        0x801'5904      0x4  Data  Gb  ip4_addr.o [1]
+ip_addr_any              0x801'5908      0x4  Data  Gb  ip4_addr.o [1]
+ip_addr_broadcast        0x801'590c      0x4  Data  Gb  ip4_addr.o [1]
 ip_data                 0x2004'9d6c     0x18  Data  Gb  ip.o [1]
 ip_id                   0x2004'9736      0x2  Data  Lc  ip4.o [1]
 ip_reass_chain_frag_into_datagram_and_validate
@@ -1688,19 +1404,19 @@ mem_mutex               0x2004'7b68      0x4  Data  Lc  mem.o [1]
 mem_trim                 0x800'3c95     0xd4  Code  Gb  mem.o [1]
 memchr                   0x801'2d69           Code  Gb  memchr.o [5]
 memcmp                   0x800'7469           Code  Gb  memcmp.o [5]
-memp_FRAG_PBUF           0x801'56fc      0xc  Data  Gb  memp.o [1]
-memp_NETBUF              0x801'5708      0xc  Data  Gb  memp.o [1]
-memp_NETCONN             0x801'5714      0xc  Data  Gb  memp.o [1]
-memp_PBUF                0x801'5744      0xc  Data  Gb  memp.o [1]
-memp_PBUF_POOL           0x801'5750      0xc  Data  Gb  memp.o [1]
-memp_REASSDATA           0x801'56f0      0xc  Data  Gb  memp.o [1]
-memp_SYS_TIMEOUT         0x801'5738      0xc  Data  Gb  memp.o [1]
-memp_TCPIP_MSG_API       0x801'5720      0xc  Data  Gb  memp.o [1]
-memp_TCPIP_MSG_INPKT     0x801'572c      0xc  Data  Gb  memp.o [1]
-memp_TCP_PCB             0x801'56cc      0xc  Data  Gb  memp.o [1]
-memp_TCP_PCB_LISTEN      0x801'56d8      0xc  Data  Gb  memp.o [1]
-memp_TCP_SEG             0x801'56e4      0xc  Data  Gb  memp.o [1]
-memp_UDP_PCB             0x801'56c0      0xc  Data  Gb  memp.o [1]
+memp_FRAG_PBUF           0x801'5704      0xc  Data  Gb  memp.o [1]
+memp_NETBUF              0x801'5710      0xc  Data  Gb  memp.o [1]
+memp_NETCONN             0x801'571c      0xc  Data  Gb  memp.o [1]
+memp_PBUF                0x801'574c      0xc  Data  Gb  memp.o [1]
+memp_PBUF_POOL           0x801'5758      0xc  Data  Gb  memp.o [1]
+memp_REASSDATA           0x801'56f8      0xc  Data  Gb  memp.o [1]
+memp_SYS_TIMEOUT         0x801'5740      0xc  Data  Gb  memp.o [1]
+memp_TCPIP_MSG_API       0x801'5728      0xc  Data  Gb  memp.o [1]
+memp_TCPIP_MSG_INPKT     0x801'5734      0xc  Data  Gb  memp.o [1]
+memp_TCP_PCB             0x801'56d4      0xc  Data  Gb  memp.o [1]
+memp_TCP_PCB_LISTEN      0x801'56e0      0xc  Data  Gb  memp.o [1]
+memp_TCP_SEG             0x801'56ec      0xc  Data  Gb  memp.o [1]
+memp_UDP_PCB             0x801'56c8      0xc  Data  Gb  memp.o [1]
 memp_free                0x800'47c9     0x2c  Code  Gb  memp.o [1]
 memp_init                0x800'4741     0x60  Code  Gb  memp.o [1]
 memp_malloc              0x800'47a1     0x28  Code  Gb  memp.o [1]
@@ -2122,15 +1838,15 @@ xTickCount              0x2004'93f0      0x4  Data  Lc  tasks.o [1]
 xYieldPending           0x2004'9400      0x4  Data  Lc  tasks.o [1]
 
 
-[1] = C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj
+[1] = C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\FlyController\Obj
 [2] = dl7M_tlf.a
 [3] = dlpp7M_tl_fc.a
 [4] = m7M_tlv.a
 [5] = rt7M_tl.a
 [6] = shb_l.a
 
-   87 601 bytes of readonly  code memory
-    1 491 bytes of readonly  data memory
+   87 609 bytes of readonly  code memory
+    1 489 bytes of readonly  data memory
   304 141 bytes of readwrite data memory
 
 Errors: none

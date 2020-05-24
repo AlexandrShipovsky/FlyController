@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\settings\FlyController.FlyController.general.xcl" --backend -f "C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\settings\FlyController.FlyController.driver.xcl" 
+"B:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\settings\FlyController.FlyController.general.xcl" --backend -f "C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\settings\FlyController.FlyController.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\settings\FlyController.FlyController.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\settings\FlyController.FlyController.driver.xcl" 
+"B:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\settings\FlyController.FlyController.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\settings\FlyController.FlyController.driver.xcl" 
 
 @echo off 
 :end

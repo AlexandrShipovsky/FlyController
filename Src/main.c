@@ -56,10 +56,10 @@ UART_HandleTypeDef huart8;
 UART_HandleTypeDef huart3;
 
 osThreadId defaultTaskHandle;
-osThreadId cliTaskHandle;
-osThreadId ConGroundStatioHandle;
-osThreadId ParserGroundStaHandle;
+osThreadId ConGndStatTaskHandle;
+osThreadId ParsGndStTaskHandle;
 osThreadId CANTaskHandle;
+osThreadId CliTaskHandle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -74,10 +74,10 @@ static void MX_UART8_Init(void);
 static void MX_CRC_Init(void);
 static void MX_I2C4_Init(void);
 void StartDefaultTask(void const * argument);
-void StartCliTask(void const * argument);
 void StartConGroundStation(void const * argument);
-void StartParserGroundStationTask(void const * argument);
+void StartParserGroundStation(void const * argument);
 void StartCANTask(void const * argument);
+void StartCliTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -148,24 +148,24 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityLow, 0, 512);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 256);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-  /* definition and creation of cliTask */
-  osThreadDef(cliTask, StartCliTask, osPriorityIdle, 0, 512);
-  cliTaskHandle = osThreadCreate(osThread(cliTask), NULL);
+  /* definition and creation of ConGndStatTask */
+  osThreadDef(ConGndStatTask, StartConGroundStation, osPriorityBelowNormal, 0, 1024);
+  ConGndStatTaskHandle = osThreadCreate(osThread(ConGndStatTask), NULL);
 
-  /* definition and creation of ConGroundStatio */
-  osThreadDef(ConGroundStatio, StartConGroundStation, osPriorityLow, 0, 2048);
-  ConGroundStatioHandle = osThreadCreate(osThread(ConGroundStatio), NULL);
-
-  /* definition and creation of ParserGroundSta */
-  osThreadDef(ParserGroundSta, StartParserGroundStationTask, osPriorityLow, 0, 512);
-  ParserGroundStaHandle = osThreadCreate(osThread(ParserGroundSta), NULL);
+  /* definition and creation of ParsGndStTask */
+  osThreadDef(ParsGndStTask, StartParserGroundStation, osPriorityBelowNormal, 0, 1024);
+  ParsGndStTaskHandle = osThreadCreate(osThread(ParsGndStTask), NULL);
 
   /* definition and creation of CANTask */
-  osThreadDef(CANTask, StartCANTask, osPriorityLow, 0, 512);
+  osThreadDef(CANTask, StartCANTask, osPriorityBelowNormal, 0, 256);
   CANTaskHandle = osThreadCreate(osThread(CANTask), NULL);
+
+  /* definition and creation of CliTask */
+  osThreadDef(CliTask, StartCliTask, osPriorityLow, 0, 256);
+  CliTaskHandle = osThreadCreate(osThread(CliTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -593,28 +593,9 @@ __weak void StartDefaultTask(void const * argument)
   /* USER CODE END 5 */ 
 }
 
-/* USER CODE BEGIN Header_StartCliTask */
-/**
-* @brief Function implementing the cliTask thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_StartCliTask */
-__weak void StartCliTask(void const * argument)
-{
-  /* USER CODE BEGIN StartCliTask */
-  /* Infinite loop */
-  for (;;)
-  {
-    //HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
-    osDelay(1);
-  }
-  /* USER CODE END StartCliTask */
-}
-
 /* USER CODE BEGIN Header_StartConGroundStation */
 /**
-* @brief Function implementing the ConGroundStatio thread.
+* @brief Function implementing the ConGndStatTask thread.
 * @param argument: Not used
 * @retval None
 */
@@ -623,29 +604,29 @@ __weak void StartConGroundStation(void const * argument)
 {
   /* USER CODE BEGIN StartConGroundStation */
   /* Infinite loop */
-  for (;;)
+  for(;;)
   {
     osDelay(1);
   }
   /* USER CODE END StartConGroundStation */
 }
 
-/* USER CODE BEGIN Header_StartParserGroundStationTask */
+/* USER CODE BEGIN Header_StartParserGroundStation */
 /**
-* @brief Function implementing the ParserGroundSta thread.
+* @brief Function implementing the ParsGndStTask thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartParserGroundStationTask */
-__weak void StartParserGroundStationTask(void const * argument)
+/* USER CODE END Header_StartParserGroundStation */
+__weak void StartParserGroundStation(void const * argument)
 {
-  /* USER CODE BEGIN StartParserGroundStationTask */
+  /* USER CODE BEGIN StartParserGroundStation */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END StartParserGroundStationTask */
+  /* USER CODE END StartParserGroundStation */
 }
 
 /* USER CODE BEGIN Header_StartCANTask */
@@ -664,6 +645,24 @@ __weak void StartCANTask(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartCANTask */
+}
+
+/* USER CODE BEGIN Header_StartCliTask */
+/**
+* @brief Function implementing the CliTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartCliTask */
+__weak void StartCliTask(void const * argument)
+{
+  /* USER CODE BEGIN StartCliTask */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartCliTask */
 }
 
  /**

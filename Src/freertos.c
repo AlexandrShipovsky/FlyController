@@ -24,7 +24,7 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+/* USER CODE BEGIN Includes */     
 //#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
@@ -73,7 +73,7 @@ void PilotCommandHandler(uint8_t *pbuf); // Обработчик команды
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -140,12 +140,12 @@ void ethernetif_notify_conn_changed(struct netif *netif)
   BaseType_t xHigherPriorityTaskWoken;
   uint8_t PhyStat;
   extern struct netif gnetif;
-  extern osThreadId ConGroundStatioHandle;
+  extern osThreadId ConGndStatTaskHandle;
 
   PhyStat = gnetif.flags;
   if (PhyStat == 15)
   {
-    xHigherPriorityTaskWoken = xTaskResumeFromISR(ConGroundStatioHandle);
+    xHigherPriorityTaskWoken = xTaskResumeFromISR(ConGndStatTaskHandle);
     if (xHigherPriorityTaskWoken == pdTRUE)
     {
       portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
@@ -153,7 +153,7 @@ void ethernetif_notify_conn_changed(struct netif *netif)
   }
   else
   {
-    vTaskSuspend(ConGroundStatioHandle);
+    vTaskSuspend(ConGndStatTaskHandle);
     HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
     net_state = 0;
   }
@@ -248,8 +248,8 @@ void StartConGroundStation(void const *argument)
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartParserGroundStationTask */
-void StartParserGroundStationTask(void const *argument)
+/* USER CODE END Header_StartParserGroundStation */
+void StartParserGroundStation(void const *argument)
 {
   /* USER CODE BEGIN StartParserGroundStationTask */
   uint8_t pbuf[BUFSIZE];
