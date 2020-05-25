@@ -70,6 +70,7 @@ ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с п�
 /* USER CODE BEGIN FunctionPrototypes */
 void PingHandler(uint8_t *pbuf);         // Обработчик команды PING
 void PilotCommandHandler(uint8_t *pbuf); // Обработчик команды
+void TestModeHandler(uint8_t *pbuf);     // Обработчик команды начала предполетного тестирования всех систем
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
@@ -280,6 +281,7 @@ void StartParserGroundStation(void const *argument)
       switch (pbuf[i])
       {
       case PreFlightTestRequest:
+        TestModeHandler(&pbuf[i]);
         i += CommandSize[PreFlightTestRequest];
         break;
 
@@ -329,6 +331,9 @@ void StartCANTask(void const *argument)
 {
   /* USER CODE BEGIN StartCANTask */
   uint8_t canbuf[8];
+  const char testbuf[9] = {PreFlightTestResponse};
+  const char calibbuf[9] = {WingCalibrationResponse};
+  int8_t res;
   /* Infinite loop */
   for (;;)
   {
@@ -346,8 +351,21 @@ void StartCANTask(void const *argument)
         memcpy(&ElMotorUnitParameters.Pitch, &canbuf[1], sizeof(ElMotorUnitParameters.Pitch));
         memcpy(&ElMotorUnitParameters.Roll, &canbuf[3], sizeof(ElMotorUnitParameters.Roll));
         break;
+      case TestMode:
+        res = netconn_write(nc, testbuf, CommandSize[PreFlightTestResponse], NETCONN_COPY);
+        if (res != ERR_OK)
+        {
+        }
+        break;
+      case CalibComplied:
+        res = netconn_write(nc, calibbuf, CommandSize[WingCalibrationResponse], NETCONN_COPY);
+        if (res != ERR_OK)
+        {
+        }
+        break;
       }
     }
+    memset(canbuf, 0x00, sizeof(canbuf)); // Очистить буфер
     vTaskDelay(1);
   }
   /* USER CODE END StartCANTask */
@@ -452,6 +470,31 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   res = netconn_write(nc, (char const *)SendTCPBuf, CommandSize[PilotCommandResponse], NETCONN_COPY);
   if (res != ERR_OK)
   {
+  }
+}
+/*
+*
+*
+*
+*/
+void TestModeHandler(uint8_t *pbuf)
+{
+  uint8_t ElMotorBuf[8];
+
+  extern CAN_HandleTypeDef hcan1;
+  uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
+  CAN_TxHeaderTypeDef TxHeader;
+  // Передача на блок управления приводами
+  TxHeader.DLC = 8;
+  TxHeader.StdId = 0x0000;
+  TxHeader.RTR = CAN_RTR_DATA;
+  TxHeader.IDE = CAN_ID_STD;
+  TxHeader.TransmitGlobalTime = DISABLE;
+
+  ElMotorBuf[0] = TestMode;
+  if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, ElMotorBuf, &TxMailBox) != HAL_OK)
+  {
+    //Error_Handler();
   }
 }
 /* USER CODE END Application */

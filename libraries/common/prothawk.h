@@ -36,7 +36,9 @@ extern "C"
     typedef enum
     {
         PitchRollCommand = 5,
-        VBATCommand = 6
+        VBATCommand = 6,
+        TestMode = 7,
+        CalibComplied = 8
     } ElMotorCommandsTypeDef;
 
     typedef struct
@@ -48,13 +50,13 @@ extern "C"
 
     const uint8_t CommandSize[ENDCOMMAND] = {
         /*zero*/0,
-        /*commands[PreFlightTestRequest] = */ 0,
-        /*commands[PreFlightTestResponse] = */ 0,
+        /*commands[PreFlightTestRequest] = */ 9,
+        /*commands[PreFlightTestResponse] = */ 9,
         /*commands[WingCalibrationRequest] = */ 9,
-        /*commands[WingCalibrationResponse] = */ 2,
+        /*commands[WingCalibrationResponse] = */ 9,
         /*commands[PilotCommand] = */ 9,
         /*commands[PilotCommandResponse] = */ 9,
-        /*commands[PING] = */ 10,
+        /*commands[PING] = */ 9,
         /*commands[TelemetryRequest] = */ 1,
         /*commands[TelemetryResponse] = */ 15
         };
