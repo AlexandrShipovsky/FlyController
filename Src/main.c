@@ -148,23 +148,23 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 256);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityLow, 0, 512);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of ConGndStatTask */
-  osThreadDef(ConGndStatTask, StartConGroundStation, osPriorityBelowNormal, 0, 1024);
+  osThreadDef(ConGndStatTask, StartConGroundStation, osPriorityBelowNormal, 0, 2048);
   ConGndStatTaskHandle = osThreadCreate(osThread(ConGndStatTask), NULL);
 
   /* definition and creation of ParsGndStTask */
-  osThreadDef(ParsGndStTask, StartParserGroundStation, osPriorityBelowNormal, 0, 1024);
+  osThreadDef(ParsGndStTask, StartParserGroundStation, osPriorityLow, 0, 2048);
   ParsGndStTaskHandle = osThreadCreate(osThread(ParsGndStTask), NULL);
 
   /* definition and creation of CANTask */
-  osThreadDef(CANTask, StartCANTask, osPriorityBelowNormal, 0, 256);
+  osThreadDef(CANTask, StartCANTask, osPriorityLow, 0, 512);
   CANTaskHandle = osThreadCreate(osThread(CANTask), NULL);
 
   /* definition and creation of CliTask */
-  osThreadDef(CliTask, StartCliTask, osPriorityLow, 0, 256);
+  osThreadDef(CliTask, StartCliTask, osPriorityIdle, 0, 256);
   CliTaskHandle = osThreadCreate(osThread(CliTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */

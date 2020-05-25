@@ -24,7 +24,7 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */     
+/* USER CODE BEGIN Includes */
 //#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
@@ -45,7 +45,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define BUFSIZE 256 // Размер буфера для принимаемых пакетов
+#define BUFSIZE 512 // Размер буфера для принимаемых пакетов
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -57,7 +57,7 @@
 /* USER CODE BEGIN Variables */
 uint8_t net_state = 0;                            // Состояние подключения
 xQueueHandle GroundStationDataQueueHandle = NULL; // Очередь передачи принятых байт от задачи приема к задаче парсинга
-xQueueHandle ElMotorCANQueueHandle = NULL; // Очередь передачи принятых по CAN1 байт
+xQueueHandle ElMotorCANQueueHandle = NULL;        // Очередь передачи принятых по CAN1 байт
 struct netconn *nc;
 struct netbuf *nb;
 
@@ -73,7 +73,7 @@ void PilotCommandHandler(uint8_t *pbuf); // Обработчик команды
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -106,7 +106,7 @@ void StartDefaultTask(void const *argument)
   /* init code for LWIP */
 
   GroundStationDataQueueHandle = xQueueCreate(16, BUFSIZE);
-  ElMotorCANQueueHandle = xQueueCreate(8,8);
+  ElMotorCANQueueHandle = xQueueCreate(8, 8);
 
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
@@ -197,6 +197,12 @@ void StartConGroundStation(void const *argument)
       {
         HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
         len = netbuf_len(nb);
+        /*if(len > 50)
+        {
+          HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+          while(1){};
+        }
+        */
         netbuf_copy(nb, buf, len);
         netbuf_delete(nb);
         if (GroundStationDataQueueHandle != NULL)
@@ -262,11 +268,12 @@ void StartParserGroundStation(void const *argument)
     {
       if (xQueueReceive(GroundStationDataQueueHandle,
                         pbuf,
-                        (TickType_t)0) == pdPASS)
+                        (TickType_t)5) == pdPASS)
       {
         /* *pxRxedPointer now points to xMessage. */
       }
     }
+
     uint16_t i = 0;
     while (pbuf[i] != 0x00)
     {
@@ -287,19 +294,22 @@ void StartParserGroundStation(void const *argument)
       case WingCalibrationResponse:
         i += CommandSize[WingCalibrationResponse];
         break;
+      case PING:
+        PingHandler(&pbuf[i]);
+        i += (uint16_t)CommandSize[PING];
+        break;
 
       case PilotCommand:
         PilotCommandHandler(&pbuf[i]);
-        i += CommandSize[PilotCommand];
+        i += (uint16_t)CommandSize[PilotCommand];
         break;
 
       case PilotCommandResponse:
-        i += CommandSize[PilotCommandResponse];
+        i += (uint16_t)CommandSize[PilotCommandResponse];
         break;
 
-      case PING:
-        PingHandler(&pbuf[i]);
-        i += CommandSize[PING];
+      default:
+        memset(pbuf, 0x00, sizeof(pbuf)); // Очистить буфер
         break;
       }
     }
@@ -318,24 +328,24 @@ void StartParserGroundStation(void const *argument)
 void StartCANTask(void const *argument)
 {
   /* USER CODE BEGIN StartCANTask */
-  uint8_t pbuf[8];
+  uint8_t canbuf[8];
   /* Infinite loop */
   for (;;)
   {
     if (ElMotorCANQueueHandle != NULL)
     {
       if (xQueueReceive(ElMotorCANQueueHandle,
-                        pbuf,
+                        canbuf,
                         (TickType_t)0) == pdPASS)
       {
         /* *pxRxedPointer now points to xMessage. */
       }
-      switch(pbuf[0])
+      switch (canbuf[0])
       {
       case PitchRollCommand:
-      memcpy(&ElMotorUnitParameters.Pitch, &pbuf[1], sizeof(ElMotorUnitParameters.Pitch));
-      memcpy(&ElMotorUnitParameters.Roll, &pbuf[1], sizeof(ElMotorUnitParameters.Roll));
-      break;
+        memcpy(&ElMotorUnitParameters.Pitch, &canbuf[1], sizeof(ElMotorUnitParameters.Pitch));
+        memcpy(&ElMotorUnitParameters.Roll, &canbuf[3], sizeof(ElMotorUnitParameters.Roll));
+        break;
       }
     }
     vTaskDelay(1);
@@ -360,15 +370,12 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
     else
     {
       if (ElMotorCANQueueHandle != NULL)
-        {
-          xQueueSendToBackFromISR(ElMotorCANQueueHandle,
-                               (void *)buf,
-                               &xHigherPriorityTaskWoken);
-         
-        }
+      {
+        xQueueSendToBackFromISR(ElMotorCANQueueHandle,
+                                (void *)buf,
+                                &xHigherPriorityTaskWoken);
+      }
     }
-    
-    
   }
 }
 /* USER CODE BEGIN Header_StartCliTask */
@@ -392,10 +399,11 @@ void StartCliTask(void const *argument)
 
 /******************************************************************/
 /*Обработчики команд*/
-void PingHandler(uint8_t *pbuf)
+void PingHandler(uint8_t *pingbuf)
 {
   int8_t res;
-  res = netconn_write(nc, (char const *)pbuf, CommandSize[PING], NETCONN_COPY);
+
+  res = netconn_write(nc, (char const *)pingbuf, CommandSize[PING], NETCONN_COPY);
   if (res != ERR_OK)
   {
   }
@@ -405,22 +413,22 @@ void PingHandler(uint8_t *pbuf)
 *
 *
 */
-void PilotCommandHandler(uint8_t *pbuf)
+void PilotCommandHandler(uint8_t *pilotbuf)
 {
   int8_t res;
   uint8_t i = 1;
-  uint8_t SendTCPBuf[32];
+  uint8_t SendTCPBuf[9];
   extern CAN_HandleTypeDef hcan1;
 
   uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
   CAN_TxHeaderTypeDef TxHeader;
 
   // Получение данных от наземной станции
-  memcpy(&PitchRollAccel.Pitch, &pbuf[i], sizeof(PitchRollAccel.Pitch));
+  memcpy(&PitchRollAccel.Pitch, &pilotbuf[i], sizeof(PitchRollAccel.Pitch));
   i += 2;
-  memcpy(&PitchRollAccel.Roll, &pbuf[i], sizeof(PitchRollAccel.Roll));
+  memcpy(&PitchRollAccel.Roll, &pilotbuf[i], sizeof(PitchRollAccel.Roll));
   i += 2;
-  memcpy(&PitchRollAccel.Accel, &pbuf[i], sizeof(PitchRollAccel.Accel));
+  memcpy(&PitchRollAccel.Accel, &pilotbuf[i], sizeof(PitchRollAccel.Accel));
 
   // Передача на блок управления приводами
   TxHeader.DLC = 5;
@@ -429,12 +437,10 @@ void PilotCommandHandler(uint8_t *pbuf)
   TxHeader.IDE = CAN_ID_STD;
   TxHeader.TransmitGlobalTime = DISABLE;
 
-  taskENTER_CRITICAL();
-  if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, pbuf, &TxMailBox) != HAL_OK)
+  if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, pilotbuf, &TxMailBox) != HAL_OK)
   {
     //Error_Handler();
   }
-  taskEXIT_CRITICAL();
 
   SendTCPBuf[0] = PilotCommandResponse;
   SendTCPBuf[1] = (uint8_t)(ElMotorUnitParameters.Pitch & 0xFF);

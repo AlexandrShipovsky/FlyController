@@ -1,121 +1,121 @@
-"C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\netif\ppp\demand.c"
+"C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\netif\ppp\demand.c"
 -std=c11
 -ferror-limit=0
 -fbracket-depth=512
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\netif\ppp
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\netif\ppp
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Inc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Inc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Drivers/STM32F7xx_HAL_Driver/Inc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Drivers/STM32F7xx_HAL_Driver/Inc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM7/r0p1
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM7/r0p1
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Drivers/CMSIS/Device/ST/STM32F7xx/Include
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Drivers/CMSIS/Device/ST/STM32F7xx/Include
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Drivers/CMSIS/Include
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Drivers/CMSIS/Include
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\..\libraries\CLI
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\..\libraries\CLI
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/system
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/system
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/netif/ppp
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/netif/ppp
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/lwip
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/lwip
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/lwip/apps
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/lwip/apps
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/lwip/priv
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/lwip/priv
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/lwip/prot
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/lwip/prot
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/netif
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/netif
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/posix
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/posix
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/posix/net
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/posix/net
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/stdc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/src/include/compat/stdc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/system/arch
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM/../Middlewares/Third_Party/LwIP/system/arch
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\..\libraries\common
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\..\libraries\common
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\EWARM\..\libraries\units
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\..\libraries\units
 -I
-B:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\inc
+C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\inc
 -I
-B:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\inc\c
+C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\inc\c
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Inc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Inc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Drivers\STM32F7xx_HAL_Driver\Inc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Drivers\STM32F7xx_HAL_Driver\Inc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\FreeRTOS\Source\include
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\FreeRTOS\Source\include
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM7\r0p1
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM7\r0p1
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\ST\STM32_USB_Device_Library\Core\Inc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\ST\STM32_USB_Device_Library\Core\Inc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Drivers\CMSIS\Device\ST\STM32F7xx\Include
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Drivers\CMSIS\Device\ST\STM32F7xx\Include
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Drivers\CMSIS\Include
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Drivers\CMSIS\Include
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\libraries\CLI
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\libraries\CLI
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\system
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\system
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\netif\ppp
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\netif\ppp
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\lwip
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\lwip
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\lwip\apps
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\lwip\apps
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\lwip\priv
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\lwip\priv
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\lwip\prot
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\lwip\prot
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\netif
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\netif
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\posix
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\posix
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\posix\arpa
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\posix\arpa
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\posix\net
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\posix\net
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\posix\sys
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\posix\sys
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\stdc
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\src\include\compat\stdc
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\Middlewares\Third_Party\LwIP\system\arch
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\Middlewares\Third_Party\LwIP\system\arch
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\libraries\common
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\libraries\common
 -I
-C:\Users\Jumper\Desktop\firmware\FlyController\libraries\units
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\libraries\units
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
@@ -411,8 +411,8 @@ C:\Users\Jumper\Desktop\firmware\FlyController\libraries\units
 -D__EDG_FLOAT128_ENABLING_POSSIBLE=0
 -DUSE_HAL_DRIVER=1
 -DSTM32F767xx=1
--D_DLIB_CONFIG_FILE_HEADER_NAME="B:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.1\\arm\\inc\\c\\DLib_Config_Full.h"
--D_DLIB_CONFIG_FILE_STRING="B:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.1\\arm\\inc\\c\\DLib_Config_Full.h"
+-D_DLIB_CONFIG_FILE_HEADER_NAME="C:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.1\\arm\\inc\\c\\DLib_Config_Full.h"
+-D_DLIB_CONFIG_FILE_STRING="C:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.1\\arm\\inc\\c\\DLib_Config_Full.h"
 -D__VERSION__="IAR ANSI C/C++ Compiler V8.30.1.114/W32 for ARM"
 -D__ICCARM_OLD_DEFINED_VAARGS__=1
 -D__VA_STACK_ALIGN__=8

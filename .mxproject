@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/Users/Jumper/Desktop/firmware/FlyController/Inc
+HeaderPath=C:/Users/Чистое небо/Desktop/Э.01.00.00 Беспилотный мотодельтаплан/Полетный контроллер/firmware/FlyController/Inc
 HeaderFiles=FreeRTOSConfig.h;lwip.h;lwipopts.h;ethernetif.h;usb_device.h;usbd_conf.h;usbd_desc.h;usbd_cdc_if.h;stm32f7xx_it.h;stm32f7xx_hal_conf.h;main.h;custom_mems_conf_app.h;custom_mems_conf.h;stm32f7xx_nucleo_bus.h;stm32f7xx_nucleo_errno.h;stm32f7xx_nucleo_conf.h;RTE_Components.h;
-SourcePath=C:/Users/Jumper/Desktop/firmware/FlyController/Src
+SourcePath=C:/Users/Чистое небо/Desktop/Э.01.00.00 Беспилотный мотодельтаплан/Полетный контроллер/firmware/FlyController/Src
 SourceFiles=freertos.c;lwip.c;ethernetif.c;usb_device.c;usbd_conf.c;usbd_desc.c;usbd_cdc_if.c;stm32f7xx_it.c;stm32f7xx_hal_msp.c;stm32f7xx_hal_timebase_tim.c;main.c;stm32f7xx_nucleo_bus.c;
 
 [PreviousLibFiles]
