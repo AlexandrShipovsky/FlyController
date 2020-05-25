@@ -70,7 +70,8 @@ ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с п�
 /* USER CODE BEGIN FunctionPrototypes */
 void PingHandler(uint8_t *pbuf);         // Обработчик команды PING
 void PilotCommandHandler(uint8_t *pbuf); // Обработчик команды
-void TestModeHandler(uint8_t *pbuf);     // Обработчик команды начала предполетного тестирования всех систем
+void TestModeHandler(void);     // Обработчик команды начала предполетного тестирования всех систем
+void CalibrationHandler(void); // Обработчик команды окончания калибровки приводов
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
@@ -281,7 +282,7 @@ void StartParserGroundStation(void const *argument)
       switch (pbuf[i])
       {
       case PreFlightTestRequest:
-        TestModeHandler(&pbuf[i]);
+        TestModeHandler();
         i += CommandSize[PreFlightTestRequest];
         break;
 
@@ -290,6 +291,7 @@ void StartParserGroundStation(void const *argument)
         break;
 
       case WingCalibrationRequest:
+        CalibrationHandler();
         i += CommandSize[WingCalibrationRequest];
         break;
 
@@ -477,7 +479,7 @@ void PilotCommandHandler(uint8_t *pilotbuf)
 *
 *
 */
-void TestModeHandler(uint8_t *pbuf)
+void TestModeHandler(void)
 {
   uint8_t ElMotorBuf[8];
 
@@ -492,6 +494,32 @@ void TestModeHandler(uint8_t *pbuf)
   TxHeader.TransmitGlobalTime = DISABLE;
 
   ElMotorBuf[0] = TestMode;
+  if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, ElMotorBuf, &TxMailBox) != HAL_OK)
+  {
+    //Error_Handler();
+  }
+}
+/*
+*
+*
+*
+*
+*/
+void CalibrationHandler(void)
+{
+   uint8_t ElMotorBuf[8];
+
+  extern CAN_HandleTypeDef hcan1;
+  uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
+  CAN_TxHeaderTypeDef TxHeader;
+  // Передача на блок управления приводами
+  TxHeader.DLC = 8;
+  TxHeader.StdId = 0x0000;
+  TxHeader.RTR = CAN_RTR_DATA;
+  TxHeader.IDE = CAN_ID_STD;
+  TxHeader.TransmitGlobalTime = DISABLE;
+
+  ElMotorBuf[0] = CalibComplied;
   if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, ElMotorBuf, &TxMailBox) != HAL_OK)
   {
     //Error_Handler();
