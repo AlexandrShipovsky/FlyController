@@ -35,7 +35,7 @@
 
 #include "confighawk.h"
 #include "prothawk.h"
-#include "ElMotorUnit.h"
+#include "telemetry.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -61,7 +61,6 @@ xQueueHandle ElMotorCANQueueHandle = NULL;        // Очередь переда
 struct netconn *nc;
 struct netbuf *nb;
 
-PitchRollAccelTypeDef PitchRollAccel; // Структура со значениями положения двигателей
 
 ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с параметрами блока управления приводами
 /* USER CODE END Variables */
@@ -70,8 +69,8 @@ ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с п�
 /* USER CODE BEGIN FunctionPrototypes */
 void PingHandler(uint8_t *pbuf);         // Обработчик команды PING
 void PilotCommandHandler(uint8_t *pbuf); // Обработчик команды
-void TestModeHandler(void);     // Обработчик команды начала предполетного тестирования всех систем
-void CalibrationHandler(void); // Обработчик команды окончания калибровки приводов
+void TestModeHandler(void);              // Обработчик команды начала предполетного тестирования всех систем
+void CalibrationHandler(uint8_t *pilotbuf);           // Обработчик команды окончания калибровки приводов
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
@@ -291,7 +290,7 @@ void StartParserGroundStation(void const *argument)
         break;
 
       case WingCalibrationRequest:
-        CalibrationHandler();
+        CalibrationHandler(&pbuf[i]);
         i += CommandSize[WingCalibrationRequest];
         break;
 
@@ -365,6 +364,14 @@ void StartCANTask(void const *argument)
         {
         }
         break;
+      case PitchMinMax:
+        memcpy(&ElMotorUnitParameters.MinPitch, &canbuf[1], sizeof(ElMotorUnitParameters.MinPitch));
+        memcpy(&ElMotorUnitParameters.MaxPitch, &canbuf[3], sizeof(ElMotorUnitParameters.MaxPitch));
+        break;
+      case RollMinMax:
+        memcpy(&ElMotorUnitParameters.MinRoll, &canbuf[1], sizeof(ElMotorUnitParameters.MinRoll));
+        memcpy(&ElMotorUnitParameters.MaxRoll, &canbuf[3], sizeof(ElMotorUnitParameters.MaxRoll));
+        break;
       }
     }
     memset(canbuf, 0x00, sizeof(canbuf)); // Очистить буфер
@@ -436,19 +443,11 @@ void PingHandler(uint8_t *pingbuf)
 void PilotCommandHandler(uint8_t *pilotbuf)
 {
   int8_t res;
-  uint8_t i = 1;
-  uint8_t SendTCPBuf[9];
+  uint8_t SendTCPBuf[15];
   extern CAN_HandleTypeDef hcan1;
 
   uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
   CAN_TxHeaderTypeDef TxHeader;
-
-  // Получение данных от наземной станции
-  memcpy(&PitchRollAccel.Pitch, &pilotbuf[i], sizeof(PitchRollAccel.Pitch));
-  i += 2;
-  memcpy(&PitchRollAccel.Roll, &pilotbuf[i], sizeof(PitchRollAccel.Roll));
-  i += 2;
-  memcpy(&PitchRollAccel.Accel, &pilotbuf[i], sizeof(PitchRollAccel.Accel));
 
   // Передача на блок управления приводами
   TxHeader.DLC = 5;
@@ -469,6 +468,14 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   SendTCPBuf[4] = (uint8_t)(ElMotorUnitParameters.Roll >> 8);
   SendTCPBuf[5] = 0x00;
   SendTCPBuf[6] = 0x00;
+  SendTCPBuf[7] = (uint8_t)(ElMotorUnitParameters.MinPitch & 0xFF);
+  SendTCPBuf[8] = (uint8_t)(ElMotorUnitParameters.MinPitch >> 8);
+  SendTCPBuf[9] = (uint8_t)(ElMotorUnitParameters.MaxPitch & 0xFF);
+  SendTCPBuf[10] = (uint8_t)(ElMotorUnitParameters.MaxPitch >> 8);
+  SendTCPBuf[11] = (uint8_t)(ElMotorUnitParameters.MinRoll & 0xFF);
+  SendTCPBuf[12] = (uint8_t)(ElMotorUnitParameters.MinRoll >> 8);
+  SendTCPBuf[13] = (uint8_t)(ElMotorUnitParameters.MaxRoll & 0xFF);
+  SendTCPBuf[14] = (uint8_t)(ElMotorUnitParameters.MaxRoll >> 8);
   res = netconn_write(nc, (char const *)SendTCPBuf, CommandSize[PilotCommandResponse], NETCONN_COPY);
   if (res != ERR_OK)
   {
@@ -505,19 +512,37 @@ void TestModeHandler(void)
 *
 *
 */
-void CalibrationHandler(void)
+void CalibrationHandler(uint8_t *pilotbuf)
 {
-   uint8_t ElMotorBuf[8];
+  uint8_t ElMotorBuf[8];
 
   extern CAN_HandleTypeDef hcan1;
   uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
   CAN_TxHeaderTypeDef TxHeader;
-  // Передача на блок управления приводами
+  // Передача команды на блок управления приводами
   TxHeader.DLC = 8;
   TxHeader.StdId = 0x0000;
   TxHeader.RTR = CAN_RTR_DATA;
   TxHeader.IDE = CAN_ID_STD;
   TxHeader.TransmitGlobalTime = DISABLE;
+
+  
+
+  ElMotorBuf[0] = PitchMinMax;
+  // Получение данных от наземной станции
+  memcpy(&ElMotorBuf[1], &pilotbuf[1], 4);
+  if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, ElMotorBuf, &TxMailBox) != HAL_OK)
+  {
+    //Error_Handler();
+  }
+
+  ElMotorBuf[0] = RollMinMax;
+  // Получение данных от наземной станции
+  memcpy(&ElMotorBuf[1], &pilotbuf[5], 4);
+  if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, ElMotorBuf, &TxMailBox) != HAL_OK)
+  {
+    //Error_Handler();
+  }
 
   ElMotorBuf[0] = CalibComplied;
   if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, ElMotorBuf, &TxMailBox) != HAL_OK)

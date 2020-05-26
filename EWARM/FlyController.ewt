@@ -1358,12 +1358,6 @@
                 <name>$PROJ_DIR$\..\libraries\common\prothawk.h</name>
             </file>
         </group>
-        <group>
-            <name>units</name>
-            <file>
-                <name>$PROJ_DIR$\..\libraries\units\ElMotorUnit.h</name>
-            </file>
-        </group>
     </group>
     <group>
         <name>Middlewares</name>

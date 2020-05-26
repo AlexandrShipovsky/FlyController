@@ -38,15 +38,10 @@ extern "C"
         PitchRollCommand = 5,
         VBATCommand = 6,
         TestMode = 7,
-        CalibComplied = 8
+        CalibComplied = 8,
+        PitchMinMax = 9,
+        RollMinMax = 10
     } ElMotorCommandsTypeDef;
-
-    typedef struct
-    {
-        int16_t Pitch;
-        int16_t Roll;
-        int16_t Accel;
-    } PitchRollAccelTypeDef;
 
     const uint8_t CommandSize[ENDCOMMAND] = {
         /*zero*/0,
@@ -55,7 +50,7 @@ extern "C"
         /*commands[WingCalibrationRequest] = */ 9,
         /*commands[WingCalibrationResponse] = */ 9,
         /*commands[PilotCommand] = */ 9,
-        /*commands[PilotCommandResponse] = */ 9,
+        /*commands[PilotCommandResponse] = */ 15,
         /*commands[PING] = */ 9,
         /*commands[TelemetryRequest] = */ 1,
         /*commands[TelemetryResponse] = */ 15
