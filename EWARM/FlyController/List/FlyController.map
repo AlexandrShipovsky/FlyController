@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.30.1.114/W32 for ARM                  27/May/2020  09:46:35
+# IAR ELF Linker V8.30.1.114/W32 for ARM                  27/May/2020  09:59:30
 # Copyright 2007-2018 IAR Systems AB.
 #
 #    Output file  =  
@@ -12,7 +12,7 @@
 #        Беспилотный мотодельтаплан\Полетный
 #        контроллер\firmware\FlyController\EWARM\FlyController\List\FlyController.map
 #    Command line =  
-#        -f C:\Users\A146~1\AppData\Local\Temp\EW27B8.tmp
+#        -f C:\Users\A146~1\AppData\Local\Temp\EWFD62.tmp
 #        ("C:\Users\Чистое небо\Desktop\Э.01.00.00
 #        Беспилотный мотодельтаплан\Полетный
 #        контроллер\firmware\FlyController\EWARM\FlyController\Obj\altcp.o"

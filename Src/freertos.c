@@ -486,7 +486,7 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   SendTCPBuf[12] = (uint8_t)(ElMotorUnitParameters.MinRoll >> 8);
   SendTCPBuf[13] = (uint8_t)(ElMotorUnitParameters.MaxRoll & 0xFF);
   SendTCPBuf[14] = (uint8_t)(ElMotorUnitParameters.MaxRoll >> 8);
-  memcpy(&SendTCPBuf[5],&ElMotorUnitParameters.VBAT, sizeof(ElMotorUnitParameters.VBAT));
+  memcpy(&SendTCPBuf[15],&ElMotorUnitParameters.VBAT, sizeof(ElMotorUnitParameters.VBAT));
 
   taskENTER_CRITICAL();
   res = netconn_write(nc, (char const *)SendTCPBuf, CommandSize[PilotCommandResponse], NETCONN_COPY);
