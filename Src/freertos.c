@@ -377,6 +377,9 @@ void StartCANTask(void const *argument)
         memcpy(&ElMotorUnitParameters.MinRoll, &canbuf[1], sizeof(ElMotorUnitParameters.MinRoll));
         memcpy(&ElMotorUnitParameters.MaxRoll, &canbuf[3], sizeof(ElMotorUnitParameters.MaxRoll));
         break;
+      case VBATCommand:
+        memcpy(&ElMotorUnitParameters.VBAT, &canbuf[1], sizeof(ElMotorUnitParameters.VBAT));
+        break;
       }
     }
     memset(canbuf, 0x00, sizeof(canbuf)); // Очистить буфер
@@ -450,7 +453,7 @@ void PingHandler(uint8_t *pingbuf)
 void PilotCommandHandler(uint8_t *pilotbuf)
 {
   int8_t res;
-  uint8_t SendTCPBuf[18];
+  uint8_t SendTCPBuf[19];
   extern CAN_HandleTypeDef hcan1;
 
   uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
@@ -483,6 +486,8 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   SendTCPBuf[12] = (uint8_t)(ElMotorUnitParameters.MinRoll >> 8);
   SendTCPBuf[13] = (uint8_t)(ElMotorUnitParameters.MaxRoll & 0xFF);
   SendTCPBuf[14] = (uint8_t)(ElMotorUnitParameters.MaxRoll >> 8);
+  memcpy(&SendTCPBuf[5],&ElMotorUnitParameters.VBAT, sizeof(ElMotorUnitParameters.VBAT));
+
   taskENTER_CRITICAL();
   res = netconn_write(nc, (char const *)SendTCPBuf, CommandSize[PilotCommandResponse], NETCONN_COPY);
   taskEXIT_CRITICAL();

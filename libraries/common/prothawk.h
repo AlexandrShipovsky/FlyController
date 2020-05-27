@@ -50,7 +50,7 @@ extern "C"
         /*commands[WingCalibrationRequest] = */ 9,
         /*commands[WingCalibrationResponse] = */ 9,
         /*commands[PilotCommand] = */ 9,
-        /*commands[PilotCommandResponse] = */ 18,
+        /*commands[PilotCommandResponse] = */ 19,
         /*commands[PING] = */ 9,
         /*commands[TelemetryRequest] = */ 1,
         /*commands[TelemetryResponse] = */ 15
