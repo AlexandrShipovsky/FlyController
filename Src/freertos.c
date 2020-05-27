@@ -24,12 +24,13 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+/* USER CODE BEGIN Includes */     
 //#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
 #include "cli.h"
 #include "api.h"
+#include "tcp.h"
 #include "lwip.h"
 #include "string.h"
 
@@ -45,7 +46,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define BUFSIZE 512 // Размер буфера для принимаемых пакетов
+#define BUFSIZE 1024 // Размер буфера для принимаемых пакетов
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -61,20 +62,19 @@ xQueueHandle ElMotorCANQueueHandle = NULL;        // Очередь переда
 struct netconn *nc;
 struct netbuf *nb;
 
-
 ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с параметрами блока управления приводами
 /* USER CODE END Variables */
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-void PingHandler(uint8_t *pbuf);         // Обработчик команды PING
-void PilotCommandHandler(uint8_t *pbuf); // Обработчик команды
-void TestModeHandler(void);              // Обработчик команды начала предполетного тестирования всех систем
-void CalibrationHandler(uint8_t *pilotbuf);           // Обработчик команды окончания калибровки приводов
+void PingHandler(uint8_t *pbuf);            // Обработчик команды PING
+void PilotCommandHandler(uint8_t *pbuf);    // Обработчик команды
+void TestModeHandler(void);                 // Обработчик команды начала предполетного тестирования всех систем
+void CalibrationHandler(uint8_t *pilotbuf); // Обработчик команды окончания калибровки приводов
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -177,13 +177,14 @@ void StartConGroundStation(void const *argument)
 
   extern struct netif gnetif;
 
+  
   ip_addr_t local_ip;
   ip_addr_t remote_ip;
   /* Infinite loop */
   for (;;)
   {
     vTaskDelay(1);
-
+    tcp_nagle_disable(nc);
     if (net_state)
     {
 
@@ -238,7 +239,7 @@ void StartConGroundStation(void const *argument)
           res = netconn_connect(nc, &remote_ip, PortGroundStation);
           if (res == ERR_OK)
           {
-
+            
             net_state = 1;
             continue;
           }
@@ -353,13 +354,17 @@ void StartCANTask(void const *argument)
         memcpy(&ElMotorUnitParameters.Roll, &canbuf[3], sizeof(ElMotorUnitParameters.Roll));
         break;
       case TestMode:
+        taskENTER_CRITICAL();
         res = netconn_write(nc, testbuf, CommandSize[PreFlightTestResponse], NETCONN_COPY);
+        taskEXIT_CRITICAL();
         if (res != ERR_OK)
         {
         }
         break;
       case CalibComplied:
+        taskENTER_CRITICAL();
         res = netconn_write(nc, calibbuf, CommandSize[WingCalibrationResponse], NETCONN_COPY);
+        taskEXIT_CRITICAL();
         if (res != ERR_OK)
         {
         }
@@ -430,7 +435,9 @@ void PingHandler(uint8_t *pingbuf)
 {
   int8_t res;
 
+  taskENTER_CRITICAL();
   res = netconn_write(nc, (char const *)pingbuf, CommandSize[PING], NETCONN_COPY);
+  taskEXIT_CRITICAL();
   if (res != ERR_OK)
   {
   }
@@ -443,7 +450,7 @@ void PingHandler(uint8_t *pingbuf)
 void PilotCommandHandler(uint8_t *pilotbuf)
 {
   int8_t res;
-  uint8_t SendTCPBuf[15];
+  uint8_t SendTCPBuf[18];
   extern CAN_HandleTypeDef hcan1;
 
   uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
@@ -476,7 +483,9 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   SendTCPBuf[12] = (uint8_t)(ElMotorUnitParameters.MinRoll >> 8);
   SendTCPBuf[13] = (uint8_t)(ElMotorUnitParameters.MaxRoll & 0xFF);
   SendTCPBuf[14] = (uint8_t)(ElMotorUnitParameters.MaxRoll >> 8);
+  taskENTER_CRITICAL();
   res = netconn_write(nc, (char const *)SendTCPBuf, CommandSize[PilotCommandResponse], NETCONN_COPY);
+  taskEXIT_CRITICAL();
   if (res != ERR_OK)
   {
   }
@@ -525,8 +534,6 @@ void CalibrationHandler(uint8_t *pilotbuf)
   TxHeader.RTR = CAN_RTR_DATA;
   TxHeader.IDE = CAN_ID_STD;
   TxHeader.TransmitGlobalTime = DISABLE;
-
-  
 
   ElMotorBuf[0] = PitchMinMax;
   // Получение данных от наземной станции
