@@ -40,7 +40,8 @@ extern "C"
         TestMode = 7,
         CalibComplied = 8,
         PitchMinMax = 9,
-        RollMinMax = 10
+        RollMinMax = 10,
+        PitchForceCommand = 11
     } ElMotorCommandsTypeDef;
 
     const uint8_t CommandSize[ENDCOMMAND] = {
@@ -50,7 +51,7 @@ extern "C"
         /*commands[WingCalibrationRequest] = */ 9,
         /*commands[WingCalibrationResponse] = */ 9,
         /*commands[PilotCommand] = */ 9,
-        /*commands[PilotCommandResponse] = */ 19,
+        /*commands[PilotCommandResponse] = */ 23,
         /*commands[PING] = */ 9,
         /*commands[TelemetryRequest] = */ 1,
         /*commands[TelemetryResponse] = */ 15

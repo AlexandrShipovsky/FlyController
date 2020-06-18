@@ -881,7 +881,7 @@
                     <item>PitchRollAccel</item>
                     <item>testbuf</item>
                     <item>nc</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

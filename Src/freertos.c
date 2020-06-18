@@ -24,7 +24,7 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */     
+/* USER CODE BEGIN Includes */
 //#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
@@ -74,7 +74,7 @@ void CalibrationHandler(uint8_t *pilotbuf); // Обработчик команд
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -177,7 +177,6 @@ void StartConGroundStation(void const *argument)
 
   extern struct netif gnetif;
 
-  
   ip_addr_t local_ip;
   ip_addr_t remote_ip;
   /* Infinite loop */
@@ -239,7 +238,7 @@ void StartConGroundStation(void const *argument)
           res = netconn_connect(nc, &remote_ip, PortGroundStation);
           if (res == ERR_OK)
           {
-            
+
             net_state = 1;
             continue;
           }
@@ -380,6 +379,11 @@ void StartCANTask(void const *argument)
       case VBATCommand:
         memcpy(&ElMotorUnitParameters.VBAT, &canbuf[1], sizeof(ElMotorUnitParameters.VBAT));
         break;
+      case PitchForceCommand:
+        memcpy(&ElMotorUnitParameters.PitchForce, &canbuf[1], sizeof(ElMotorUnitParameters.PitchForce));
+        break;
+      default:
+        break;
       }
     }
     memset(canbuf, 0x00, sizeof(canbuf)); // Очистить буфер
@@ -486,7 +490,8 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   SendTCPBuf[12] = (uint8_t)(ElMotorUnitParameters.MinRoll >> 8);
   SendTCPBuf[13] = (uint8_t)(ElMotorUnitParameters.MaxRoll & 0xFF);
   SendTCPBuf[14] = (uint8_t)(ElMotorUnitParameters.MaxRoll >> 8);
-  memcpy(&SendTCPBuf[15],&ElMotorUnitParameters.VBAT, sizeof(ElMotorUnitParameters.VBAT));
+  memcpy(&SendTCPBuf[15], &ElMotorUnitParameters.VBAT, sizeof(ElMotorUnitParameters.VBAT));
+  memcpy(&SendTCPBuf[19], &ElMotorUnitParameters.PitchForce, sizeof(ElMotorUnitParameters.PitchForce));
 
   taskENTER_CRITICAL();
   res = netconn_write(nc, (char const *)SendTCPBuf, CommandSize[PilotCommandResponse], NETCONN_COPY);

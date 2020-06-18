@@ -29,6 +29,7 @@ typedef struct
         int16_t MinRoll;
         int16_t MaxRoll;
         float VBAT;
+        float PitchForce;
     } ElMotorUnitParametersTypeDef;
 
 #ifdef __cplusplus
