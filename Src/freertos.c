@@ -61,6 +61,7 @@ xQueueHandle GroundStationDataQueueHandle = NULL; // Очередь переда
 xQueueHandle ElMotorCANQueueHandle = NULL;        // Очередь передачи принятых по CAN1 байт
 struct netconn *nc;
 struct netbuf *nb;
+struct netbuf *nb_send;
 
 ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с параметрами блока управления приводами
 /* USER CODE END Variables */
@@ -183,7 +184,6 @@ void StartConGroundStation(void const *argument)
   for (;;)
   {
     vTaskDelay(1);
-    tcp_nagle_disable(nc);
     if (net_state)
     {
 
@@ -229,7 +229,7 @@ void StartConGroundStation(void const *argument)
       }
       local_ip = gnetif.ip_addr;
       ip4addr_aton(IpGroundStation, &remote_ip);
-      nc = netconn_new(NETCONN_TCP);
+      nc = netconn_new(NETCONN_UDP);
       if (nc != NULL)
       {
         res = netconn_bind(nc, &local_ip, PortGroundStation);
@@ -354,7 +354,11 @@ void StartCANTask(void const *argument)
         break;
       case TestMode:
         taskENTER_CRITICAL();
-        res = netconn_write(nc, testbuf, CommandSize[PreFlightTestResponse], NETCONN_COPY);
+        nb_send = netbuf_new();
+        netbuf_alloc(nb_send, CommandSize[PreFlightTestResponse]);
+        pbuf_take(nb_send->p, (void *)testbuf, CommandSize[PreFlightTestResponse]);
+        res = netconn_send(nc, nb_send);
+        netbuf_delete(nb_send);
         taskEXIT_CRITICAL();
         if (res != ERR_OK)
         {
@@ -362,7 +366,11 @@ void StartCANTask(void const *argument)
         break;
       case CalibComplied:
         taskENTER_CRITICAL();
-        res = netconn_write(nc, calibbuf, CommandSize[WingCalibrationResponse], NETCONN_COPY);
+        nb_send = netbuf_new();
+        netbuf_alloc(nb_send, CommandSize[WingCalibrationResponse]);
+        pbuf_take(nb_send->p, (void *)calibbuf, CommandSize[WingCalibrationResponse]);
+        res = netconn_send(nc, nb_send);
+        netbuf_delete(nb_send);
         taskEXIT_CRITICAL();
         if (res != ERR_OK)
         {
@@ -443,7 +451,11 @@ void PingHandler(uint8_t *pingbuf)
   int8_t res;
 
   taskENTER_CRITICAL();
-  res = netconn_write(nc, (char const *)pingbuf, CommandSize[PING], NETCONN_COPY);
+  nb_send = netbuf_new();
+  netbuf_alloc(nb_send, CommandSize[PING]);
+  pbuf_take(nb_send->p, (void *)pingbuf, CommandSize[PING]);
+  res = netconn_send(nc, nb_send);
+  netbuf_delete(nb_send);
   taskEXIT_CRITICAL();
   if (res != ERR_OK)
   {
@@ -457,7 +469,7 @@ void PingHandler(uint8_t *pingbuf)
 void PilotCommandHandler(uint8_t *pilotbuf)
 {
   int8_t res;
-  uint8_t SendTCPBuf[19];
+  uint8_t SendTCPBuf[23];
   extern CAN_HandleTypeDef hcan1;
 
   uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
@@ -494,7 +506,11 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   memcpy(&SendTCPBuf[19], &ElMotorUnitParameters.PitchForce, sizeof(ElMotorUnitParameters.PitchForce));
 
   taskENTER_CRITICAL();
-  res = netconn_write(nc, (char const *)SendTCPBuf, CommandSize[PilotCommandResponse], NETCONN_COPY);
+  nb_send = netbuf_new();
+  netbuf_alloc(nb_send, CommandSize[PilotCommandResponse]);
+  pbuf_take(nb_send->p, (void *)SendTCPBuf, CommandSize[PilotCommandResponse]);
+  res = netconn_send(nc, nb_send);
+  netbuf_delete(nb_send);
   taskEXIT_CRITICAL();
   if (res != ERR_OK)
   {
