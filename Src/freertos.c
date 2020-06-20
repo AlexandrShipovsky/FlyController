@@ -24,7 +24,7 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+/* USER CODE BEGIN Includes */     
 //#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
@@ -75,7 +75,7 @@ void CalibrationHandler(uint8_t *pilotbuf); // Обработчик команд
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -107,27 +107,14 @@ void StartDefaultTask(void const *argument)
 
   /* init code for LWIP */
 
-  GroundStationDataQueueHandle = xQueueCreate(16, BUFSIZE);
-  ElMotorCANQueueHandle = xQueueCreate(8, 8);
-
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
-  extern struct netif gnetif;
-  uint8_t PhyStat;
 
   /* Infinite loop */
   for (;;)
   {
-    PhyStat = gnetif.flags; //  Статистика подключения
-    if (PhyStat != 15)
-    {
-      HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
-    }
-    else
-    {
-      HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
-    }
     HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+    HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
     vTaskDelay(500);
   };
 
@@ -136,7 +123,7 @@ void StartDefaultTask(void const *argument)
 
 void ethernetif_notify_conn_changed(struct netif *netif)
 {
-  /* NOTE : This is function could be implemented in user file 
+    /* NOTE : This is function could be implemented in user file 
             when the callback is needed,
   */
   BaseType_t xHigherPriorityTaskWoken;
@@ -180,70 +167,55 @@ void StartConGroundStation(void const *argument)
 
   ip_addr_t local_ip;
   ip_addr_t remote_ip;
+
+  GroundStationDataQueueHandle = xQueueCreate(16, BUFSIZE);
+
+  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+  while (gnetif.ip_addr.addr == 0)
+  {
+    vTaskDelay(1);
+  }
+  local_ip = gnetif.ip_addr;
+  ip4addr_aton(IpGroundStation, &remote_ip);
+  nc = netconn_new(NETCONN_UDP);
+  if (nc != NULL)
+  {
+    res = netconn_bind(nc, &local_ip, PortGroundStation);
+    if (res == ERR_OK)
+    {
+      res = netconn_connect(nc, &remote_ip, PortGroundStation);
+      if (res == ERR_OK)
+      {
+        net_state = 1;
+      }
+    }
+  }
   /* Infinite loop */
   for (;;)
   {
     vTaskDelay(1);
-    if (net_state)
+    res = netconn_recv(nc, &nb);
+    if (res != 0)
     {
-
-      res = netconn_recv(nc, &nb);
-      if (res != 0)
-      {
-        HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-        netconn_delete(nc);
-        net_state = 0;
-      }
-      else
-      {
-        HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-        len = netbuf_len(nb);
-        /*if(len > 50)
-        {
-          HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
-          while(1){};
-        }
-        */
-        netbuf_copy(nb, buf, len);
-        netbuf_delete(nb);
-        if (GroundStationDataQueueHandle != NULL)
-        {
-          if (xQueueSendToBack(GroundStationDataQueueHandle,
-                               (void *)buf,
-                               (TickType_t)10) != pdPASS)
-          {
-            /* Failed to post the message, even after 10 ticks. */
-          }
-        }
-
-        memset(buf, 0x00, sizeof(buf));
-      }
+      HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+      net_state = 0;
     }
     else
     {
-      HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-      netconn_delete(nc);
-      while (gnetif.ip_addr.addr == 0)
+      len = netbuf_len(nb);
+      netbuf_copy(nb, buf, len);
+      netbuf_delete(nb);
+      if (GroundStationDataQueueHandle != NULL)
       {
-        vTaskDelay(1);
-      }
-      local_ip = gnetif.ip_addr;
-      ip4addr_aton(IpGroundStation, &remote_ip);
-      nc = netconn_new(NETCONN_UDP);
-      if (nc != NULL)
-      {
-        res = netconn_bind(nc, &local_ip, PortGroundStation);
-        if (res == ERR_OK)
+        if (xQueueSendToBack(GroundStationDataQueueHandle,
+                             (void *)buf,
+                             (TickType_t)10) != pdPASS)
         {
-          res = netconn_connect(nc, &remote_ip, PortGroundStation);
-          if (res == ERR_OK)
-          {
-
-            net_state = 1;
-            continue;
-          }
+          /* Failed to post the message, even after 10 ticks. */
         }
       }
+
+      memset(buf, 0x00, sizeof(buf));
     }
   }
 }
@@ -259,6 +231,8 @@ void StartConGroundStation(void const *argument)
 void StartParserGroundStation(void const *argument)
 {
   /* USER CODE BEGIN StartParserGroundStationTask */
+  ElMotorCANQueueHandle = xQueueCreate(8, 8);
+
   uint8_t pbuf[BUFSIZE];
   memset(pbuf, 0x00, sizeof(pbuf));
   /* Infinite loop */
@@ -450,6 +424,7 @@ void PingHandler(uint8_t *pingbuf)
 {
   int8_t res;
 
+  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
   taskENTER_CRITICAL();
   nb_send = netbuf_new();
   netbuf_alloc(nb_send, CommandSize[PING]);
