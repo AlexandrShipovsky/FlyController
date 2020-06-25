@@ -1,4 +1,6 @@
 ﻿C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\FlyController.pbd
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\a3g4250d.pbi
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\a3g4250d_reg.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\altcp.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\altcp_alloc.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\altcp_tcp.pbi
@@ -33,11 +35,14 @@ C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мот
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\event_groups.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\freertos.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\fsm.pbi
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\h3lis331dl.pbi
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\h3lis331dl_reg.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\heap_4.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\icmp.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\icmp6.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\if_api.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\igmp.pbi
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\IMU.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\inet6.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\inet_chksum.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\init.pbi
@@ -51,10 +56,14 @@ C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мот
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\ipcp.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\ipv6cp.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\lcp.pbi
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\lis3mdl.pbi
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\lis3mdl_reg.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\list.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\lowpan6.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\lowpan6_ble.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\lowpan6_common.pbi
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\lps33hw.pbi
+C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\lps33hw_reg.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\lwip.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\magic.pbi
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj\main.pbi

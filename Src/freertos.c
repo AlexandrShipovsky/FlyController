@@ -47,6 +47,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define BUFSIZE 1024 // Размер буфера для принимаемых пакетов
+#define BUFSIZEUART 32
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -62,6 +63,9 @@ xQueueHandle ElMotorCANQueueHandle = NULL;        // Очередь переда
 struct netconn *nc;
 struct netbuf *nb;
 struct netbuf *nb_send;
+
+uint8_t BufUART[BUFSIZEUART] = {0,};
+HAL_StatusTypeDef ErrUART;
 
 ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с параметрами блока управления приводами
 /* USER CODE END Variables */
@@ -109,12 +113,15 @@ void StartDefaultTask(void const *argument)
 
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
+  extern UART_HandleTypeDef huart8;
 
+  ErrUART = HAL_UART_Receive_DMA(&huart8, (uint8_t*)BufUART, BUFSIZEUART);
   /* Infinite loop */
   for (;;)
   {
     HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
     HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+    ErrUART = HAL_UART_Transmit_IT(&huart8, (uint8_t*)"Golosuy za popravki\n\r", 20);
     vTaskDelay(500);
   };
 
@@ -409,11 +416,11 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 void StartCliTask(void const *argument)
 {
   /* USER CODE BEGIN StartCliTask */
+  
   /* Infinite loop */
   for (;;)
   {
-    //DBG_CLI_USB_Task();
-    vTaskDelay(10);
+    DBG_CLI_Serial_Task();
   }
   /* USER CODE END StartCliTask */
 }

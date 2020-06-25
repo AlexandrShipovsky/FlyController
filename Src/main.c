@@ -54,12 +54,14 @@ I2C_HandleTypeDef hi2c4;
 UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart8;
 UART_HandleTypeDef huart3;
+DMA_HandleTypeDef hdma_uart8_rx;
 
 osThreadId defaultTaskHandle;
 osThreadId ConGndStatTaskHandle;
 osThreadId ParsGndStTaskHandle;
 osThreadId CANTaskHandle;
 osThreadId CliTaskHandle;
+osThreadId IMUTaskHandle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -67,6 +69,7 @@ osThreadId CliTaskHandle;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_CAN1_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_UART5_Init(void);
@@ -78,6 +81,7 @@ void StartConGroundStation(void const * argument);
 void StartParserGroundStation(void const * argument);
 void StartCANTask(void const * argument);
 void StartCliTask(void const * argument);
+void StartIMUTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -120,6 +124,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_CAN1_Init();
   MX_USART3_UART_Init();
   MX_UART5_Init();
@@ -166,6 +171,10 @@ int main(void)
   /* definition and creation of CliTask */
   osThreadDef(CliTask, StartCliTask, osPriorityIdle, 0, 256);
   CliTaskHandle = osThreadCreate(osThread(CliTask), NULL);
+
+  /* definition and creation of IMUTask */
+  osThreadDef(IMUTask, StartIMUTask, osPriorityLow, 0, 512);
+  IMUTaskHandle = osThreadCreate(osThread(IMUTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -438,7 +447,7 @@ static void MX_UART8_Init(void)
 
   /* USER CODE END UART8_Init 1 */
   huart8.Instance = UART8;
-  huart8.Init.BaudRate = 115200;
+  huart8.Init.BaudRate = 230400;
   huart8.Init.WordLength = UART_WORDLENGTH_8B;
   huart8.Init.StopBits = UART_STOPBITS_1;
   huart8.Init.Parity = UART_PARITY_NONE;
@@ -481,7 +490,9 @@ static void MX_USART3_UART_Init(void)
   huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart3.Init.OverSampling = UART_OVERSAMPLING_16;
   huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_AUTOBAUDRATE_INIT;
+  huart3.AdvancedInit.AutoBaudRateEnable = UART_ADVFEATURE_AUTOBAUDRATE_ENABLE;
+  huart3.AdvancedInit.AutoBaudRateMode = UART_ADVFEATURE_AUTOBAUDRATE_ONSTARTBIT;
   if (HAL_UART_Init(&huart3) != HAL_OK)
   {
     Error_Handler();
@@ -489,6 +500,22 @@ static void MX_USART3_UART_Init(void)
   /* USER CODE BEGIN USART3_Init 2 */
 
   /* USER CODE END USART3_Init 2 */
+
+}
+
+/** 
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void) 
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream6_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
 
 }
 
@@ -663,6 +690,24 @@ __weak void StartCliTask(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartCliTask */
+}
+
+/* USER CODE BEGIN Header_StartIMUTask */
+/**
+* @brief Function implementing the IMUTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartIMUTask */
+__weak void StartIMUTask(void const * argument)
+{
+  /* USER CODE BEGIN StartIMUTask */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartIMUTask */
 }
 
  /**

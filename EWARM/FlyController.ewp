@@ -376,6 +376,10 @@
           <state>$PROJ_DIR$/../Middlewares/Third_Party/LwIP/src/include/compat/stdc</state>
           <state>$PROJ_DIR$/../Middlewares/Third_Party/LwIP/system/arch</state>
           <state>$PROJ_DIR$\..\libraries\common</state>
+          <state>$PROJ_DIR$\..\Drivers\BSP\Components\a3g4250d</state>
+          <state>$PROJ_DIR$\..\Drivers\BSP\Components\h3lis331dl</state>
+          <state>$PROJ_DIR$\..\Drivers\BSP\Components\lis3mdl</state>
+          <state>$PROJ_DIR$\..\Drivers\BSP\Components\lps33hw</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1101,6 +1105,72 @@
   </group>
   <group>
     <name>Drivers</name>
+    <group>
+      <name>BSP</name>
+      <group>
+        <name>Components</name>
+        <group>
+          <name>a3g4250d</name>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\a3g4250d\a3g4250d.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\a3g4250d\a3g4250d.h</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\a3g4250d\a3g4250d_reg.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\a3g4250d\a3g4250d_reg.h</name>
+          </file>
+        </group>
+        <group>
+          <name>h3lis331dl</name>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\h3lis331dl\h3lis331dl.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\h3lis331dl\h3lis331dl.h</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\h3lis331dl\h3lis331dl_reg.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\h3lis331dl\h3lis331dl_reg.h</name>
+          </file>
+        </group>
+        <group>
+          <name>lis3mdl</name>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\lis3mdl\lis3mdl.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\lis3mdl\lis3mdl.h</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\lis3mdl\lis3mdl_reg.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\lis3mdl\lis3mdl_reg.h</name>
+          </file>
+        </group>
+        <group>
+          <name>lps33hw</name>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps33hw\lps33hw.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps33hw\lps33hw.h</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps33hw\lps33hw_reg.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps33hw\lps33hw_reg.h</name>
+          </file>
+        </group>
+      </group>
+    </group>
     <group>
       <name>CMSIS</name>
       <file>

@@ -19,7 +19,7 @@
 typedef int CLI_InputStrLen_t;		//��� ���������� ��� �������� ����� ��������� ������ (������ ���� ��������)
 
 
-#define INVITE_STRING "\x1b[0;35mElMotorControl>\x1b[0m"
+#define INVITE_STRING "\x1b[0;35mFlyController>\x1b[0m"
 
 
 #define CLI_PRINTF_WORK_BUFFER_SIZE	(1024)
