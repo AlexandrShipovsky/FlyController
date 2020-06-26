@@ -30,6 +30,8 @@ extern "C" {
 #include "lis3mdl.h"
 #include "lps33hw.h"
 #include "h3lis331dl.h"
+#include "stm32f7xx_nucleo_bus.h"
+#include "custom_mems_conf.h"
 
 /* Private includes ----------------------------------------------------------*/
 

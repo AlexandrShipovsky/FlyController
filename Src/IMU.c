@@ -46,12 +46,12 @@ LPS33HW_IO_t PressIO;
 void StartIMUTask(void const *argument)
 {
     /* Compass LIS3MDL*/
-    CompassIO.Init = CompassInit;
-    CompassIO.DeInit = CompassDeInit;
+    CompassIO.Init = CUSTOM_LIS3MDL_0_I2C_Init;
+    CompassIO.DeInit = CUSTOM_LIS3MDL_0_I2C_DeInit;
     CompassIO.BusType = LIS3MDL_I2C_BUS;
     CompassIO.Address = LIS3MDL_I2C_ADD_L;
-    CompassIO.ReadReg = IMURead;
-    CompassIO.WriteReg = IMUWrite;
+    CompassIO.ReadReg = CUSTOM_LIS3MDL_0_I2C_ReadReg;
+    CompassIO.WriteReg = CUSTOM_LIS3MDL_0_I2C_WriteReg;
 
     if (LIS3MDL_RegisterBusIO(&CompassObj, &CompassIO) != LIS3MDL_OK)
     {
@@ -62,13 +62,15 @@ void StartIMUTask(void const *argument)
         }
     }
 
+    LIS3MDL_Init(&CompassObj);
+
     /* Accel lis331dl*/
-    AccelIO.Init = AccelInit;
-    AccelIO.DeInit = AccelDeInit;
+    AccelIO.Init = CUSTOM_H3LIS331DL_0_I2C_Init;
+    AccelIO.DeInit = CUSTOM_H3LIS331DL_0_I2C_DeInit;
     AccelIO.BusType = H3LIS331DL_I2C_BUS;
     AccelIO.Address = H3LIS331DL_I2C_ADD_L;
-    AccelIO.ReadReg = IMURead;
-    AccelIO.WriteReg = IMUWrite;
+    AccelIO.ReadReg = CUSTOM_H3LIS331DL_0_I2C_ReadReg;
+    AccelIO.WriteReg = CUSTOM_H3LIS331DL_0_I2C_WriteReg;
 
     if (H3LIS331DL_RegisterBusIO(&AccelObj, &AccelIO) != H3LIS331DL_OK)
     {
@@ -79,13 +81,15 @@ void StartIMUTask(void const *argument)
         }
     }
 
+    H3LIS331DL_Init(&AccelObj);
+
     /* Gyro L3G4200D*/
-    GyroIO.Init = GyroInit;
-    GyroIO.DeInit = GyroDeInit;
+    GyroIO.Init = CUSTOM_A3G4250D_0_I2C_Init;
+    GyroIO.DeInit = CUSTOM_A3G4250D_0_I2C_DeInit;
     GyroIO.BusType = A3G4250D_I2C_BUS;
     GyroIO.Address = A3G4250D_I2C_ADD_L;
-    GyroIO.ReadReg = IMURead;
-    GyroIO.WriteReg = IMUWrite;
+    GyroIO.ReadReg = CUSTOM_A3G4250D_0_I2C_ReadReg;
+    GyroIO.WriteReg = CUSTOM_A3G4250D_0_I2C_WriteReg;
 
     if (A3G4250D_RegisterBusIO(&GyroObj, &GyroIO) != A3G4250D_OK)
     {
@@ -95,6 +99,8 @@ void StartIMUTask(void const *argument)
             vTaskDelay(1000);
         }
     }
+
+    A3G4250D_Init(&GyroObj);
 
     /* Barometer LPS331*/
     PressIO.Init = PressInit;

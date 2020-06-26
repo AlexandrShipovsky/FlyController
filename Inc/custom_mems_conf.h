@@ -1,0 +1,71 @@
+/**
+ ******************************************************************************
+ * @file    custom_mems_conf.h
+ * @author  MEMS Application Team
+ * @brief   This file contains definitions of the MEMS components bus interfaces for custom boards
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __CUSTOM_MEMS_CONF_H__
+#define __CUSTOM_MEMS_CONF_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f7xx_hal.h"
+#include "stm32f7xx_nucleo_bus.h"
+#include "stm32f7xx_nucleo_errno.h"
+
+/* USER CODE BEGIN 1 */
+
+/* USER CODE END 1 */
+
+#define USE_CUSTOM_MOTION_SENSOR_LIS3MDL_0        1U
+
+#define USE_CUSTOM_ENV_SENSOR_LPS33HW_0           1U
+
+#define USE_CUSTOM_MOTION_SENSOR_A3G4250D_0        1U
+
+#define USE_CUSTOM_MOTION_SENSOR_H3LIS331DL_0        1U
+
+#define CUSTOM_LIS3MDL_0_I2C_Init BSP_I2C4_Init
+#define CUSTOM_LIS3MDL_0_I2C_DeInit BSP_I2C4_DeInit
+#define CUSTOM_LIS3MDL_0_I2C_ReadReg BSP_I2C4_ReadReg
+#define CUSTOM_LIS3MDL_0_I2C_WriteReg BSP_I2C4_WriteReg
+
+#define CUSTOM_LPS33HW_0_I2C_Init BSP_I2C4_Init
+#define CUSTOM_LPS33HW_0_I2C_DeInit BSP_I2C4_DeInit
+#define CUSTOM_LPS33HW_0_I2C_ReadReg BSP_I2C4_ReadReg
+#define CUSTOM_LPS33HW_0_I2C_WriteReg BSP_I2C4_WriteReg
+
+#define CUSTOM_A3G4250D_0_I2C_Init BSP_I2C4_Init
+#define CUSTOM_A3G4250D_0_I2C_DeInit BSP_I2C4_DeInit
+#define CUSTOM_A3G4250D_0_I2C_ReadReg BSP_I2C4_ReadReg
+#define CUSTOM_A3G4250D_0_I2C_WriteReg BSP_I2C4_WriteReg
+
+#define CUSTOM_H3LIS331DL_0_I2C_Init BSP_I2C4_Init
+#define CUSTOM_H3LIS331DL_0_I2C_DeInit BSP_I2C4_DeInit
+#define CUSTOM_H3LIS331DL_0_I2C_ReadReg BSP_I2C4_ReadReg
+#define CUSTOM_H3LIS331DL_0_I2C_WriteReg BSP_I2C4_WriteReg
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __CUSTOM_MEMS_CONF_H__*/
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

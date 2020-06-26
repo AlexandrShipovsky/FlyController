@@ -19,9 +19,6 @@
 
 #include "IMU.h"
 
-
-
-
 void CLI_CommandsParser(const TCLI_IO *const io, char *ps, CLI_InputStrLen_t len)
 {
 
@@ -77,7 +74,6 @@ void CLI_CommandsParser(const TCLI_IO *const io, char *ps, CLI_InputStrLen_t len
 
 	CLI_IF_CMD("LIS3MDLINIT", "Init lis3mdl")
 	{
-		
 
 		return;
 	}
@@ -85,4 +81,3 @@ void CLI_CommandsParser(const TCLI_IO *const io, char *ps, CLI_InputStrLen_t len
 	//----------------------------------------------------------------------------------
 	CLI_UNKNOWN_COMMAND();
 }
-
