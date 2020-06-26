@@ -1202,6 +1202,9 @@
                 <name>$PROJ_DIR$\..\Src\freertos.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Src\IMU.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Src\lwip.c</name>
             </file>
             <file>

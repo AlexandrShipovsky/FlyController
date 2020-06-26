@@ -132,7 +132,7 @@ typedef struct {
   *
   */
 
-#define LPS33HW_INTERRUPT_CFG  0x0BU
+#define LPS33HW_INTERRUPT_CFG  0x23U
 typedef struct {
   uint8_t pe               : 2; /* ple + phe -> pe */
   uint8_t lir              : 1;
@@ -143,10 +143,10 @@ typedef struct {
   uint8_t autorifp         : 1;
 } lps33hw_interrupt_cfg_t;
 
-#define LPS33HW_THS_P_L        0x0CU
-#define LPS33HW_THS_P_H        0x0DU
+#define LPS33HW_THS_P_L        0x25U
+#define LPS33HW_THS_P_H        0x26U
 #define LPS33HW_WHO_AM_I       0x0FU
-#define LPS33HW_CTRL_REG1      0x10U
+#define LPS33HW_CTRL_REG1      0x20U
 typedef struct {
   uint8_t sim              : 1;
   uint8_t bdu              : 1;
@@ -155,7 +155,7 @@ typedef struct {
   uint8_t not_used_01      : 1;
 } lps33hw_ctrl_reg1_t;
 
-#define LPS33HW_CTRL_REG2      0x11U
+#define LPS33HW_CTRL_REG2      0x21U
 typedef struct {
   uint8_t one_shot         : 1;
   uint8_t not_used_01      : 1;
@@ -167,7 +167,7 @@ typedef struct {
   uint8_t boot             : 1;
 } lps33hw_ctrl_reg2_t;
 
-#define LPS33HW_CTRL_REG3      0x12U
+#define LPS33HW_CTRL_REG3      0x22U
 typedef struct {
   uint8_t int_s            : 2;
   uint8_t drdy             : 1;
@@ -185,19 +185,19 @@ typedef struct {
   uint8_t f_mode           : 3;
 } lps33hw_fifo_ctrl_t;
 
-#define LPS33HW_REF_P_XL       0x15U
-#define LPS33HW_REF_P_L        0x16U
-#define LPS33HW_REF_P_H        0x17U
+#define LPS33HW_REF_P_XL       0x08U
+#define LPS33HW_REF_P_L        0x09U
+#define LPS33HW_REF_P_H        0x0AU
 #define LPS33HW_RPDS_L         0x18U
 #define LPS33HW_RPDS_H         0x19U
 
-#define LPS33HW_RES_CONF       0x1AU
+#define LPS33HW_RES_CONF       0x10U
 typedef struct {
   uint8_t lc_en            : 1;
   uint8_t not_used_01      : 7;
 } lps33hw_res_conf_t;
 
-#define LPS33HW_INT_SOURCE     0x25U
+#define LPS33HW_INT_SOURCE     0x24U
 typedef struct {
   uint8_t ph               : 1;
   uint8_t pl               : 1;

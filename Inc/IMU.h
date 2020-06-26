@@ -44,10 +44,20 @@ extern "C" {
 
 
 /* Exported functions prototypes ---------------------------------------------*/
+int32_t IMUWrite(uint16_t adr, uint16_t RegAdr, uint8_t *data, uint16_t len);
+int32_t IMURead(uint16_t adr, uint16_t RegAdr, uint8_t *data, uint16_t len);
+
 int32_t CompassInit(void);
 int32_t CompassDeInit(void);
-int32_t CompassWrite(uint16_t adr, uint16_t RegAdr, uint8_t *data, uint16_t lenth);
-int32_t CompassRead(uint16_t adr, uint16_t RegAdr, uint8_t *data, uint16_t lenth);
+
+int32_t AccelInit(void);
+int32_t AccelDeInit(void);
+
+int32_t GyroInit(void);
+int32_t GyroDeInit(void);
+
+int32_t PressInit(void);
+int32_t PressDeInit(void);
 
 /* Private defines -----------------------------------------------------------*/
 
