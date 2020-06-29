@@ -1220,6 +1220,9 @@
                 <name>$PROJ_DIR$\..\Src\stm32f7xx_it.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Src\stm32f7xx_nucleo_bus.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Src\usb_device.c</name>
             </file>
             <file>
@@ -1285,18 +1288,18 @@
                     </file>
                 </group>
                 <group>
-                    <name>lps33hw</name>
+                    <name>lps331</name>
                     <file>
-                        <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps33hw\lps33hw.c</name>
+                        <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps331\lps331.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps33hw\lps33hw.h</name>
+                        <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps331\lps331.h</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps33hw\lps33hw_reg.c</name>
+                        <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps331\lps331_reg.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps33hw\lps33hw_reg.h</name>
+                        <name>$PROJ_DIR$\..\Drivers\BSP\Components\lps331\lps331_reg.h</name>
                     </file>
                 </group>
             </group>
@@ -1711,6 +1714,21 @@
             <file>
                 <name>$PROJ_DIR$\..\Middlewares\Third_Party\LwIP\src\netif\zepif.c</name>
             </file>
+        </group>
+        <group>
+            <name>MEMS</name>
+            <group>
+                <name>Motion Library/MotionFX</name>
+                <file>
+                    <name>$PROJ_DIR$\..\Middlewares\ST\STM32_MotionFX_Library\Inc\motion_fx.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Middlewares\ST\STM32_MotionFX_Library\Inc\motion_fx_cm0p.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Middlewares\ST\STM32_MotionFX_Library\Lib\MotionFX_CM7F_wc32_ot.a</name>
+                </file>
+            </group>
         </group>
         <group>
             <name>USB_Device_Library</name>

@@ -350,6 +350,25 @@ int32_t a3g4250d_data_format_set(stmdev_ctx_t *ctx, a3g4250d_ble_t val)
   }
   return ret;
 }
+/**
+  * @brief  Scale
+  *
+  * @param  ctx     Read / write interface definitions.(ptr)
+  * @param       
+  *
+  */
+int32_t l3g4200d_data_scale_set(stmdev_ctx_t *ctx, l3g4200d_scale_t val)
+{
+  a3g4250d_ctrl_reg4_t ctrl_reg4;
+  int32_t ret;
+
+  ret = a3g4250d_read_reg(ctx, A3G4250D_CTRL_REG4,(uint8_t*)&ctrl_reg4, 1);
+  if(ret == 0){
+    ctrl_reg4.not_used_01 = (uint8_t)val;
+    ret = a3g4250d_write_reg(ctx, A3G4250D_CTRL_REG4,(uint8_t*)&ctrl_reg4, 1);
+  }
+  return ret;
+}
 
 /**
   * @brief  Big/Little Endian data selection.[get]

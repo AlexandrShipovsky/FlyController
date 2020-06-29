@@ -26,12 +26,15 @@ extern "C" {
 #include "FreeRTOS.h"
 #include "task.h"
 
+//#include <arm_math.h>
+
 #include "a3g4250d.h"
 #include "lis3mdl.h"
-#include "lps33hw.h"
+#include "lps331.h"
 #include "h3lis331dl.h"
 #include "stm32f7xx_nucleo_bus.h"
 #include "custom_mems_conf.h"
+#include "motion_fx.h"
 
 /* Private includes ----------------------------------------------------------*/
 
@@ -46,23 +49,11 @@ extern "C" {
 
 
 /* Exported functions prototypes ---------------------------------------------*/
-int32_t IMUWrite(uint16_t adr, uint16_t RegAdr, uint8_t *data, uint16_t len);
-int32_t IMURead(uint16_t adr, uint16_t RegAdr, uint8_t *data, uint16_t len);
-
-int32_t CompassInit(void);
-int32_t CompassDeInit(void);
-
-int32_t AccelInit(void);
-int32_t AccelDeInit(void);
-
-int32_t GyroInit(void);
-int32_t GyroDeInit(void);
-
 int32_t PressInit(void);
 int32_t PressDeInit(void);
 
 /* Private defines -----------------------------------------------------------*/
-
+#define LPS331_I2C_ADD_L   0xB9U
 
 
 #ifdef __cplusplus

@@ -16,25 +16,33 @@
 extern I2C_HandleTypeDef hi2c4;
 
 /* Compass LIS3MDL*/
-LIS3MDL_Axes_t CompassAxes;
+LIS3MDL_AxesRaw_t CompassAxesRaw;
 LIS3MDL_Object_t CompassObj;
 LIS3MDL_IO_t CompassIO;
 
 /* Accel lis331dl*/
-H3LIS331DL_Axes_t AccelAxes;
+H3LIS331DL_AxesRaw_t AccelAxesRaw;
 H3LIS331DL_Object_t AccelObj;
 H3LIS331DL_IO_t AccelIO;
 
 /* Gyro L3G4200D*/
-A3G4250D_Axes_t GyroAxes;
+A3G4250D_AxesRaw_t GyroAxesRaw;
 A3G4250D_Object_t GyroObj;
 A3G4250D_IO_t GyroIO;
 
 /* Barometer LPS331*/
+float PressureZero;
+float TemperatureZero;
+float altitudesum = 0.0;
+
 float pressure;
 float temperature;
+float altitude;
 LPS33HW_Object_t PressObj;
 LPS33HW_IO_t PressIO;
+
+uint8_t ID;
+float rate;
 
 /* USER CODE BEGIN Header_StartIMUTask */
 /**
@@ -63,6 +71,7 @@ void StartIMUTask(void const *argument)
     }
 
     LIS3MDL_Init(&CompassObj);
+    LIS3MDL_MAG_Enable(&CompassObj);
 
     /* Accel lis331dl*/
     AccelIO.Init = CUSTOM_H3LIS331DL_0_I2C_Init;
@@ -82,6 +91,7 @@ void StartIMUTask(void const *argument)
     }
 
     H3LIS331DL_Init(&AccelObj);
+    H3LIS331DL_ACC_Enable(&AccelObj);
 
     /* Gyro L3G4200D*/
     GyroIO.Init = CUSTOM_A3G4250D_0_I2C_Init;
@@ -101,14 +111,14 @@ void StartIMUTask(void const *argument)
     }
 
     A3G4250D_Init(&GyroObj);
-
+    A3G4250D_GYRO_Enable(&GyroObj);
     /* Barometer LPS331*/
-    PressIO.Init = PressInit;
-    PressIO.DeInit = PressDeInit;
+    PressIO.Init = CUSTOM_LPS331_0_I2C_Init;
+    PressIO.DeInit = CUSTOM_LPS331_0_I2C_DeInit;
     PressIO.BusType = LPS33HW_I2C_BUS;
-    PressIO.Address = LPS33HW_I2C_ADD_L;
-    PressIO.ReadReg = IMURead;
-    PressIO.WriteReg = IMUWrite;
+    PressIO.Address = LPS331_I2C_ADD_L;
+    PressIO.ReadReg = CUSTOM_LPS331_0_I2C_ReadReg;
+    PressIO.WriteReg = CUSTOM_LPS331_0_I2C_WriteReg;
 
     if (LPS33HW_RegisterBusIO(&PressObj, &PressIO) != LPS33HW_OK)
     {
@@ -118,135 +128,51 @@ void StartIMUTask(void const *argument)
             vTaskDelay(1000);
         }
     }
-    /* Infinite loop */
 
+    LPS33HW_Init(&PressObj);
+    LPS33HW_PRESS_Enable(&PressObj);
+    
+    float AverageBuf[100];
+
+    LPS33HW_PRESS_GetPressure(&PressObj,&AverageBuf[0]);
+    vTaskDelay(500);
+
+    uint8_t i = 0;
+    for(i = 0; i < 20 ; i++)
+    {
+        LPS33HW_PRESS_GetPressure(&PressObj,&AverageBuf[i]);
+        PressureZero += AverageBuf[i];
+        vTaskDelay(50);
+    }
+    PressureZero /= 20.0;
+    
+    LPS33HW_TEMP_GetTemperature(&PressObj,&TemperatureZero);
+    /* Infinite loop */
+    i = 0;
     for (;;)
     {
-        vTaskDelay(1);
-        LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
-        H3LIS331DL_ACC_GetAxes(&AccelObj, &AccelAxes);
-        A3G4250D_GYRO_GetAxes(&GyroObj,&GyroAxes);
+        vTaskDelay(10);
+        LIS3MDL_MAG_GetAxesRaw(&CompassObj, &CompassAxesRaw);
+        H3LIS331DL_ACC_GetAxesRaw(&AccelObj, &AccelAxesRaw);
+        A3G4250D_GYRO_GetAxesRaw(&GyroObj, &GyroAxesRaw);
+
+        LPS33HW_ReadID(&PressObj,&ID);
+
         LPS33HW_PRESS_GetPressure(&PressObj,&pressure);
+        
+        LPS33HW_PRESS_GetOutputDataRate(&PressObj,&rate);
         LPS33HW_TEMP_GetTemperature(&PressObj,&temperature);
-    }
-}
 
-/*
-*
-* Read-write IMU
-*******************************************************************************************
-*/
-int32_t IMUWrite(uint16_t adr, uint16_t RegAdr, uint8_t *data, uint16_t len)
-{
-    if (HAL_I2C_Mem_Write(&hi2c4, adr, RegAdr, sizeof(uint8_t), data, len, 500) == HAL_OK)
-    {
-        return 0;
+        LPS331_Get_Altitude(&PressObj,TemperatureZero,PressureZero,&AverageBuf[i]);
+        altitudesum += AverageBuf[i];
+        i++;
+        if(i == 20)
+        {
+            altitude = altitudesum / 20.0;
+            i = 0;
+            altitudesum = 0.0;
+        }
     }
-    return -1;
-}
-
-int32_t IMURead(uint16_t adr, uint16_t RegAdr, uint8_t *data, uint16_t len)
-{
-    if (HAL_I2C_Mem_Read(&hi2c4, adr, RegAdr, sizeof(uint8_t), data, len, 500) == HAL_OK)
-    {
-        return 0;
-    }
-    return -1;
-}
-/*
-*
-* Compass init
-*******************************************************************************************
-*/
-int32_t CompassInit(void)
-{
-    if (LIS3MDL_Init(&CompassObj) != LIS3MDL_OK)
-    {
-        return LIS3MDL_ERROR;
-    }
-    if (LIS3MDL_MAG_SetFullScale(&CompassObj, LIS3MDL_4_GAUSS) != LIS3MDL_OK)
-    {
-        return LIS3MDL_ERROR;
-    }
-    if (LIS3MDL_MAG_SetOutputDataRate(&CompassObj, 80.0f) != LIS3MDL_OK)
-    {
-        return LIS3MDL_ERROR;
-    }
-
-    if (LIS3MDL_MAG_Enable(&CompassObj) != LIS3MDL_OK)
-    {
-        return LIS3MDL_ERROR;
-    }
-
-    return LIS3MDL_OK;
-}
-
-int32_t CompassDeInit(void)
-{
-    return LIS3MDL_DeInit(&CompassObj);
-}
-
-/*
-*
-* Accel init
-*******************************************************************************************
-*/
-int32_t AccelInit(void)
-{
-    if (H3LIS331DL_Init(&AccelObj) != H3LIS331DL_OK)
-    {
-        return H3LIS331DL_ERROR;
-    }
-    if (H3LIS331DL_ACC_SetFullScale(&AccelObj, H3LIS331DL_ACC_SENSITIVITY_FOR_FS_200G) != H3LIS331DL_OK)
-    {
-        return H3LIS331DL_ERROR;
-    }
-    if (H3LIS331DL_ACC_SetOutputDataRate(&AccelObj, 100.0f) != H3LIS331DL_OK)
-    {
-        return H3LIS331DL_ERROR;
-    }
-
-    if (H3LIS331DL_ACC_Enable(&AccelObj) != H3LIS331DL_OK)
-    {
-        return H3LIS331DL_ERROR;
-    }
-
-    return H3LIS331DL_OK;
-}
-
-int32_t AccelDeInit(void)
-{
-    return LIS3MDL_DeInit(&CompassObj);
-}
-
-/*
-*
-* Gyro init
-*******************************************************************************************
-*/
-int32_t GyroInit(void)
-{
-    if (A3G4250D_Init(&GyroObj) != A3G4250D_OK)
-    {
-        return A3G4250D_ERROR;
-    }
-
-    if (A3G4250D_GYRO_SetOutputDataRate(&GyroObj, 100.0f) != A3G4250D_OK)
-    {
-        return A3G4250D_ERROR;
-    }
-
-    if (A3G4250D_GYRO_Enable(&GyroObj) != A3G4250D_OK)
-    {
-        return A3G4250D_ERROR;
-    }
-
-    return A3G4250D_OK;
-}
-
-int32_t GyroDeInit(void)
-{
-    return A3G4250D_DeInit(&GyroObj);
 }
 
 /*
@@ -265,7 +191,7 @@ int32_t PressInit(void)
     {
         return LPS33HW_ERROR;
     }
-    
+
     if (LPS33HW_TEMP_SetOutputDataRate(&PressObj, 1.0f) != LPS33HW_OK)
     {
         return LPS33HW_ERROR;

@@ -65,9 +65,9 @@ void CLI_CommandsParser(const TCLI_IO *const io, char *ps, CLI_InputStrLen_t len
 			DbgPrintf("Compass I2C adr = %i (HEX: 0x%X)\n\r", LIS3MDL_I2C_ADD_L, LIS3MDL_I2C_ADD_L);
 		}
 
-		if (HAL_I2C_IsDeviceReady(&hi2c4, LPS33HW_I2C_ADD_L, 1, 100) == HAL_OK)
+		if (HAL_I2C_IsDeviceReady(&hi2c4, LPS331_I2C_ADD_L, 1, 100) == HAL_OK)
 		{
-			DbgPrintf("Barometer I2C adr = %i (HEX: 0x%X)\n\r", LPS33HW_I2C_ADD_L, LPS33HW_I2C_ADD_L);
+			DbgPrintf("Barometer I2C adr = %i (HEX: 0x%X)\n\r", LPS331_I2C_ADD_L, LPS331_I2C_ADD_L);
 		}
 		return;
 	}
@@ -80,4 +80,4 @@ void CLI_CommandsParser(const TCLI_IO *const io, char *ps, CLI_InputStrLen_t len
 
 	//----------------------------------------------------------------------------------
 	CLI_UNKNOWN_COMMAND();
-}
+}}

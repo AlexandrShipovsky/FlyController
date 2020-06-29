@@ -31,7 +31,10 @@ extern "C" {
 #include "stm32f7xx_nucleo_errno.h"
 
 /* USER CODE BEGIN 1 */
-
+#define CUSTOM_LPS331_0_I2C_Init BSP_I2C4_Init
+#define CUSTOM_LPS331_0_I2C_DeInit BSP_I2C4_DeInit
+#define CUSTOM_LPS331_0_I2C_ReadReg BSP_I2C4_ReadReg
+#define CUSTOM_LPS331_0_I2C_WriteReg BSP_I2C4_WriteReg
 /* USER CODE END 1 */
 
 #define USE_CUSTOM_MOTION_SENSOR_LIS3MDL_0        1U

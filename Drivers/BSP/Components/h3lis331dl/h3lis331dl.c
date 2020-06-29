@@ -156,7 +156,7 @@ int32_t H3LIS331DL_Init(H3LIS331DL_Object_t *pObj)
   }
 
   /* Full scale selection. */
-  if (h3lis331dl_full_scale_set(&(pObj->Ctx), H3LIS331DL_100g) != H3LIS331DL_OK)
+  if (h3lis331dl_full_scale_set(&(pObj->Ctx), H3LIS331DL_200g) != H3LIS331DL_OK)
   {
     return H3LIS331DL_ERROR;
   }
