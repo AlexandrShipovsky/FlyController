@@ -25,6 +25,7 @@ extern "C" {
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "cmsis_os.h"
 
 //#include <arm_math.h>
 
@@ -35,7 +36,8 @@ extern "C" {
 #include "stm32f7xx_nucleo_bus.h"
 #include "custom_mems_conf.h"
 #include "motion_fx.h"
-
+#include "motion_mc.h"
+#include "motion_vc.h"
 /* Private includes ----------------------------------------------------------*/
 
 

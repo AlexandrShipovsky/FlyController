@@ -156,7 +156,7 @@ int32_t H3LIS331DL_Init(H3LIS331DL_Object_t *pObj)
   }
 
   /* Full scale selection. */
-  if (h3lis331dl_full_scale_set(&(pObj->Ctx), H3LIS331DL_200g) != H3LIS331DL_OK)
+  if (h3lis331dl_full_scale_set(&(pObj->Ctx), H3LIS331DL_4g) != H3LIS331DL_OK)
   {
     return H3LIS331DL_ERROR;
   }
@@ -300,16 +300,16 @@ int32_t H3LIS331DL_ACC_GetSensitivity(H3LIS331DL_Object_t *pObj, float *Sensitiv
 
   switch (full_scale)
   {
-    case H3LIS331DL_100g:
-      *Sensitivity = H3LIS331DL_ACC_SENSITIVITY_FOR_FS_100G;
+    case H3LIS331DL_2g:
+      *Sensitivity = H3LIS331DL_ACC_SENSITIVITY_FOR_FS_2G;
        break;
 
-    case H3LIS331DL_200g:
-      *Sensitivity = H3LIS331DL_ACC_SENSITIVITY_FOR_FS_200G;
+    case H3LIS331DL_4g:
+      *Sensitivity = H3LIS331DL_ACC_SENSITIVITY_FOR_FS_4G;
       break;
 
-    case H3LIS331DL_400g:
-      *Sensitivity = H3LIS331DL_ACC_SENSITIVITY_FOR_FS_400G;
+    case H3LIS331DL_8g:
+      *Sensitivity = H3LIS331DL_ACC_SENSITIVITY_FOR_FS_8G;
       break;
 
     default:
@@ -427,16 +427,16 @@ int32_t H3LIS331DL_ACC_GetFullScale(H3LIS331DL_Object_t *pObj, int32_t *FullScal
 
   switch (fs_low_level)
   {
-    case H3LIS331DL_100g:
-      *FullScale = 100;
+    case H3LIS331DL_2g:
+      *FullScale = 1;
       break;
 
-    case H3LIS331DL_200g:
-      *FullScale = 200;
+    case H3LIS331DL_4g:
+      *FullScale = 2;
       break;
 
-    case H3LIS331DL_400g:
-      *FullScale = 400;
+    case H3LIS331DL_8g:
+      *FullScale = 4;
       break;
 
     default:
@@ -460,9 +460,9 @@ int32_t H3LIS331DL_ACC_SetFullScale(H3LIS331DL_Object_t *pObj, int32_t FullScale
 
   /* Seems like MISRA C-2012 rule 14.3a violation but only from single file statical analysis point of view because
      the parameter passed to the function is not known at the moment of analysis */
-  new_fs = (FullScale <= 100) ? H3LIS331DL_100g
-         : (FullScale <= 200) ? H3LIS331DL_200g
-         :                      H3LIS331DL_400g;
+  new_fs = (FullScale <= 2) ? H3LIS331DL_2g
+         : (FullScale <= 4) ? H3LIS331DL_4g
+         :                      H3LIS331DL_8g;
 
   if (h3lis331dl_full_scale_set(&(pObj->Ctx), new_fs) != H3LIS331DL_OK)
   {

@@ -39,7 +39,6 @@
 /* STMicroelectronics.X-CUBE-MEMS1.7.2.0 */
 #define H3LIS331DL_ACC_I2C
 #define LIS3MDL_MAG_I2C
-#define LPS33HW_PRESSTEMP_I2C
 #define A3G4250D_GYR_I2C 
  
 #endif /* __RTE_COMPONENTS_H__ */

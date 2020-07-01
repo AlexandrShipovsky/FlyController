@@ -16,24 +16,29 @@
 extern I2C_HandleTypeDef hi2c4;
 
 /* Compass LIS3MDL*/
-LIS3MDL_AxesRaw_t CompassAxesRaw;
+LIS3MDL_Axes_t CompassAxes;
+float CompassAxesCalib[3];
+float CompassAxesRawmT[3];
 LIS3MDL_Object_t CompassObj;
 LIS3MDL_IO_t CompassIO;
 
+MMC_Input_t MagCalibIn;
+MMC_Output_t MagCalibOut;
+
 /* Accel lis331dl*/
-H3LIS331DL_AxesRaw_t AccelAxesRaw;
+H3LIS331DL_Axes_t AccelAxes;
 H3LIS331DL_Object_t AccelObj;
 H3LIS331DL_IO_t AccelIO;
 
 /* Gyro L3G4200D*/
-A3G4250D_AxesRaw_t GyroAxesRaw;
+A3G4250D_Axes_t GyroAxes;
 A3G4250D_Object_t GyroObj;
 A3G4250D_IO_t GyroIO;
 
 /* Barometer LPS331*/
 float PressureZero;
 float TemperatureZero;
-float altitudesum = 0.0;
+float AltitudeZero = 0.0;
 
 float pressure;
 float temperature;
@@ -41,9 +46,14 @@ float altitude;
 LPS33HW_Object_t PressObj;
 LPS33HW_IO_t PressIO;
 
-uint8_t ID;
-float rate;
+MVC_input_t VerticalConextIn;
+MVC_output_t OutMotionVC;
 
+MFX_knobs_t KnobsMFX;
+MFX_input_t InMFX;
+MFX_output_t OutMFX;
+
+MFX_engine_state_t statMFX;
 /* USER CODE BEGIN Header_StartIMUTask */
 /**
 * @brief Function implementing the IMUTask thread.
@@ -131,47 +141,120 @@ void StartIMUTask(void const *argument)
 
     LPS33HW_Init(&PressObj);
     LPS33HW_PRESS_Enable(&PressObj);
-    
-    float AverageBuf[100];
 
-    LPS33HW_PRESS_GetPressure(&PressObj,&AverageBuf[0]);
-    vTaskDelay(500);
+    MotionVC_Initialize();
 
-    uint8_t i = 0;
-    for(i = 0; i < 20 ; i++)
+    /* Получение значения высоты над уровнем моря в начальной точке*/
+    while (AltitudeZero == 0.0)
     {
-        LPS33HW_PRESS_GetPressure(&PressObj,&AverageBuf[i]);
-        PressureZero += AverageBuf[i];
-        vTaskDelay(50);
+        H3LIS331DL_ACC_GetAxes(&AccelObj, &AccelAxes);
+        LPS33HW_PRESS_GetPressure(&PressObj, &pressure);
+        vTaskDelay(100);
+        VerticalConextIn.AccX = AccelAxes.x / 1000.0;
+        VerticalConextIn.AccY = AccelAxes.y / 1000.0;
+        VerticalConextIn.AccZ = AccelAxes.z / 1000.0;
+        VerticalConextIn.Press = pressure;
+
+        MotionVC_Update(&VerticalConextIn, &OutMotionVC);
+
+        AltitudeZero = OutMotionVC.Baro_Altitude / 100.0;
     }
-    PressureZero /= 20.0;
-    
-    LPS33HW_TEMP_GetTemperature(&PressObj,&TemperatureZero);
+
+    /* Калибровка магнитометра*/
+    /*************************************************************************************************/
+    /*************************************************************************************************/
+    MotionMC_Initialize(25, 1);
+    MotionMC_GetCalParams(&MagCalibOut);
+
+    while (MagCalibOut.CalQuality != MMC_CALQSTATUSGOOD)
+    {
+        LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
+        MagCalibIn.Mag[0] = CompassAxes.x / 10.0;
+        MagCalibIn.Mag[1] = CompassAxes.y / 10.0;
+        MagCalibIn.Mag[2] = CompassAxes.z / 10.0;
+        MagCalibIn.TimeStamp = osKernelSysTick();
+        MotionMC_Update(&MagCalibIn);
+        MotionMC_GetCalParams(&MagCalibOut);
+        vTaskDelay(25);
+    }
+    MotionMC_Initialize(25, 0);
+    /* MotionFX run*/
+    MotionFX_initialize();
+    /*************************************************************************************************/
+    /*************************************************************************************************/
+    MotionFX_getKnobs(&KnobsMFX);
+    KnobsMFX.LMode = 2; // Динамическая коррекция гироскопа
+    KnobsMFX.modx = 5;  // Встраиваемая система
+    KnobsMFX.FrTime = 10;
+    KnobsMFX.output_type = MFX_ENGINE_OUTPUT_ENU;
+    MotionFX_setKnobs(&KnobsMFX);
+    MotionFX_enable_9X(MFX_ENGINE_ENABLE);
+    MotionFX_enable_6X(MFX_ENGINE_ENABLE);
+
+    uint32_t tick_current = 0;
+    uint32_t tick_prev = 0;
+    float deltaTimeMFX;
+
     /* Infinite loop */
-    i = 0;
     for (;;)
     {
+
+        statMFX = MotionFX_getStatus_9X();
         vTaskDelay(10);
-        LIS3MDL_MAG_GetAxesRaw(&CompassObj, &CompassAxesRaw);
-        H3LIS331DL_ACC_GetAxesRaw(&AccelObj, &AccelAxesRaw);
-        A3G4250D_GYRO_GetAxesRaw(&GyroObj, &GyroAxesRaw);
 
-        LPS33HW_ReadID(&PressObj,&ID);
+        /* Высота*/
+        H3LIS331DL_ACC_GetAxes(&AccelObj, &AccelAxes);
+        LPS33HW_PRESS_GetPressure(&PressObj, &pressure);
 
-        LPS33HW_PRESS_GetPressure(&PressObj,&pressure);
-        
-        LPS33HW_PRESS_GetOutputDataRate(&PressObj,&rate);
-        LPS33HW_TEMP_GetTemperature(&PressObj,&temperature);
+        VerticalConextIn.AccX = AccelAxes.x / 1000.0;
+        VerticalConextIn.AccY = AccelAxes.y / 1000.0;
+        VerticalConextIn.AccZ = AccelAxes.z / 1000.0;
+        VerticalConextIn.Press = pressure;
 
-        LPS331_Get_Altitude(&PressObj,TemperatureZero,PressureZero,&AverageBuf[i]);
-        altitudesum += AverageBuf[i];
-        i++;
-        if(i == 20)
+        MotionVC_Update(&VerticalConextIn, &OutMotionVC);
+
+        altitude = OutMotionVC.Baro_Altitude / 100.0 - AltitudeZero;
+
+        /* Расчет значений компаса*/
+        //MotionMC_GetCalParams(&MagCalibOut);
+        LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
+        CompassAxesRawmT[0] = CompassAxes.x / 10.0;
+        CompassAxesRawmT[1] = CompassAxes.y / 10.0;
+        CompassAxesRawmT[2] = CompassAxes.z / 10.0;
+
+        for (uint8_t i = 0; i < 3; i++)
         {
-            altitude = altitudesum / 20.0;
-            i = 0;
-            altitudesum = 0.0;
+            CompassAxesCalib[i] = 0.0;
+            for (uint8_t j = 0; j < 3; j++)
+            {
+                CompassAxesCalib[i] += MagCalibOut.SF_Matrix[i][j] * (CompassAxesRawmT[i] - MagCalibOut.HI_Bias[i]);
+            }
         }
+
+        A3G4250D_GYRO_GetAxes(&GyroObj, &GyroAxes);
+
+        for (uint8_t i = 0; i < 3; i++)
+        {
+            InMFX.mag[i] = (float)CompassAxesCalib[i] / 50.0; // uT/50
+        }
+         
+        InMFX.acc[0] = (float)AccelAxes.x / 1000.0;
+        InMFX.acc[1] = (float)AccelAxes.y / 1000.0;
+        InMFX.acc[2] = (float)AccelAxes.z / 1000.0;
+
+        InMFX.gyro[0] = (float)GyroAxes.x / 1000.0;
+        InMFX.gyro[1] = (float)GyroAxes.y / 1000.0;
+        InMFX.gyro[2] = (float)GyroAxes.z / 1000.0;
+
+        tick_current = osKernelSysTick();
+        deltaTimeMFX = (tick_current - tick_prev)/1000.0;
+        MotionFX_propagate(&OutMFX,&InMFX,&deltaTimeMFX);
+        MotionFX_update(&OutMFX,&InMFX,&deltaTimeMFX,NULL);
+        tick_prev = tick_current;
+
+        LPS33HW_TEMP_GetTemperature(&PressObj, &temperature);
+
+        //LPS331_Get_Altitude(&PressObj,TemperatureZero,PressureZero,&AverageBuf[i]);
     }
 }
 
@@ -212,4 +295,13 @@ int32_t PressInit(void)
 int32_t PressDeInit(void)
 {
     return LPS33HW_DeInit(&PressObj);
+}
+
+char MotionMC_LoadCalFromNVM(unsigned short int datasize, unsigned int *data)
+{
+    return 1; /* FAILURE: Read from NVM not implemented. */
+}
+char MotionMC_SaveCalInNVM(unsigned short int datasize, unsigned int *data)
+{
+    return 1; /* FAILURE: Write to NVM not implemented. */
 }

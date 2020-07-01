@@ -157,7 +157,7 @@ int32_t A3G4250D_Init(A3G4250D_Object_t *pObj)
     return A3G4250D_ERROR;
   }
 
-  if (l3g4200d_data_scale_set(&(pObj->Ctx), DPS2000) != A3G4250D_OK)
+  if (l3g4200d_data_scale_set(&(pObj->Ctx), DPS500) != A3G4250D_OK)
   {
     return A3G4250D_ERROR;
   }

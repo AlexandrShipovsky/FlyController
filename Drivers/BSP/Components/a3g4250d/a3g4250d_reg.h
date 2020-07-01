@@ -583,7 +583,6 @@ extern "C"
   {
     DPS250 = 0,
     DPS500 = 1,
-    DPS1000 = 2,
     DPS2000 = 3,
   } l3g4200d_scale_t;
 
