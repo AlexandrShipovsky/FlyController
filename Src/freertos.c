@@ -24,7 +24,7 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */     
+/* USER CODE BEGIN Includes */
 //#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
@@ -64,7 +64,9 @@ struct netconn *nc;
 struct netbuf *nb;
 struct netbuf *nb_send;
 
-uint8_t BufUART[BUFSIZEUART] = {0,};
+uint8_t BufUART[BUFSIZEUART] = {
+    0,
+};
 HAL_StatusTypeDef ErrUART;
 
 ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с параметрами блока управления приводами
@@ -79,7 +81,7 @@ void CalibrationHandler(uint8_t *pilotbuf); // Обработчик команд
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -115,13 +117,13 @@ void StartDefaultTask(void const *argument)
   /* USER CODE BEGIN 5 */
   extern UART_HandleTypeDef huart8;
 
-  ErrUART = HAL_UART_Receive_DMA(&huart8, (uint8_t*)BufUART, BUFSIZEUART);
+  ErrUART = HAL_UART_Receive_DMA(&huart8, (uint8_t *)BufUART, BUFSIZEUART);
   /* Infinite loop */
   for (;;)
   {
     HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
     HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-    ErrUART = HAL_UART_Transmit_IT(&huart8, (uint8_t*)"Golosuy za popravki\n\r", 20);
+    ErrUART = HAL_UART_Transmit_IT(&huart8, (uint8_t *)"Golosuy za popravki\n\r", 20);
     vTaskDelay(500);
   };
 
@@ -130,7 +132,7 @@ void StartDefaultTask(void const *argument)
 
 void ethernetif_notify_conn_changed(struct netif *netif)
 {
-    /* NOTE : This is function could be implemented in user file 
+  /* NOTE : This is function could be implemented in user file 
             when the callback is needed,
   */
   BaseType_t xHigherPriorityTaskWoken;
@@ -416,7 +418,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 void StartCliTask(void const *argument)
 {
   /* USER CODE BEGIN StartCliTask */
-  
+
   /* Infinite loop */
   for (;;)
   {
@@ -451,11 +453,14 @@ void PingHandler(uint8_t *pingbuf)
 void PilotCommandHandler(uint8_t *pilotbuf)
 {
   int8_t res;
-  uint8_t SendTCPBuf[23];
+  uint8_t SendTCPBuf[40];
   extern CAN_HandleTypeDef hcan1;
 
   uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
   CAN_TxHeaderTypeDef TxHeader;
+
+  extern SemaphoreHandle_t SemaphoreForSendTelemetry; // Семафор, разрешающий отправку телеметрии с ИНС раз в TimeSendTelemetry*vTaskDelay миллисекунд
+  extern IMUTelemetryTypeDef IMUTelemetry;
 
   // Передача на блок управления приводами
   TxHeader.DLC = 5;
@@ -487,6 +492,26 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   memcpy(&SendTCPBuf[15], &ElMotorUnitParameters.VBAT, sizeof(ElMotorUnitParameters.VBAT));
   memcpy(&SendTCPBuf[19], &ElMotorUnitParameters.PitchForce, sizeof(ElMotorUnitParameters.PitchForce));
 
+  if (SemaphoreForSendTelemetry != NULL)
+  {
+    if (xSemaphoreTake(SemaphoreForSendTelemetry, (TickType_t)0))
+    {
+      SendTCPBuf[23] = TelemetryResponse;
+      memcpy(&SendTCPBuf[24], &IMUTelemetry.altitude, sizeof(IMUTelemetry.altitude));
+      memcpy(&SendTCPBuf[28], &IMUTelemetry.yaw, sizeof(IMUTelemetry.yaw));
+      memcpy(&SendTCPBuf[32], &IMUTelemetry.pitch, sizeof(IMUTelemetry.pitch));
+      memcpy(&SendTCPBuf[36], &IMUTelemetry.roll, sizeof(IMUTelemetry.roll));
+      taskENTER_CRITICAL();
+      nb_send = netbuf_new();
+      netbuf_alloc(nb_send, CommandSize[PilotCommandResponse] + CommandSize[TelemetryResponse]);
+      pbuf_take(nb_send->p, (void *)SendTCPBuf, CommandSize[PilotCommandResponse] + CommandSize[TelemetryResponse]);
+      res = netconn_send(nc, nb_send);
+      netbuf_delete(nb_send);
+      taskEXIT_CRITICAL();
+      return;
+    }
+  }
+
   taskENTER_CRITICAL();
   nb_send = netbuf_new();
   netbuf_alloc(nb_send, CommandSize[PilotCommandResponse]);
@@ -497,6 +522,7 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   if (res != ERR_OK)
   {
   }
+  return;
 }
 /*
 *

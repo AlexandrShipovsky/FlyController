@@ -53,7 +53,8 @@ MFX_knobs_t KnobsMFX;
 MFX_input_t InMFX;
 MFX_output_t OutMFX;
 
-MFX_engine_state_t statMFX;
+SemaphoreHandle_t SemaphoreForSendTelemetry; // Семафор, разрешающий отправку телеметрии с ИНС раз в TimeSendTelemetry*vTaskDelay миллисекунд
+IMUTelemetryTypeDef IMUTelemetry;
 /* USER CODE BEGIN Header_StartIMUTask */
 /**
 * @brief Function implementing the IMUTask thread.
@@ -195,20 +196,21 @@ void StartIMUTask(void const *argument)
     uint32_t tick_prev = 0;
     float deltaTimeMFX;
 
+    uint16_t IncForSendTelemetry = 0;
+    SemaphoreForSendTelemetry = xSemaphoreCreateBinary();
     /* Infinite loop */
     for (;;)
     {
-
-        statMFX = MotionFX_getStatus_9X();
         vTaskDelay(10);
+        IncForSendTelemetry++;
 
         /* Высота*/
         H3LIS331DL_ACC_GetAxes(&AccelObj, &AccelAxes);
         LPS33HW_PRESS_GetPressure(&PressObj, &pressure);
 
-        VerticalConextIn.AccX = AccelAxes.x / 1000.0;
-        VerticalConextIn.AccY = AccelAxes.y / 1000.0;
-        VerticalConextIn.AccZ = AccelAxes.z / 1000.0;
+        VerticalConextIn.AccX = (float)AccelAxes.x / 1000.0;
+        VerticalConextIn.AccY = (float)AccelAxes.y / 1000.0;
+        VerticalConextIn.AccZ = (float)AccelAxes.z / 1000.0;
         VerticalConextIn.Press = pressure;
 
         MotionVC_Update(&VerticalConextIn, &OutMotionVC);
@@ -216,11 +218,11 @@ void StartIMUTask(void const *argument)
         altitude = OutMotionVC.Baro_Altitude / 100.0 - AltitudeZero;
 
         /* Расчет значений компаса*/
-        //MotionMC_GetCalParams(&MagCalibOut);
+        MotionMC_GetCalParams(&MagCalibOut);
         LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
-        CompassAxesRawmT[0] = CompassAxes.x / 10.0;
-        CompassAxesRawmT[1] = CompassAxes.y / 10.0;
-        CompassAxesRawmT[2] = CompassAxes.z / 10.0;
+        CompassAxesRawmT[0] = (float)CompassAxes.x / 10.0;
+        CompassAxesRawmT[1] = (float)CompassAxes.y / 10.0;
+        CompassAxesRawmT[2] = (float)CompassAxes.z / 10.0;
 
         for (uint8_t i = 0; i < 3; i++)
         {
@@ -237,7 +239,7 @@ void StartIMUTask(void const *argument)
         {
             InMFX.mag[i] = (float)CompassAxesCalib[i] / 50.0; // uT/50
         }
-         
+
         InMFX.acc[0] = (float)AccelAxes.x / 1000.0;
         InMFX.acc[1] = (float)AccelAxes.y / 1000.0;
         InMFX.acc[2] = (float)AccelAxes.z / 1000.0;
@@ -247,13 +249,33 @@ void StartIMUTask(void const *argument)
         InMFX.gyro[2] = (float)GyroAxes.z / 1000.0;
 
         tick_current = osKernelSysTick();
-        deltaTimeMFX = (tick_current - tick_prev)/1000.0;
-        MotionFX_propagate(&OutMFX,&InMFX,&deltaTimeMFX);
-        MotionFX_update(&OutMFX,&InMFX,&deltaTimeMFX,NULL);
+        deltaTimeMFX = (tick_current - tick_prev) / 1000.0;
+        MotionFX_propagate(&OutMFX, &InMFX, &deltaTimeMFX);
+        MotionFX_update(&OutMFX, &InMFX, &deltaTimeMFX, NULL);
         tick_prev = tick_current;
 
         LPS33HW_TEMP_GetTemperature(&PressObj, &temperature);
 
+        if (IncForSendTelemetry > TimeSendTelemetry)
+        {
+            if (SemaphoreForSendTelemetry != NULL)
+            {
+                if (xSemaphoreGive(SemaphoreForSendTelemetry) != pdTRUE)
+                {
+                }
+                if (xSemaphoreTake(SemaphoreForSendTelemetry, (TickType_t)0))
+                {
+                    IMUTelemetry.altitude = altitude;
+                    IMUTelemetry.yaw = OutMFX.rotation_9X[0];
+                    IMUTelemetry.pitch = OutMFX.rotation_9X[1];
+                    IMUTelemetry.roll = OutMFX.rotation_9X[2];
+                     if (xSemaphoreGive(SemaphoreForSendTelemetry) != pdTRUE)
+                    {
+                    }
+                }
+            }
+            IncForSendTelemetry = 0;
+        }
         //LPS331_Get_Altitude(&PressObj,TemperatureZero,PressureZero,&AverageBuf[i]);
     }
 }

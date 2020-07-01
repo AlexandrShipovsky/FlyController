@@ -54,7 +54,7 @@ extern "C"
         /*commands[PilotCommandResponse] = */ 23,
         /*commands[PING] = */ 9,
         /*commands[TelemetryRequest] = */ 1,
-        /*commands[TelemetryResponse] = */ 15
+        /*commands[TelemetryResponse] = */ 17
         };
 
 #ifdef __cplusplus

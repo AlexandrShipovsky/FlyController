@@ -19,18 +19,27 @@ extern "C"
 #endif
 
 #include "stdint.h"
+
+  typedef struct
+  {
+    int16_t Pitch;
+    int16_t Roll;
+    int16_t MinPitch;
+    int16_t MaxPitch;
+    int16_t MinRoll;
+    int16_t MaxRoll;
+    float VBAT;
+    float PitchForce;
+  } ElMotorUnitParametersTypeDef;
+
+  typedef struct 
+  {
+    float altitude;
+    float yaw;
+    float pitch;
+    float roll;
+  } IMUTelemetryTypeDef;
   
-typedef struct
-    {
-        int16_t Pitch;
-        int16_t Roll;
-        int16_t MinPitch;
-        int16_t MaxPitch;
-        int16_t MinRoll;
-        int16_t MaxRoll;
-        float VBAT;
-        float PitchForce;
-    } ElMotorUnitParametersTypeDef;
 
 #ifdef __cplusplus
 }

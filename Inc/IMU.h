@@ -38,6 +38,8 @@ extern "C" {
 #include "motion_fx.h"
 #include "motion_mc.h"
 #include "motion_vc.h"
+
+#include "telemetry.h"
 /* Private includes ----------------------------------------------------------*/
 
 
@@ -45,7 +47,7 @@ extern "C" {
 
 
 /* Exported constants --------------------------------------------------------*/
-
+#define TimeSendTelemetry (uint16_t)10
 
 /* Exported macro ------------------------------------------------------------*/
 
