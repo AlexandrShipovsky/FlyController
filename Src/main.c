@@ -93,7 +93,8 @@ void StartIMUTask(void const * argument);
 /**
   * @brief  The application entry point.
   * @retval int
-  */int main(void)
+  */
+int main(void)
 {
   /* USER CODE BEGIN 1 */
 
@@ -168,7 +169,7 @@ void StartIMUTask(void const * argument);
   CliTaskHandle = osThreadCreate(osThread(CliTask), NULL);
 
   /* definition and creation of IMUTask */
-  osThreadDef(IMUTask, StartIMUTask, osPriorityLow, 0, 512);
+  osThreadDef(IMUTask, StartIMUTask, osPriorityLow, 0, 1024);
   IMUTaskHandle = osThreadCreate(osThread(IMUTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
