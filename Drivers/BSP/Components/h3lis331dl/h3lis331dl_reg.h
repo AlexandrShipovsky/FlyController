@@ -146,9 +146,9 @@ typedef struct {
   *
   */
 
-#define H3LIS331DL_FROM_FS_2g_TO_mg(lsb)    (float)( lsb *  1.0f )
-#define H3LIS331DL_FROM_FS_4g_TO_mg(lsb)    (float)( lsb *  2.0f )
-#define H3LIS331DL_FROM_FS_8g_TO_mg(lsb)    (float)( lsb * 3.9f )
+#define H3LIS331DL_FROM_FS_100g_TO_mg(lsb)    (float)( lsb *  49.0f )
+#define H3LIS331DL_FROM_FS_200g_TO_mg(lsb)    (float)( lsb *  98.0f )
+#define H3LIS331DL_FROM_FS_400g_TO_mg(lsb)    (float)( lsb * 195.0f )
 
 /**
   * @}
@@ -332,9 +332,9 @@ int32_t h3lis331dl_read_reg(stmdev_ctx_t *ctx, uint8_t reg, uint8_t* data,
 int32_t h3lis331dl_write_reg(stmdev_ctx_t *ctx, uint8_t reg, uint8_t* data,
                             uint16_t len);
 
-extern float h3lis331dl_from_fs2_to_mg(int16_t lsb);
-extern float h3lis331dl_from_fs4_to_mg(int16_t lsb);
-extern float h3lis331dl_from_fs8_to_mg(int16_t lsb);
+extern float h3lis331dl_from_fs100_to_mg(int16_t lsb);
+extern float h3lis331dl_from_fs200_to_mg(int16_t lsb);
+extern float h3lis331dl_from_fs400_to_mg(int16_t lsb);
 
 int32_t h3lis331dl_axis_x_data_set(stmdev_ctx_t *ctx, uint8_t val);
 int32_t h3lis331dl_axis_x_data_get(stmdev_ctx_t *ctx, uint8_t *val);
@@ -370,9 +370,9 @@ int32_t h3lis331dl_reference_mode_get(stmdev_ctx_t *ctx,
                                      h3lis331dl_hpm_t *val);
 
 typedef enum {
-  H3LIS331DL_2g  = 0x00,
-  H3LIS331DL_4g  = 0x01,
-  H3LIS331DL_8g  = 0x03,
+  H3LIS331DL_100g  = 0,
+  H3LIS331DL_200g  = 1,
+  H3LIS331DL_400g  = 3,
 } h3lis331dl_fs_t;
 int32_t h3lis331dl_full_scale_set(stmdev_ctx_t *ctx,
                                   h3lis331dl_fs_t val);

@@ -46,6 +46,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 CAN_HandleTypeDef hcan1;
+CAN_HandleTypeDef hcan2;
 
 CRC_HandleTypeDef hcrc;
 
@@ -73,6 +74,7 @@ static void MX_USART3_UART_Init(void);
 static void MX_UART5_Init(void);
 static void MX_UART8_Init(void);
 static void MX_CRC_Init(void);
+static void MX_CAN2_Init(void);
 void StartDefaultTask(void const * argument);
 void StartConGroundStation(void const * argument);
 void StartParserGroundStation(void const * argument);
@@ -127,6 +129,7 @@ int main(void)
   MX_UART5_Init();
   MX_UART8_Init();
   MX_CRC_Init();
+  MX_CAN2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -312,6 +315,65 @@ static void MX_CAN1_Init(void)
     //Ошибка
   }
   /* USER CODE END CAN1_Init 2 */
+
+}
+
+/**
+  * @brief CAN2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_CAN2_Init(void)
+{
+
+  /* USER CODE BEGIN CAN2_Init 0 */
+
+  /* USER CODE END CAN2_Init 0 */
+
+  /* USER CODE BEGIN CAN2_Init 1 */
+
+  /* USER CODE END CAN2_Init 1 */
+  hcan2.Instance = CAN2;
+  hcan2.Init.Prescaler = 12;
+  hcan2.Init.Mode = CAN_MODE_NORMAL;
+  hcan2.Init.SyncJumpWidth = CAN_SJW_2TQ;
+  hcan2.Init.TimeSeg1 = CAN_BS1_13TQ;
+  hcan2.Init.TimeSeg2 = CAN_BS2_2TQ;
+  hcan2.Init.TimeTriggeredMode = DISABLE;
+  hcan2.Init.AutoBusOff = DISABLE;
+  hcan2.Init.AutoWakeUp = DISABLE;
+  hcan2.Init.AutoRetransmission = ENABLE;
+  hcan2.Init.ReceiveFifoLocked = DISABLE;
+  hcan2.Init.TransmitFifoPriority = DISABLE;
+  if (HAL_CAN_Init(&hcan2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CAN2_Init 2 */
+  CAN_FilterTypeDef CAN_Filter;
+  CAN_Filter.FilterBank = 0;
+  CAN_Filter.FilterMode = CAN_FILTERMODE_IDMASK;
+  CAN_Filter.FilterScale = CAN_FILTERSCALE_32BIT;
+  CAN_Filter.FilterMaskIdHigh = 0x0000;
+  CAN_Filter.FilterMaskIdLow = 0x0000;
+  CAN_Filter.FilterFIFOAssignment = CAN_RX_FIFO1;
+  CAN_Filter.FilterActivation = ENABLE;
+
+  if (HAL_CAN_ConfigFilter(&hcan2, &CAN_Filter) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+   if (HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO1_MSG_PENDING) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  if (HAL_CAN_Start(&hcan2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE END CAN2_Init 2 */
 
 }
 
@@ -507,14 +569,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PB12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_12;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF9_CAN2;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
   /*Configure GPIO pin : USB_PowerSwitchOn_Pin */
   GPIO_InitStruct.Pin = USB_PowerSwitchOn_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -690,15 +744,15 @@ void Error_Handler(void)
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
-  osDelay(100);
+  HAL_Delay(100);
   HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
-  osDelay(100);
+  HAL_Delay(100);
   HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
-  osDelay(100);
+  HAL_Delay(100);
   HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
-  osDelay(100);
+  HAL_Delay(100);
   HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
-  osDelay(100);
+  HAL_Delay(100);
   HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
   /* USER CODE END Error_Handler_Debug */
 }

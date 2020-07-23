@@ -32,6 +32,13 @@ extern "C"
     float PitchForce;
   } ElMotorUnitParametersTypeDef;
 
+  typedef struct
+  {
+    uint16_t RPM; // Real value
+    uint8_t FuelCapacity; // 0 - 100%
+    uint8_t ThrottlePosition; // 0 - 100%
+  } PropultionParametersTypeDef;
+
   typedef struct 
   {
     float altitude;

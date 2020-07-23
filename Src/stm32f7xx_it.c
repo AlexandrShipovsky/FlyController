@@ -61,6 +61,7 @@
 extern ETH_HandleTypeDef heth;
 extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
 extern CAN_HandleTypeDef hcan1;
+extern CAN_HandleTypeDef hcan2;
 extern DMA_HandleTypeDef hdma_uart8_rx;
 extern UART_HandleTypeDef huart8;
 extern UART_HandleTypeDef huart3;
@@ -234,6 +235,20 @@ void ETH_IRQHandler(void)
   /* USER CODE BEGIN ETH_IRQn 1 */
 
   /* USER CODE END ETH_IRQn 1 */
+}
+
+/**
+  * @brief This function handles CAN2 RX1 interrupt.
+  */
+void CAN2_RX1_IRQHandler(void)
+{
+  /* USER CODE BEGIN CAN2_RX1_IRQn 0 */
+
+  /* USER CODE END CAN2_RX1_IRQn 0 */
+  HAL_CAN_IRQHandler(&hcan2);
+  /* USER CODE BEGIN CAN2_RX1_IRQn 1 */
+
+  /* USER CODE END CAN2_RX1_IRQn 1 */
 }
 
 /**

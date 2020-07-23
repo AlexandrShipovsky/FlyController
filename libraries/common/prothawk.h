@@ -44,8 +44,14 @@ extern "C"
         PitchForceCommand = 11
     } ElMotorCommandsTypeDef;
 
+    typedef enum
+    {
+        HeaderPropultionCommand = 55
+
+    } PropultionCommandsTypeDef;
+
     const uint8_t CommandSize[ENDCOMMAND] = {
-        /*zero*/0,
+        /*zero*/ 0,
         /*commands[PreFlightTestRequest] = */ 9,
         /*commands[PreFlightTestResponse] = */ 9,
         /*commands[WingCalibrationRequest] = */ 9,
@@ -54,8 +60,7 @@ extern "C"
         /*commands[PilotCommandResponse] = */ 23,
         /*commands[PING] = */ 9,
         /*commands[TelemetryRequest] = */ 1,
-        /*commands[TelemetryResponse] = */ 17
-        };
+        /*commands[TelemetryResponse] = */ 21};
 
 #ifdef __cplusplus
 }
