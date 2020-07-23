@@ -75,15 +75,14 @@ static void MX_UART5_Init(void);
 static void MX_UART8_Init(void);
 static void MX_CRC_Init(void);
 static void MX_CAN2_Init(void);
-void StartDefaultTask(void const * argument);
-void StartConGroundStation(void const * argument);
-void StartParserGroundStation(void const * argument);
-void StartCANTask(void const * argument);
-void StartCliTask(void const * argument);
-void StartIMUTask(void const * argument);
+void StartDefaultTask(void const *argument);
+void StartConGroundStation(void const *argument);
+void StartParserGroundStation(void const *argument);
+void StartCANTask(void const *argument);
+void StartCliTask(void const *argument);
+void StartIMUTask(void const *argument);
 
 /* USER CODE BEGIN PFP */
-
 
 /* USER CODE END PFP */
 
@@ -147,7 +146,7 @@ int main(void)
   /* USER CODE END RTOS_TIMERS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
-  
+
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -181,7 +180,7 @@ int main(void)
 
   /* Start scheduler */
   osKernelStart();
- 
+
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -233,8 +232,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -244,9 +242,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART3|RCC_PERIPHCLK_UART5
-                              |RCC_PERIPHCLK_UART8|RCC_PERIPHCLK_I2C4
-                              |RCC_PERIPHCLK_CLK48;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART3 | RCC_PERIPHCLK_UART5 | RCC_PERIPHCLK_UART8 | RCC_PERIPHCLK_I2C4 | RCC_PERIPHCLK_CLK48;
   PeriphClkInitStruct.Usart3ClockSelection = RCC_USART3CLKSOURCE_PCLK1;
   PeriphClkInitStruct.Uart5ClockSelection = RCC_UART5CLKSOURCE_PCLK1;
   PeriphClkInitStruct.Uart8ClockSelection = RCC_UART8CLKSOURCE_PCLK1;
@@ -299,23 +295,23 @@ static void MX_CAN1_Init(void)
   CAN_Filter.FilterMaskIdLow = 0x0000;
   CAN_Filter.FilterFIFOAssignment = CAN_RX_FIFO0;
   CAN_Filter.FilterActivation = ENABLE;
+  CAN_Filter.SlaveStartFilterBank = 15;
 
   if (HAL_CAN_ConfigFilter(&hcan1, &CAN_Filter) != HAL_OK)
   {
-    //Ошибка
+    Error_Handler();
   }
 
-   if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
+  if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
   {
-    //Ошибка
+    Error_Handler();
   }
 
   if (HAL_CAN_Start(&hcan1) != HAL_OK)
   {
-    //Ошибка
+    Error_Handler();
   }
   /* USER CODE END CAN1_Init 2 */
-
 }
 
 /**
@@ -351,12 +347,12 @@ static void MX_CAN2_Init(void)
   }
   /* USER CODE BEGIN CAN2_Init 2 */
   CAN_FilterTypeDef CAN_Filter;
-  CAN_Filter.FilterBank = 0;
+  CAN_Filter.FilterBank = 15;
   CAN_Filter.FilterMode = CAN_FILTERMODE_IDMASK;
   CAN_Filter.FilterScale = CAN_FILTERSCALE_32BIT;
   CAN_Filter.FilterMaskIdHigh = 0x0000;
   CAN_Filter.FilterMaskIdLow = 0x0000;
-  CAN_Filter.FilterFIFOAssignment = CAN_RX_FIFO1;
+  CAN_Filter.FilterFIFOAssignment = CAN_RX_FIFO0;
   CAN_Filter.FilterActivation = ENABLE;
 
   if (HAL_CAN_ConfigFilter(&hcan2, &CAN_Filter) != HAL_OK)
@@ -364,7 +360,7 @@ static void MX_CAN2_Init(void)
     Error_Handler();
   }
 
-   if (HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO1_MSG_PENDING) != HAL_OK)
+  if (HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
   {
     Error_Handler();
   }
@@ -374,7 +370,6 @@ static void MX_CAN2_Init(void)
     Error_Handler();
   }
   /* USER CODE END CAN2_Init 2 */
-
 }
 
 /**
@@ -405,7 +400,6 @@ static void MX_CRC_Init(void)
   /* USER CODE BEGIN CRC_Init 2 */
 
   /* USER CODE END CRC_Init 2 */
-
 }
 
 /**
@@ -440,7 +434,6 @@ static void MX_UART5_Init(void)
   /* USER CODE BEGIN UART5_Init 2 */
 
   /* USER CODE END UART5_Init 2 */
-
 }
 
 /**
@@ -475,7 +468,6 @@ static void MX_UART8_Init(void)
   /* USER CODE BEGIN UART8_Init 2 */
 
   /* USER CODE END UART8_Init 2 */
-
 }
 
 /**
@@ -512,13 +504,12 @@ static void MX_USART3_UART_Init(void)
   /* USER CODE BEGIN USART3_Init 2 */
 
   /* USER CODE END USART3_Init 2 */
-
 }
 
 /** 
   * Enable DMA controller clock
   */
-static void MX_DMA_Init(void) 
+static void MX_DMA_Init(void)
 {
 
   /* DMA controller clock enable */
@@ -528,7 +519,6 @@ static void MX_DMA_Init(void)
   /* DMA1_Stream6_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream6_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
-
 }
 
 /**
@@ -551,7 +541,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOE_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LD1_Pin|LD3_Pin|LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, LD1_Pin | LD3_Pin | LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(USB_PowerSwitchOn_GPIO_Port, USB_PowerSwitchOn_Pin, GPIO_PIN_RESET);
@@ -563,7 +553,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(USER_Btn_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LD1_Pin LD3_Pin LD2_Pin */
-  GPIO_InitStruct.Pin = LD1_Pin|LD3_Pin|LD2_Pin;
+  GPIO_InitStruct.Pin = LD1_Pin | LD3_Pin | LD2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -583,13 +573,12 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(USB_OverCurrent_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PC6 PC8 PC9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_8|GPIO_PIN_9;
+  GPIO_InitStruct.Pin = GPIO_PIN_6 | GPIO_PIN_8 | GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
 }
 
 /* USER CODE BEGIN 4 */
@@ -603,7 +592,7 @@ static void MX_GPIO_Init(void)
   * @retval None
   */
 /* USER CODE END Header_StartDefaultTask */
-__weak void StartDefaultTask(void const * argument)
+__weak void StartDefaultTask(void const *argument)
 {
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
@@ -611,17 +600,16 @@ __weak void StartDefaultTask(void const * argument)
   /* init code for LWIP */
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
-  
-  
+
   //taskEXIT_CRITICAL();
   /* Infinite loop */
   for (;;)
   {
-  
+
     osDelay(1000);
   };
 
-  /* USER CODE END 5 */ 
+  /* USER CODE END 5 */
 }
 
 /* USER CODE BEGIN Header_StartConGroundStation */
@@ -631,11 +619,11 @@ __weak void StartDefaultTask(void const * argument)
 * @retval None
 */
 /* USER CODE END Header_StartConGroundStation */
-__weak void StartConGroundStation(void const * argument)
+__weak void StartConGroundStation(void const *argument)
 {
   /* USER CODE BEGIN StartConGroundStation */
   /* Infinite loop */
-  for(;;)
+  for (;;)
   {
     osDelay(1);
   }
@@ -649,11 +637,11 @@ __weak void StartConGroundStation(void const * argument)
 * @retval None
 */
 /* USER CODE END Header_StartParserGroundStation */
-__weak void StartParserGroundStation(void const * argument)
+__weak void StartParserGroundStation(void const *argument)
 {
   /* USER CODE BEGIN StartParserGroundStation */
   /* Infinite loop */
-  for(;;)
+  for (;;)
   {
     osDelay(1);
   }
@@ -667,11 +655,11 @@ __weak void StartParserGroundStation(void const * argument)
 * @retval None
 */
 /* USER CODE END Header_StartCANTask */
-__weak void StartCANTask(void const * argument)
+__weak void StartCANTask(void const *argument)
 {
   /* USER CODE BEGIN StartCANTask */
   /* Infinite loop */
-  for(;;)
+  for (;;)
   {
     osDelay(1);
   }
@@ -685,11 +673,11 @@ __weak void StartCANTask(void const * argument)
 * @retval None
 */
 /* USER CODE END Header_StartCliTask */
-__weak void StartCliTask(void const * argument)
+__weak void StartCliTask(void const *argument)
 {
   /* USER CODE BEGIN StartCliTask */
   /* Infinite loop */
-  for(;;)
+  for (;;)
   {
     osDelay(1);
   }
@@ -703,18 +691,18 @@ __weak void StartCliTask(void const * argument)
 * @retval None
 */
 /* USER CODE END Header_StartIMUTask */
-__weak void StartIMUTask(void const * argument)
+__weak void StartIMUTask(void const *argument)
 {
   /* USER CODE BEGIN StartIMUTask */
   /* Infinite loop */
-  for(;;)
+  for (;;)
   {
     osDelay(1);
   }
   /* USER CODE END StartIMUTask */
 }
 
- /**
+/**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM14 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
@@ -727,7 +715,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM14) {
+  if (htim->Instance == TIM14)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
@@ -757,7 +746,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -766,7 +755,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

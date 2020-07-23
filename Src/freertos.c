@@ -413,13 +413,13 @@ void StartCANTask(void const *argument)
 /*CAN1 Callback*/
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-  if (hcan->Instance == CAN1)
-  {
-    uint8_t buf[8];
+  uint8_t buf[8];
     CAN_RxHeaderTypeDef RxHeader;
     BaseType_t xHigherPriorityTaskWoken;
     xHigherPriorityTaskWoken = pdFALSE;
-
+    
+  if (hcan->Instance == CAN1)
+  {
     if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, buf) != HAL_OK)
     {
       //Ошибка
@@ -434,18 +434,10 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
       }
     }
   }
-}
-/*CAN2 Callback*/
-void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
-{
+
   if (hcan->Instance == CAN2)
   {
-    uint8_t buf[8];
-    CAN_RxHeaderTypeDef RxHeader;
-    BaseType_t xHigherPriorityTaskWoken;
-    xHigherPriorityTaskWoken = pdFALSE;
-
-    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO1, &RxHeader, buf) != HAL_OK)
+    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, buf) != HAL_OK)
     {
       //Ошибка
     }
@@ -460,6 +452,7 @@ void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
     }
   }
 }
+
 /* USER CODE BEGIN Header_StartCliTask */
 /**
 * @brief Function implementing the cliTask thread.

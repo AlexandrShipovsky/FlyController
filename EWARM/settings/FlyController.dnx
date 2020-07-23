@@ -20,7 +20,7 @@
         <stlinkResetStrategy>3</stlinkResetStrategy>
     </StLinkDriver>
     <DebugChecksum>
-        <Checksum>1515071485</Checksum>
+        <Checksum>3235705456</Checksum>
     </DebugChecksum>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>
@@ -58,8 +58,10 @@
         <Fmt0>ip_addr_t-addr	4	0</Fmt0>
         <Fmt1>lps33hw_ctrl_reg1_t-odr	1	0</Fmt1>
         <Fmt2>lps33hw_ctrl_reg1_t-pd	1	0</Fmt2>
-        <Fmt3>struct netconn-flags	3	0</Fmt3>
-        <Fmt4>struct netif-flags	3	0</Fmt4>
+        <Fmt3>struct &lt;Unnamed 101&gt;-FuelCapacity	3	0</Fmt3>
+        <Fmt4>struct &lt;Unnamed 101&gt;-ThrottlePosition	3	0</Fmt4>
+        <Fmt5>struct netconn-flags	3	0</Fmt5>
+        <Fmt6>struct netif-flags	3	0</Fmt6>
     </struct_types>
     <array_types>
         <Fmt0>char[1024]	3	0</Fmt0>
@@ -120,10 +122,7 @@
     <Breakpoints2>
         <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.2.1" 0 0 1 "" 0 "" 0</Bp0>
         <Bp1>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.2.1" 0 0 1 "" 0 "" 0</Bp1>
-        <Bp2>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\freertos.c}.446.5" 0 0 1 "" 0 "" 0</Bp2>
-        <Bp3>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\freertos.c}.421.5" 0 0 1 "" 0 "" 0</Bp3>
-        <Bp4>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.348.3" 0 0 1 "" 0 "" 0</Bp4>
-        <Count>5</Count>
+        <Count>2</Count>
     </Breakpoints2>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
