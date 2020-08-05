@@ -286,7 +286,7 @@
         <option>
           <name>CCAllowList</name>
           <version>1</version>
-          <state>11111110</state>
+          <state>00000000</state>
         </option>
         <option>
           <name>CCDebugInfo</name>
@@ -398,7 +398,7 @@
         </option>
         <option>
           <name>CCOptLevel</name>
-          <state>3</state>
+          <state>0</state>
         </option>
         <option>
           <name>CCOptStrategy</name>
@@ -407,7 +407,7 @@
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>3</state>
+          <state>0</state>
         </option>
         <option>
           <name>CompilerMisraRules98</name>
@@ -1642,24 +1642,24 @@
         </file>
       </group>
       <group>
-        <name>Motion Library/MotionVC</name>
+        <name>Motion Library/MotionMC</name>
         <file>
-          <name>$PROJ_DIR$/../Middlewares/ST/STM32_MotionVC_Library/Lib/MotionVC_CM7F_wc32_ot.a</name>
+          <name>$PROJ_DIR$\..\Middlewares\ST\STM32_MotionMC_Library\Lib\MotionMC_CM7F_wc32_ot.a</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../Middlewares/ST/STM32_MotionVC_Library/Inc/motion_vc.h</name>
+          <name>$PROJ_DIR$\..\Middlewares\ST\STM32_MotionMC_Library\Inc\motion_mc.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Middlewares\ST\STM32_MotionMC_Library\Inc\motion_mc_cm0p.h</name>
         </file>
       </group>
       <group>
-        <name>Motion Library/MotionMC</name>
+        <name>Motion Library/MotionVC</name>
         <file>
-          <name>$PROJ_DIR$/../Middlewares/ST/STM32_MotionMC_Library/Lib/MotionMC_CM7F_wc32_ot.a</name>
+          <name>$PROJ_DIR$\..\Middlewares\ST\STM32_MotionVC_Library\Lib\MotionVC_CM7F_wc32_ot.a</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../Middlewares/ST/STM32_MotionMC_Library/Inc/motion_mc.h</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$/../Middlewares/ST/STM32_MotionMC_Library/Inc/motion_mc_cm0p.h</name>
+          <name>$PROJ_DIR$\..\Middlewares\ST\STM32_MotionVC_Library\Inc\motion_vc.h</name>
         </file>
       </group>
     </group>

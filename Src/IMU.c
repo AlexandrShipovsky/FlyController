@@ -55,6 +55,10 @@ MFX_output_t OutMFX;
 
 SemaphoreHandle_t SemaphoreForSendTelemetry; // Семафор, разрешающий отправку телеметрии с ИНС раз в TimeSendTelemetry*vTaskDelay миллисекунд
 IMUTelemetryTypeDef IMUTelemetry;
+
+
+//unsigned int mas[200];
+
 /* USER CODE BEGIN Header_StartIMUTask */
 /**
 * @brief Function implementing the IMUTask thread.
@@ -64,6 +68,26 @@ IMUTelemetryTypeDef IMUTelemetry;
 /* USER CODE END Header_StartIMUTask */
 void StartIMUTask(void const *argument)
 {
+    /***
+    while (1)
+    {
+        HAL_FLASH_Unlock();
+        uint32_t Address = FlashStartAdress;
+        unsigned short int i = 0;
+
+        
+        for (i = 0; i < 8; i++)
+        {
+            if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address + i * sizeof(unsigned int), *(&mas[i])) != HAL_OK)
+            {
+                //return 1; // Failure 
+            }
+        }
+        HAL_FLASH_Lock();
+    }
+
+    */
+
     /* Compass LIS3MDL*/
     CompassIO.Init = CUSTOM_LIS3MDL_0_I2C_Init;
     CompassIO.DeInit = CUSTOM_LIS3MDL_0_I2C_DeInit;
@@ -269,7 +293,7 @@ void StartIMUTask(void const *argument)
                     IMUTelemetry.yaw = OutMFX.rotation_9X[0];
                     IMUTelemetry.pitch = OutMFX.rotation_9X[1];
                     IMUTelemetry.roll = OutMFX.rotation_9X[2];
-                     if (xSemaphoreGive(SemaphoreForSendTelemetry) != pdTRUE)
+                    if (xSemaphoreGive(SemaphoreForSendTelemetry) != pdTRUE)
                     {
                     }
                 }
@@ -321,9 +345,31 @@ int32_t PressDeInit(void)
 
 char MotionMC_LoadCalFromNVM(unsigned short int datasize, unsigned int *data)
 {
-    return 1; /* FAILURE: Read from NVM not implemented. */
+    unsigned int *adr = (unsigned int *)FlashStartAdress;
+    unsigned short int i = 0;
+    if (*adr == 0xFFFFFFFF)
+    {
+        return 1; /* Failure */
+    }
+   for (i = 0; i < datasize; i++)
+    {
+        data[i] = *(&adr[i]);
+    }
+
+    return 0; /* Success */
 }
 char MotionMC_SaveCalInNVM(unsigned short int datasize, unsigned int *data)
 {
-    return 1; /* FAILURE: Write to NVM not implemented. */
+    HAL_FLASH_Unlock();
+    uint32_t Address = FlashStartAdress;
+    unsigned short int i = 0;
+    for (i = 0; i < datasize; i++)
+    {
+        if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address + i * sizeof(unsigned int), *(&data[i])) != HAL_OK)
+        {
+            return 1; /* Failure */
+        }
+    }
+    HAL_FLASH_Lock();
+    return 0; /* Success */
 }

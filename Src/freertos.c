@@ -397,8 +397,8 @@ void StartCANTask(void const *argument)
       {
       case HeaderPropultionCommand:
         memcpy(&PropultionParameters.RPM, &canbuf[1], sizeof(PropultionParameters.RPM));
-        memcpy(&PropultionParameters.FuelCapacity, &canbuf[3], sizeof(PropultionParameters.FuelCapacity));
-        memcpy(&PropultionParameters.ThrottlePosition, &canbuf[4], sizeof(PropultionParameters.ThrottlePosition));
+        memcpy(&PropultionParameters.FuelCapacity, &canbuf[1+sizeof(PropultionParameters.RPM)], sizeof(PropultionParameters.FuelCapacity));
+        memcpy(&PropultionParameters.ThrottlePosition, &canbuf[1+sizeof(PropultionParameters.RPM)+sizeof(PropultionParameters.FuelCapacity)], sizeof(PropultionParameters.ThrottlePosition));
         break;
       default:
         break;
@@ -498,7 +498,7 @@ void PingHandler(uint8_t *pingbuf)
 void PilotCommandHandler(uint8_t *pilotbuf)
 {
   int8_t res;
-  uint8_t SendTCPBuf[44];
+  uint8_t SendTCPBuf[41];
   extern CAN_HandleTypeDef hcan1;
   extern CAN_HandleTypeDef hcan2;
 
@@ -542,8 +542,8 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   SendTCPBuf[2] = (uint8_t)(ElMotorUnitParameters.Pitch >> 8);
   SendTCPBuf[3] = (uint8_t)(ElMotorUnitParameters.Roll & 0xFF);
   SendTCPBuf[4] = (uint8_t)(ElMotorUnitParameters.Roll >> 8);
-  SendTCPBuf[5] = 0x00;
-  SendTCPBuf[6] = 0x00;
+  SendTCPBuf[5] = pilotbuf[5]; //PropultionParameters.RPM;
+  SendTCPBuf[6] = pilotbuf[6]; //PropultionParameters.ThrottlePosition;
   SendTCPBuf[7] = (uint8_t)(ElMotorUnitParameters.MinPitch & 0xFF);
   SendTCPBuf[8] = (uint8_t)(ElMotorUnitParameters.MinPitch >> 8);
   SendTCPBuf[9] = (uint8_t)(ElMotorUnitParameters.MaxPitch & 0xFF);
@@ -564,9 +564,7 @@ void PilotCommandHandler(uint8_t *pilotbuf)
       memcpy(&SendTCPBuf[28], &IMUTelemetry.yaw, sizeof(IMUTelemetry.yaw));
       memcpy(&SendTCPBuf[32], &IMUTelemetry.pitch, sizeof(IMUTelemetry.pitch));
       memcpy(&SendTCPBuf[36], &IMUTelemetry.roll, sizeof(IMUTelemetry.roll));
-      memcpy(&SendTCPBuf[40], &PropultionParameters.RPM, sizeof(PropultionParameters.RPM));
-      memcpy(&SendTCPBuf[42], &PropultionParameters.FuelCapacity, sizeof(PropultionParameters.FuelCapacity));
-      memcpy(&SendTCPBuf[43], &PropultionParameters.ThrottlePosition, sizeof(PropultionParameters.ThrottlePosition));
+      memcpy(&SendTCPBuf[40], &PropultionParameters.FuelCapacity, sizeof(PropultionParameters.FuelCapacity));
       taskENTER_CRITICAL();
       nb_send = netbuf_new();
       netbuf_alloc(nb_send, CommandSize[PilotCommandResponse] + CommandSize[TelemetryResponse]);

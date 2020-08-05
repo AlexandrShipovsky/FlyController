@@ -20,7 +20,7 @@
         <stlinkResetStrategy>3</stlinkResetStrategy>
     </StLinkDriver>
     <DebugChecksum>
-        <Checksum>3235705456</Checksum>
+        <Checksum>4213668584</Checksum>
     </DebugChecksum>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>
@@ -30,8 +30,8 @@
         <Enabled>_ 0</Enabled>
     </CodeCoverage>
     <Disassembly>
-        <InstrCount>0</InstrCount>
         <MixedMode>1</MixedMode>
+        <InstrCount>0</InstrCount>
     </Disassembly>
     <CallStack>
         <ShowArgs>0</ShowArgs>
@@ -56,12 +56,8 @@
     </SWOTraceHWSettings>
     <struct_types>
         <Fmt0>ip_addr_t-addr	4	0</Fmt0>
-        <Fmt1>lps33hw_ctrl_reg1_t-odr	1	0</Fmt1>
-        <Fmt2>lps33hw_ctrl_reg1_t-pd	1	0</Fmt2>
-        <Fmt3>struct &lt;Unnamed 101&gt;-FuelCapacity	3	0</Fmt3>
-        <Fmt4>struct &lt;Unnamed 101&gt;-ThrottlePosition	3	0</Fmt4>
-        <Fmt5>struct netconn-flags	3	0</Fmt5>
-        <Fmt6>struct netif-flags	3	0</Fmt6>
+        <Fmt1>struct netconn-flags	3	0</Fmt1>
+        <Fmt2>struct netif-flags	3	0</Fmt2>
     </struct_types>
     <array_types>
         <Fmt0>char[1024]	3	0</Fmt0>
@@ -70,6 +66,8 @@
         <Fmt3>uint8_t[32]	4	0</Fmt3>
         <Fmt4>uint8_t[4]	3	0</Fmt4>
         <Fmt5>uint8_t[8]	3	0</Fmt5>
+        <Fmt6>unsigned int[200]	4	0</Fmt6>
+        <Fmt7>unsigned short[8]	4	0</Fmt7>
     </array_types>
     <Trace2>
         <Enabled>0</Enabled>
@@ -122,7 +120,9 @@
     <Breakpoints2>
         <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.2.1" 0 0 1 "" 0 "" 0</Bp0>
         <Bp1>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.2.1" 0 0 1 "" 0 "" 0</Bp1>
-        <Count>2</Count>
+        <Bp2>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\IMU.c}.359.5" 0 0 1 "" 0 "" 0</Bp2>
+        <Bp3>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\IMU.c}.192.5" 0 0 1 "" 0 "" 0</Bp3>
+        <Count>4</Count>
     </Breakpoints2>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
