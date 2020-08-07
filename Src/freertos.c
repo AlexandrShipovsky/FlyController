@@ -509,7 +509,7 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   extern IMUTelemetryTypeDef IMUTelemetry;
 
   // Передача на блок управления приводами
-  TxHeader.DLC = 5;
+  TxHeader.DLC = 6;
   TxHeader.StdId = 0x0000;
   TxHeader.RTR = CAN_RTR_DATA;
   TxHeader.IDE = CAN_ID_STD;
@@ -530,7 +530,7 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   uint8_t PropultionBuf[2];
 
   PropultionBuf[0] = (uint8_t)HeaderPropultionCommand;
-  PropultionBuf[1] = pilotbuf[5];
+  PropultionBuf[1] = pilotbuf[6];
 
   if (HAL_CAN_AddTxMessage(&hcan2, &TxHeader, PropultionBuf, &TxMailBox) != HAL_OK)
   {

@@ -67,26 +67,6 @@ IMUTelemetryTypeDef IMUTelemetry;
 /* USER CODE END Header_StartIMUTask */
 void StartIMUTask(void const *argument)
 {
-    /***
-    while (1)
-    {
-        HAL_FLASH_Unlock();
-        uint32_t Address = FlashStartAdress;
-        unsigned short int i = 0;
-
-        
-        for (i = 0; i < 8; i++)
-        {
-            if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address + i * sizeof(unsigned int), *(&mas[i])) != HAL_OK)
-            {
-                //return 1; // Failure 
-            }
-        }
-        HAL_FLASH_Lock();
-    }
-
-    */
-
     /* Compass LIS3MDL*/
     CompassIO.Init = CUSTOM_LIS3MDL_0_I2C_Init;
     CompassIO.DeInit = CUSTOM_LIS3MDL_0_I2C_DeInit;
@@ -184,22 +164,6 @@ void StartIMUTask(void const *argument)
         AltitudeZero = OutMotionVC.Baro_Altitude / 100.0;
     }
 
-    /* Калибровка магнитометра*/
-    /*************************************************************************************************/
-    /*************************************************************************************************/
-    MotionMC_Initialize(25, 1);
-    while (MagCalibOut.CalQuality != MMC_CALQSTATUSGOOD)
-    {
-        LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
-        MagCalibIn.Mag[0] = CompassAxes.x / 10.0;
-        MagCalibIn.Mag[1] = CompassAxes.y / 10.0;
-        MagCalibIn.Mag[2] = CompassAxes.z / 10.0;
-        MagCalibIn.TimeStamp = osKernelSysTick();
-        MotionMC_Update(&MagCalibIn);
-        MotionMC_GetCalParams(&MagCalibOut);
-        vTaskDelay(25);
-    }
-    MotionMC_Initialize(25, 0);
     /* MotionFX run*/
     MotionFX_initialize();
     /*************************************************************************************************/
@@ -219,19 +183,34 @@ void StartIMUTask(void const *argument)
 
     uint16_t IncForSendTelemetry = 0;
     SemaphoreForSendTelemetry = xSemaphoreCreateBinary();
+
+    MagLoadCalib();
     /* Infinite loop */
     for (;;)
     {
         vTaskDelay(10);
         IncForSendTelemetry++;
 
-        // Получение значений 
+        // Проверка нажатия кнопки на калибровку
+        if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin) == GPIO_PIN_SET)
+        {
+            vTaskDelay(2000);
+            if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin) == GPIO_PIN_SET)
+            {
+                MagCalibButton();
+                tick_current = 0;
+                tick_prev = 0;
+            }
+        }
+        // Получение значений
         H3LIS331DL_ACC_GetAxes(&AccelObj, &AccelAxes);
         A3G4250D_GYRO_GetAxes(&GyroObj, &GyroAxes);
         LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
-        
+        tick_current = osKernelSysTick();
+        deltaTimeMFX = (tick_current - tick_prev) / 1000.0;
+
         /* Высота*/
-        
+
         LPS33HW_PRESS_GetPressure(&PressObj, &pressure);
 
         VerticalConextIn.AccX = (float)AccelAxes.x / 1000.0;
@@ -244,7 +223,7 @@ void StartIMUTask(void const *argument)
         altitude = OutMotionVC.Baro_Altitude / 100.0 - AltitudeZero;
 
         /* Расчет значений компаса*/
-        
+
         CompassAxesRawmT[0] = (float)CompassAxes.x / 10.0;
         CompassAxesRawmT[1] = (float)CompassAxes.y / 10.0;
         CompassAxesRawmT[2] = (float)CompassAxes.z / 10.0;
@@ -257,8 +236,6 @@ void StartIMUTask(void const *argument)
                 CompassAxesCalib[i] += MagCalibOut.SF_Matrix[i][j] * (CompassAxesRawmT[i] - MagCalibOut.HI_Bias[i]);
             }
         }
-
-        
 
         for (uint8_t i = 0; i < 3; i++)
         {
@@ -273,8 +250,7 @@ void StartIMUTask(void const *argument)
         InMFX.gyro[1] = (float)GyroAxes.y / 1000.0;
         InMFX.gyro[2] = (float)GyroAxes.z / 1000.0;
 
-        tick_current = osKernelSysTick();
-        deltaTimeMFX = (tick_current - tick_prev) / 1000.0;
+        
         MotionFX_propagate(&OutMFX, &InMFX, &deltaTimeMFX);
         MotionFX_update(&OutMFX, &InMFX, &deltaTimeMFX, NULL);
         tick_prev = tick_current;
@@ -350,6 +326,7 @@ char MotionMC_LoadCalFromNVM(unsigned short int datasize, unsigned int *data)
     uint8_t i = 0;
     if (*adr == 0xFFFFFFFF)
     {
+        Error_Handler();
         return 1; /* Failure */
     }
     for (i = 0; i < 3; i++)
@@ -359,7 +336,7 @@ char MotionMC_LoadCalFromNVM(unsigned short int datasize, unsigned int *data)
 
     for (i = 0; i < 3; i++)
     {
-        memcpy(&MagCalibOut.SF_Matrix[i][i], adr + (i+3), sizeof(float));
+        memcpy(&MagCalibOut.SF_Matrix[i][i], adr + (i + 3), sizeof(float));
     }
     MagCalibOut.CalQuality = MMC_CALQSTATUSGOOD;
     return 0; /* Success */
@@ -384,4 +361,36 @@ char MotionMC_SaveCalInNVM(unsigned short int datasize, unsigned int *data)
     }
     HAL_FLASH_Lock();
     return 0; /* Success */
+}
+
+void MagCalibButton(void)
+{
+    /* Калибровка магнитометра*/
+    /*************************************************************************************************/
+    /*************************************************************************************************/
+    HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+
+    MotionMC_Initialize(25, 1);
+    MotionMC_GetCalParams(&MagCalibOut);
+
+    while (MagCalibOut.CalQuality != MMC_CALQSTATUSGOOD)
+    {
+        LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
+        MagCalibIn.Mag[0] = CompassAxes.x / 10.0;
+        MagCalibIn.Mag[1] = CompassAxes.y / 10.0;
+        MagCalibIn.Mag[2] = CompassAxes.z / 10.0;
+        MagCalibIn.TimeStamp = osKernelSysTick();
+        MotionMC_Update(&MagCalibIn);
+        MotionMC_GetCalParams(&MagCalibOut);
+        vTaskDelay(25);
+    }
+    MotionMC_Initialize(25, 0);
+
+    HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+}
+
+void MagLoadCalib(void)
+{
+    MotionMC_Initialize(25, 1);
+    MotionMC_Initialize(25, 0);
 }

@@ -21,6 +21,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include "main.h"
 #include "stm32f7xx_hal.h"
 #include "stm32f7xx_hal_flash.h"
 
@@ -41,6 +42,7 @@ extern "C" {
 #include "motion_vc.h"
 
 #include "telemetry.h"
+
 /* Private includes ----------------------------------------------------------*/
 
 
@@ -56,6 +58,8 @@ extern "C" {
 /* Exported functions prototypes ---------------------------------------------*/
 int32_t PressInit(void);
 int32_t PressDeInit(void);
+void MagCalibButton(void);
+void MagLoadCalib(void);
 
 /* Private defines -----------------------------------------------------------*/
 #define LPS331_I2C_ADD_L   0xB9U
