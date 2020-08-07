@@ -84,19 +84,19 @@ int32_t h3lis331dl_write_reg(stmdev_ctx_t* ctx, uint8_t reg, uint8_t* data,
   *
   */
 
-float h3lis331dl_from_fs100_to_mg(int16_t lsb)
+float h3lis331dl_from_fs2_to_mg(int16_t lsb)
 {
-  return ((float)lsb * 49.0f);
+  return ((float)lsb * 1.0f);
 }
 
-float h3lis331dl_from_fs200_to_mg(int16_t lsb)
+float h3lis331dl_from_fs4_to_mg(int16_t lsb)
 {
-  return ((float)lsb * 98.0f);
+  return ((float)lsb * 2.0f);
 }
 
-float h3lis331dl_from_fs400_to_mg(int16_t lsb)
+float h3lis331dl_from_fs8_to_mg(int16_t lsb)
 {
-  return ((float)lsb * 195.0f);
+  return ((float)lsb * 3.9f);
 }
 
 /**
@@ -406,17 +406,17 @@ int32_t h3lis331dl_full_scale_get(stmdev_ctx_t *ctx, h3lis331dl_fs_t *val)
 
   switch (ctrl_reg4.fs)
   {
-    case H3LIS331DL_100g:
-      *val = H3LIS331DL_100g;
+    case H3LIS331DL_2g:
+      *val = H3LIS331DL_2g;
       break;
-    case H3LIS331DL_200g:
-      *val = H3LIS331DL_200g;
+    case H3LIS331DL_4g:
+      *val = H3LIS331DL_4g;
       break;
-    case H3LIS331DL_400g:
-      *val = H3LIS331DL_400g;
+    case H3LIS331DL_8g:
+      *val = H3LIS331DL_8g;
       break;
     default:
-      *val = H3LIS331DL_100g;
+      *val = H3LIS331DL_2g;
       break;
   }
 
