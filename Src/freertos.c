@@ -542,8 +542,8 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   SendTCPBuf[2] = (uint8_t)(ElMotorUnitParameters.Pitch >> 8);
   SendTCPBuf[3] = (uint8_t)(ElMotorUnitParameters.Roll & 0xFF);
   SendTCPBuf[4] = (uint8_t)(ElMotorUnitParameters.Roll >> 8);
-  SendTCPBuf[5] = pilotbuf[5]; //PropultionParameters.RPM;
-  SendTCPBuf[6] = pilotbuf[6]; //PropultionParameters.ThrottlePosition;
+  SendTCPBuf[5] = PropultionParameters.RPM;
+  SendTCPBuf[6] = PropultionParameters.ThrottlePosition;
   SendTCPBuf[7] = (uint8_t)(ElMotorUnitParameters.MinPitch & 0xFF);
   SendTCPBuf[8] = (uint8_t)(ElMotorUnitParameters.MinPitch >> 8);
   SendTCPBuf[9] = (uint8_t)(ElMotorUnitParameters.MaxPitch & 0xFF);

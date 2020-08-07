@@ -56,7 +56,6 @@ MFX_output_t OutMFX;
 SemaphoreHandle_t SemaphoreForSendTelemetry; // Семафор, разрешающий отправку телеметрии с ИНС раз в TimeSendTelemetry*vTaskDelay миллисекунд
 IMUTelemetryTypeDef IMUTelemetry;
 
-
 //unsigned int mas[200];
 
 /* USER CODE BEGIN Header_StartIMUTask */
@@ -189,8 +188,6 @@ void StartIMUTask(void const *argument)
     /*************************************************************************************************/
     /*************************************************************************************************/
     MotionMC_Initialize(25, 1);
-    MotionMC_GetCalParams(&MagCalibOut);
-
     while (MagCalibOut.CalQuality != MMC_CALQSTATUSGOOD)
     {
         LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
@@ -228,8 +225,13 @@ void StartIMUTask(void const *argument)
         vTaskDelay(10);
         IncForSendTelemetry++;
 
-        /* Высота*/
+        // Получение значений 
         H3LIS331DL_ACC_GetAxes(&AccelObj, &AccelAxes);
+        A3G4250D_GYRO_GetAxes(&GyroObj, &GyroAxes);
+        LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
+        
+        /* Высота*/
+        
         LPS33HW_PRESS_GetPressure(&PressObj, &pressure);
 
         VerticalConextIn.AccX = (float)AccelAxes.x / 1000.0;
@@ -242,8 +244,7 @@ void StartIMUTask(void const *argument)
         altitude = OutMotionVC.Baro_Altitude / 100.0 - AltitudeZero;
 
         /* Расчет значений компаса*/
-        MotionMC_GetCalParams(&MagCalibOut);
-        LIS3MDL_MAG_GetAxes(&CompassObj, &CompassAxes);
+        
         CompassAxesRawmT[0] = (float)CompassAxes.x / 10.0;
         CompassAxesRawmT[1] = (float)CompassAxes.y / 10.0;
         CompassAxesRawmT[2] = (float)CompassAxes.z / 10.0;
@@ -257,7 +258,7 @@ void StartIMUTask(void const *argument)
             }
         }
 
-        A3G4250D_GYRO_GetAxes(&GyroObj, &GyroAxes);
+        
 
         for (uint8_t i = 0; i < 3; i++)
         {
@@ -346,29 +347,40 @@ int32_t PressDeInit(void)
 char MotionMC_LoadCalFromNVM(unsigned short int datasize, unsigned int *data)
 {
     unsigned int *adr = (unsigned int *)FlashStartAdress;
-    unsigned short int i = 0;
+    uint8_t i = 0;
     if (*adr == 0xFFFFFFFF)
     {
         return 1; /* Failure */
     }
-   for (i = 0; i < datasize; i++)
+    for (i = 0; i < 3; i++)
     {
-        data[i] = *(&adr[i]);
+        memcpy(&MagCalibOut.HI_Bias[i], adr + i, sizeof(float));
     }
 
+    for (i = 0; i < 3; i++)
+    {
+        memcpy(&MagCalibOut.SF_Matrix[i][i], adr + (i+3), sizeof(float));
+    }
+    MagCalibOut.CalQuality = MMC_CALQSTATUSGOOD;
     return 0; /* Success */
 }
 char MotionMC_SaveCalInNVM(unsigned short int datasize, unsigned int *data)
 {
     HAL_FLASH_Unlock();
     uint32_t Address = FlashStartAdress;
-    unsigned short int i = 0;
-    for (i = 0; i < datasize; i++)
+    uint8_t i = 0;
+    uint32_t IntFromFloat;
+
+    for (i = 0; i < 3; i++)
     {
-        if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address + i * sizeof(unsigned int), *(&data[i])) != HAL_OK)
-        {
-            return 1; /* Failure */
-        }
+        memcpy(&IntFromFloat, &MagCalibOut.HI_Bias[i], sizeof(float));
+        HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address + i * 4U, IntFromFloat);
+    }
+
+    for (i = 0; i < 3; i++)
+    {
+        memcpy(&IntFromFloat, &MagCalibOut.SF_Matrix[i][i], sizeof(float));
+        HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address + (i + 3) * 4U, IntFromFloat);
     }
     HAL_FLASH_Lock();
     return 0; /* Success */
