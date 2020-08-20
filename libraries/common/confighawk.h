@@ -21,7 +21,7 @@ extern "C" {
 #define PortGroundStation (u16_t)8889
 
 #define IpRaspberry "192.168.168.125"
-#define PortRaspberry (u16_t)8889
+#define PortRaspberry (u16_t)9999
 
 
 #ifdef __cplusplus

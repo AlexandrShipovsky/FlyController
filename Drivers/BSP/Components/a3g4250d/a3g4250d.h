@@ -162,7 +162,7 @@ typedef union{
 #define A3G4250D_SPI_4WIRES_BUS          1U
 #define A3G4250D_SPI_3WIRES_BUS          2U
 
-#define A3G4250D_GYRO_SENSITIVITY    17.50f
+#define A3G4250D_GYRO_SENSITIVITY    8.75f
 
 /**
  * @}

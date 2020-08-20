@@ -50,7 +50,7 @@ extern "C" {
 
 
 /* Exported constants --------------------------------------------------------*/
-#define TimeSendTelemetry (uint16_t)10
+#define TimeSendTelemetry (uint16_t)3
 #define FlashStartAdress ((uint32_t)0x081C0000) /* Base address of Sector 11, 256 Kbytes */
 /* Exported macro ------------------------------------------------------------*/
 

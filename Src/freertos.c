@@ -24,7 +24,7 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */     
+/* USER CODE BEGIN Includes */
 //#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
@@ -72,6 +72,7 @@ HAL_StatusTypeDef ErrUART;
 
 ElMotorUnitParametersTypeDef ElMotorUnitParameters; // Структура с параметрами блока управления приводами
 PropultionParametersTypeDef PropultionParameters;   // Структура с параметрами блока управления силовой установкой
+JoystickTypeDef joystick;                           // Структура с параметрами джойстика
 /* USER CODE END Variables */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -80,10 +81,11 @@ void PingHandler(uint8_t *pbuf);            // Обработчик команд
 void PilotCommandHandler(uint8_t *pbuf);    // Обработчик команды
 void TestModeHandler(void);                 // Обработчик команды начала предполетного тестирования всех систем
 void CalibrationHandler(uint8_t *pilotbuf); // Обработчик команды окончания калибровки приводов
+void StopMotorHandler(uint8_t *pbuf);       // Обработчик команды останова ДВС
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -117,16 +119,73 @@ void StartDefaultTask(void const *argument)
 
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
-  //extern UART_HandleTypeDef huart8;
 
-  //ErrUART = HAL_UART_Receive_DMA(&huart8, (uint8_t *)BufUART, BUFSIZEUART);
+  extern IMUTelemetryTypeDef IMUTelemetry;
+  struct netbuf *nb_send_raspberry;
+  ip_addr_t remote_ip_raspberry;
+  int8_t res;
 
+  uint8_t SendRaspBuf[46];
+  uint8_t incbyte;
+  ip4addr_aton(IpRaspberry, &remote_ip_raspberry);
   /* Infinite loop */
   for (;;)
   {
     HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
     HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-    //ErrUART = HAL_UART_Transmit_IT(&huart8, (uint8_t *)"Golosuy za popravki\n\r", 20);
+
+    incbyte = 1;
+    SendRaspBuf[0] = 0x01;
+    memcpy(&SendRaspBuf[incbyte], &ElMotorUnitParameters.Pitch, sizeof(ElMotorUnitParameters.Pitch));
+    incbyte += sizeof(ElMotorUnitParameters.Pitch);
+    memcpy(&SendRaspBuf[incbyte], &ElMotorUnitParameters.Roll, sizeof(ElMotorUnitParameters.Roll));
+    incbyte += sizeof(ElMotorUnitParameters.Roll);
+    memcpy(&SendRaspBuf[incbyte], &PropultionParameters.RPM, sizeof(PropultionParameters.RPM));
+    incbyte += sizeof(PropultionParameters.RPM);
+    memcpy(&SendRaspBuf[incbyte], &PropultionParameters.ThrottlePosition, sizeof(PropultionParameters.ThrottlePosition));
+    incbyte += sizeof(PropultionParameters.ThrottlePosition);
+    memcpy(&SendRaspBuf[incbyte], &ElMotorUnitParameters.MinPitch, sizeof(ElMotorUnitParameters.MinPitch));
+    incbyte += sizeof(ElMotorUnitParameters.MinPitch);
+    memcpy(&SendRaspBuf[incbyte], &ElMotorUnitParameters.MaxPitch, sizeof(ElMotorUnitParameters.MaxPitch));
+    incbyte += sizeof(ElMotorUnitParameters.MaxPitch);
+    memcpy(&SendRaspBuf[incbyte], &ElMotorUnitParameters.MinRoll, sizeof(ElMotorUnitParameters.MinRoll));
+    incbyte += sizeof(ElMotorUnitParameters.MinRoll);
+    memcpy(&SendRaspBuf[incbyte], &ElMotorUnitParameters.MaxRoll, sizeof(ElMotorUnitParameters.MaxRoll));
+    incbyte += sizeof(ElMotorUnitParameters.MaxRoll);
+    memcpy(&SendRaspBuf[incbyte], &ElMotorUnitParameters.VBAT, sizeof(ElMotorUnitParameters.VBAT));
+    incbyte += sizeof(ElMotorUnitParameters.VBAT);
+    memcpy(&SendRaspBuf[incbyte], &ElMotorUnitParameters.PitchForce, sizeof(ElMotorUnitParameters.PitchForce));
+    incbyte += sizeof(ElMotorUnitParameters.PitchForce);
+    memcpy(&SendRaspBuf[incbyte], &IMUTelemetry.altitude, sizeof(IMUTelemetry.altitude));
+    incbyte += sizeof(IMUTelemetry.altitude);
+    memcpy(&SendRaspBuf[incbyte], &IMUTelemetry.yaw, sizeof(IMUTelemetry.yaw));
+    incbyte += sizeof(IMUTelemetry.yaw);
+    memcpy(&SendRaspBuf[incbyte], &IMUTelemetry.pitch, sizeof(IMUTelemetry.pitch));
+    incbyte += sizeof(IMUTelemetry.pitch);
+    memcpy(&SendRaspBuf[incbyte], &IMUTelemetry.roll, sizeof(IMUTelemetry.roll));
+    incbyte += sizeof(IMUTelemetry.roll);
+    memcpy(&SendRaspBuf[incbyte], &PropultionParameters.FuelCapacity, sizeof(PropultionParameters.FuelCapacity));
+    incbyte += sizeof(PropultionParameters.FuelCapacity);
+    memcpy(&SendRaspBuf[incbyte], &joystick.PitchJoystick, sizeof(joystick.PitchJoystick));
+    incbyte += sizeof(joystick.PitchJoystick);
+    memcpy(&SendRaspBuf[incbyte], &joystick.RollJoystick, sizeof(joystick.RollJoystick));
+    incbyte += sizeof(joystick.RollJoystick);
+    memcpy(&SendRaspBuf[incbyte], &joystick.MoveType, sizeof(joystick.MoveType));
+    incbyte += sizeof(joystick.MoveType);
+    memcpy(&SendRaspBuf[incbyte], &joystick.GasPedalJoystick, sizeof(joystick.GasPedalJoystick));
+    incbyte += sizeof(joystick.GasPedalJoystick);
+
+    taskENTER_CRITICAL();
+    nb_send_raspberry = netbuf_new();
+    netbuf_alloc(nb_send_raspberry, incbyte);
+    pbuf_take(nb_send_raspberry->p, (void *)SendRaspBuf, incbyte);
+    res = netconn_sendto(nc, nb_send_raspberry, &remote_ip_raspberry, PortRaspberry);
+    netbuf_delete(nb_send_raspberry);
+    taskEXIT_CRITICAL();
+    if (res != ERR_OK)
+    {
+    }
+
     vTaskDelay(500);
   };
 
@@ -295,7 +354,10 @@ void StartParserGroundStation(void const *argument)
       case PilotCommandResponse:
         i += (uint16_t)CommandSize[PilotCommandResponse];
         break;
-
+      case StopMotorRequest:
+        StopMotorHandler(&pbuf[i]);
+        i += (uint16_t)CommandSize[StopMotorRequest];
+        break;
       default:
         memset(pbuf, 0x00, sizeof(pbuf)); // Очистить буфер
         break;
@@ -397,8 +459,8 @@ void StartCANTask(void const *argument)
       {
       case HeaderPropultionCommand:
         memcpy(&PropultionParameters.RPM, &canbuf[1], sizeof(PropultionParameters.RPM));
-        memcpy(&PropultionParameters.FuelCapacity, &canbuf[1+sizeof(PropultionParameters.RPM)], sizeof(PropultionParameters.FuelCapacity));
-        memcpy(&PropultionParameters.ThrottlePosition, &canbuf[1+sizeof(PropultionParameters.RPM)+sizeof(PropultionParameters.FuelCapacity)], sizeof(PropultionParameters.ThrottlePosition));
+        memcpy(&PropultionParameters.FuelCapacity, &canbuf[1 + sizeof(PropultionParameters.RPM)], sizeof(PropultionParameters.FuelCapacity));
+        memcpy(&PropultionParameters.ThrottlePosition, &canbuf[1 + sizeof(PropultionParameters.RPM) + sizeof(PropultionParameters.FuelCapacity)], sizeof(PropultionParameters.ThrottlePosition));
         break;
       default:
         break;
@@ -414,10 +476,10 @@ void StartCANTask(void const *argument)
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
   uint8_t buf[8];
-    CAN_RxHeaderTypeDef RxHeader;
-    BaseType_t xHigherPriorityTaskWoken;
-    xHigherPriorityTaskWoken = pdFALSE;
-    
+  CAN_RxHeaderTypeDef RxHeader;
+  BaseType_t xHigherPriorityTaskWoken;
+  xHigherPriorityTaskWoken = pdFALSE;
+
   if (hcan->Instance == CAN1)
   {
     if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, buf) != HAL_OK)
@@ -477,7 +539,7 @@ void StartCliTask(void const *argument)
 void PingHandler(uint8_t *pingbuf)
 {
   int8_t res;
-
+  //vTaskDelay(25);
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
   taskENTER_CRITICAL();
   nb_send = netbuf_new();
@@ -536,6 +598,12 @@ void PilotCommandHandler(uint8_t *pilotbuf)
   {
     //Error_Handler
   }
+
+  // Сохранение параметров джойстика
+  memcpy(&joystick.PitchJoystick, &pilotbuf[1], sizeof(joystick.PitchJoystick));
+  memcpy(&joystick.RollJoystick, &pilotbuf[3], sizeof(joystick.RollJoystick));
+  memcpy(&joystick.MoveType, &pilotbuf[5], sizeof(joystick.MoveType));
+  memcpy(&joystick.GasPedalJoystick, &pilotbuf[6], sizeof(joystick.GasPedalJoystick));
 
   SendTCPBuf[0] = PilotCommandResponse;
   SendTCPBuf[1] = (uint8_t)(ElMotorUnitParameters.Pitch & 0xFF);
@@ -651,6 +719,29 @@ void CalibrationHandler(uint8_t *pilotbuf)
 
   ElMotorBuf[0] = CalibComplied;
   if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, ElMotorBuf, &TxMailBox) != HAL_OK)
+  {
+    //Error_Handler();
+  }
+}
+/*
+*
+*
+*
+*
+*/
+void StopMotorHandler(uint8_t *pbuf)
+{
+  extern CAN_HandleTypeDef hcan2;
+  uint32_t TxMailBox; //= CAN_TX_MAILBOX0;
+  CAN_TxHeaderTypeDef TxHeader;
+  // Передача команды на блок управления приводами
+  TxHeader.DLC = 2;
+  TxHeader.StdId = 0x0000;
+  TxHeader.RTR = CAN_RTR_DATA;
+  TxHeader.IDE = CAN_ID_STD;
+  TxHeader.TransmitGlobalTime = DISABLE;
+
+  if (HAL_CAN_AddTxMessage(&hcan2, &TxHeader, pbuf, &TxMailBox) != HAL_OK)
   {
     //Error_Handler();
   }

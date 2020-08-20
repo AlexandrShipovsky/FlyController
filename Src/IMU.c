@@ -162,6 +162,7 @@ void StartIMUTask(void const *argument)
         MotionVC_Update(&VerticalConextIn, &OutMotionVC);
 
         AltitudeZero = OutMotionVC.Baro_Altitude / 100.0;
+        //AltitudeZero = OutMotionVC.Cal_Altitude / 100.0; // Высота с учетом коррекции дрейфа
     }
 
     /* MotionFX run*/
@@ -169,13 +170,18 @@ void StartIMUTask(void const *argument)
     /*************************************************************************************************/
     /*************************************************************************************************/
     MotionFX_getKnobs(&KnobsMFX);
-    KnobsMFX.LMode = 2; // Динамическая коррекция гироскопа
+    KnobsMFX.LMode = 1; // gyro bias learn mode: 1-static learning, 2-dynamic learning
     KnobsMFX.modx = 5;  // Встраиваемая система
+    KnobsMFX.ATime = 1.5;
+    KnobsMFX.MTime = 5.5;
     KnobsMFX.FrTime = 10;
+    KnobsMFX.gbias_mag_th_sc_9X = 1.0;
+    KnobsMFX.gbias_acc_th_sc_9X = 1.0;
+    KnobsMFX.gbias_gyro_th_sc_9X = 1.0;
     KnobsMFX.output_type = MFX_ENGINE_OUTPUT_ENU;
     MotionFX_setKnobs(&KnobsMFX);
     MotionFX_enable_9X(MFX_ENGINE_ENABLE);
-    MotionFX_enable_6X(MFX_ENGINE_ENABLE);
+    //MotionFX_enable_6X(MFX_ENGINE_ENABLE);
 
     uint32_t tick_current = 0;
     uint32_t tick_prev = 0;
@@ -218,9 +224,14 @@ void StartIMUTask(void const *argument)
         VerticalConextIn.AccZ = (float)AccelAxes.z / 1000.0;
         VerticalConextIn.Press = pressure;
 
+        if(OutMotionVC.Timestamp > 6500000)
+        {
+            MotionVC_Initialize();
+        }
         MotionVC_Update(&VerticalConextIn, &OutMotionVC);
 
-        altitude = OutMotionVC.Baro_Altitude / 100.0 - AltitudeZero;
+        altitude = OutMotionVC.Baro_Altitude / 100.0 - AltitudeZero; // Высота по стандартной формуле
+        //altitude = OutMotionVC.Cal_Altitude / 100.0 - AltitudeZero; // Высота с учетом коррекции дрейфа
 
         /* Расчет значений компаса*/
 
@@ -250,7 +261,6 @@ void StartIMUTask(void const *argument)
         InMFX.gyro[1] = (float)GyroAxes.y / 1000.0;
         InMFX.gyro[2] = (float)GyroAxes.z / 1000.0;
 
-        
         MotionFX_propagate(&OutMFX, &InMFX, &deltaTimeMFX);
         MotionFX_update(&OutMFX, &InMFX, &deltaTimeMFX, NULL);
         tick_prev = tick_current;
@@ -324,6 +334,7 @@ char MotionMC_LoadCalFromNVM(unsigned short int datasize, unsigned int *data)
 {
     unsigned int *adr = (unsigned int *)FlashStartAdress;
     uint8_t i = 0;
+    uint8_t j = 0;
     if (*adr == 0xFFFFFFFF)
     {
         Error_Handler();
@@ -336,7 +347,10 @@ char MotionMC_LoadCalFromNVM(unsigned short int datasize, unsigned int *data)
 
     for (i = 0; i < 3; i++)
     {
-        memcpy(&MagCalibOut.SF_Matrix[i][i], adr + (i + 3), sizeof(float));
+        for(j = 0; j < 3; j++)
+        {
+            memcpy(&MagCalibOut.SF_Matrix[i][j], adr + (i*3 + j + 3), sizeof(float));
+        }  
     }
     MagCalibOut.CalQuality = MMC_CALQSTATUSGOOD;
     return 0; /* Success */
@@ -346,6 +360,7 @@ char MotionMC_SaveCalInNVM(unsigned short int datasize, unsigned int *data)
     HAL_FLASH_Unlock();
     uint32_t Address = FlashStartAdress;
     uint8_t i = 0;
+    uint8_t j = 0;
     uint32_t IntFromFloat;
 
     for (i = 0; i < 3; i++)
@@ -356,8 +371,11 @@ char MotionMC_SaveCalInNVM(unsigned short int datasize, unsigned int *data)
 
     for (i = 0; i < 3; i++)
     {
-        memcpy(&IntFromFloat, &MagCalibOut.SF_Matrix[i][i], sizeof(float));
-        HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address + (i + 3) * 4U, IntFromFloat);
+        for (j = 0; j < 3; j++)
+        {
+            memcpy(&IntFromFloat, &MagCalibOut.SF_Matrix[i][j], sizeof(float));
+            HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address + (i*3 + j + 3) * 4U, IntFromFloat);
+        }
     }
     HAL_FLASH_Lock();
     return 0; /* Success */
@@ -392,5 +410,5 @@ void MagCalibButton(void)
 void MagLoadCalib(void)
 {
     MotionMC_Initialize(25, 1);
-    MotionMC_Initialize(25, 0);
+    //MotionMC_Initialize(25, 0);
 }

@@ -46,6 +46,14 @@ extern "C"
     float pitch;
     float roll;
   } IMUTelemetryTypeDef;
+
+  typedef struct 
+  {
+    int16_t PitchJoystick;
+    int16_t RollJoystick;
+    uint8_t MoveType;
+    uint8_t GasPedalJoystick;
+  } JoystickTypeDef;
   
 
 #ifdef __cplusplus

@@ -30,6 +30,7 @@ extern "C"
         PING = 7,
         TelemetryRequest = 8,
         TelemetryResponse = 9,
+        StopMotorRequest = 10,
         ENDCOMMAND
     } HawkCommandsTypeDef;
 
@@ -60,7 +61,9 @@ extern "C"
         /*commands[PilotCommandResponse] = */ 23,
         /*commands[PING] = */ 9,
         /*commands[TelemetryRequest] = */ 1,
-        /*commands[TelemetryResponse] = */ 18};
+        /*commands[TelemetryResponse] = */ 18,
+        /*commands[StopMotorRequest] = */ 2,
+        };
 
 #ifdef __cplusplus
 }
