@@ -24,7 +24,7 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+/* USER CODE BEGIN Includes */     
 //#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
@@ -85,7 +85,7 @@ void StopMotorHandler(uint8_t *pbuf);       // Обработчик команд
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -116,9 +116,10 @@ void StartDefaultTask(void const *argument)
   MX_USB_DEVICE_Init();
 
   /* init code for LWIP */
-
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
+
+  extern IWDG_HandleTypeDef hiwdg;
 
   extern IMUTelemetryTypeDef IMUTelemetry;
   struct netbuf *nb_send_raspberry;
@@ -186,6 +187,7 @@ void StartDefaultTask(void const *argument)
     {
     }
 
+    HAL_IWDG_Refresh(&hiwdg);
     vTaskDelay(500);
   };
 
@@ -229,6 +231,7 @@ void StartConGroundStation(void const *argument)
 {
   /* USER CODE BEGIN StartConGroundStation */
 
+  vTaskDelay(1000);
   int8_t res;
 
   volatile uint16_t len;

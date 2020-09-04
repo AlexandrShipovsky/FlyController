@@ -162,9 +162,9 @@ typedef union{
 #define H3LIS331DL_SPI_4WIRES_BUS          1U
 #define H3LIS331DL_SPI_3WIRES_BUS          2U
 
-#define H3LIS331DL_ACC_SENSITIVITY_FOR_FS_2G    1.0f  /**< Sensitivity value for 100g full scale [mg/LSB] */
-#define H3LIS331DL_ACC_SENSITIVITY_FOR_FS_4G    2.0f  /**< Sensitivity value for 200g full scale [mg/LSB] */
-#define H3LIS331DL_ACC_SENSITIVITY_FOR_FS_8G   3.9f  /**< Sensitivity value for 400g full scale [mg/LSB] */
+#define H3LIS331DL_ACC_SENSITIVITY_FOR_FS_100G    49.0f  /**< Sensitivity value for 100g full scale [mg/LSB] */
+#define H3LIS331DL_ACC_SENSITIVITY_FOR_FS_200G    98.0f  /**< Sensitivity value for 200g full scale [mg/LSB] */
+#define H3LIS331DL_ACC_SENSITIVITY_FOR_FS_400G   195.0f  /**< Sensitivity value for 400g full scale [mg/LSB] */
 
 /**
  * @}

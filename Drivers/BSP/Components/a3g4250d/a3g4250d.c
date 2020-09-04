@@ -37,24 +37,24 @@
  */
 
 A3G4250D_CommonDrv_t A3G4250D_COMMON_Driver =
-    {
-        A3G4250D_Init,
-        A3G4250D_DeInit,
-        A3G4250D_ReadID,
-        A3G4250D_GetCapabilities,
+{
+  A3G4250D_Init,
+  A3G4250D_DeInit,
+  A3G4250D_ReadID,
+  A3G4250D_GetCapabilities,
 };
 
 A3G4250D_GYRO_Drv_t A3G4250D_GYRO_Driver =
-    {
-        A3G4250D_GYRO_Enable,
-        A3G4250D_GYRO_Disable,
-        A3G4250D_GYRO_GetSensitivity,
-        A3G4250D_GYRO_GetOutputDataRate,
-        A3G4250D_GYRO_SetOutputDataRate,
-        A3G4250D_GYRO_GetFullScale,
-        A3G4250D_GYRO_SetFullScale,
-        A3G4250D_GYRO_GetAxes,
-        A3G4250D_GYRO_GetAxesRaw,
+{
+  A3G4250D_GYRO_Enable,
+  A3G4250D_GYRO_Disable,
+  A3G4250D_GYRO_GetSensitivity,
+  A3G4250D_GYRO_GetOutputDataRate,
+  A3G4250D_GYRO_SetOutputDataRate,
+  A3G4250D_GYRO_GetFullScale,
+  A3G4250D_GYRO_SetFullScale,
+  A3G4250D_GYRO_GetAxes,
+  A3G4250D_GYRO_GetAxesRaw,
 };
 
 /**
@@ -93,17 +93,17 @@ int32_t A3G4250D_RegisterBusIO(A3G4250D_Object_t *pObj, A3G4250D_IO_t *pIO)
   }
   else
   {
-    pObj->IO.Init = pIO->Init;
-    pObj->IO.DeInit = pIO->DeInit;
-    pObj->IO.BusType = pIO->BusType;
-    pObj->IO.Address = pIO->Address;
-    pObj->IO.WriteReg = pIO->WriteReg;
-    pObj->IO.ReadReg = pIO->ReadReg;
-    pObj->IO.GetTick = pIO->GetTick;
+    pObj->IO.Init      = pIO->Init;
+    pObj->IO.DeInit    = pIO->DeInit;
+    pObj->IO.BusType   = pIO->BusType;
+    pObj->IO.Address   = pIO->Address;
+    pObj->IO.WriteReg  = pIO->WriteReg;
+    pObj->IO.ReadReg   = pIO->ReadReg;
+    pObj->IO.GetTick   = pIO->GetTick;
 
-    pObj->Ctx.read_reg = ReadRegWrap;
+    pObj->Ctx.read_reg  = ReadRegWrap;
     pObj->Ctx.write_reg = WriteRegWrap;
-    pObj->Ctx.handle = pObj;
+    pObj->Ctx.handle    = pObj;
 
     if (pObj->IO.Init == NULL)
     {
@@ -153,11 +153,6 @@ int32_t A3G4250D_Init(A3G4250D_Object_t *pObj)
 
   /* Output data rate selection - power down. */
   if (a3g4250d_data_rate_set(&(pObj->Ctx), A3G4250D_ODR_OFF) != A3G4250D_OK)
-  {
-    return A3G4250D_ERROR;
-  }
-
-  if (l3g4200d_data_scale_set(&(pObj->Ctx), DPS500) != A3G4250D_OK)
   {
     return A3G4250D_ERROR;
   }
@@ -215,16 +210,16 @@ int32_t A3G4250D_GetCapabilities(A3G4250D_Object_t *pObj, A3G4250D_Capabilities_
   /* Prevent unused argument(s) compilation warning */
   (void)(pObj);
 
-  Capabilities->Acc = 0;
-  Capabilities->Gyro = 1;
-  Capabilities->Magneto = 0;
-  Capabilities->LowPower = 0;
-  Capabilities->GyroMaxFS = 245;
-  Capabilities->AccMaxFS = 0;
-  Capabilities->MagMaxFS = 0;
-  Capabilities->GyroMaxOdr = 840.0f;
-  Capabilities->AccMaxOdr = 0.0f;
-  Capabilities->MagMaxOdr = 0.0f;
+  Capabilities->Acc          = 0;
+  Capabilities->Gyro         = 1;
+  Capabilities->Magneto      = 0;
+  Capabilities->LowPower     = 0;
+  Capabilities->GyroMaxFS    = 245;
+  Capabilities->AccMaxFS     = 0;
+  Capabilities->MagMaxFS     = 0;
+  Capabilities->GyroMaxOdr   = 840.0f;
+  Capabilities->AccMaxOdr    = 0.0f;
+  Capabilities->MagMaxOdr    = 0.0f;
   return A3G4250D_OK;
 }
 
@@ -315,34 +310,34 @@ int32_t A3G4250D_GYRO_GetOutputDataRate(A3G4250D_Object_t *pObj, float_t *Odr)
 
   switch (odr_low_level)
   {
-  case A3G4250D_ODR_OFF:
-    *Odr = 0.0f;
-    break;
+    case A3G4250D_ODR_OFF:
+      *Odr = 0.0f;
+      break;
 
-  case A3G4250D_ODR_SLEEP:
-    *Odr = 0.0f;
-    break;
+    case A3G4250D_ODR_SLEEP:
+      *Odr = 0.0f;
+      break;
 
-  case A3G4250D_ODR_100Hz:
-    *Odr = 105.0f;
-    break;
+    case A3G4250D_ODR_100Hz:
+      *Odr = 105.0f;
+      break;
 
-  case A3G4250D_ODR_200Hz:
-    *Odr = 208.0f;
-    break;
+    case A3G4250D_ODR_200Hz:
+      *Odr = 208.0f;
+      break;
 
-  case A3G4250D_ODR_400Hz:
-    *Odr = 420.0f;
-    break;
+    case A3G4250D_ODR_400Hz:
+      *Odr = 420.0f;
+      break;
 
-  case A3G4250D_ODR_800Hz:
-    *Odr = 840.0f;
-    break;
+    case A3G4250D_ODR_800Hz:
+      *Odr = 840.0f;
+      break;
 
-  default:
-    *Odr = -1.0f;
-    ret = A3G4250D_ERROR;
-    break;
+    default:
+      *Odr = -1.0f;
+      ret = A3G4250D_ERROR;
+      break;
   }
 
   return ret;
@@ -389,11 +384,10 @@ int32_t A3G4250D_GYRO_GetFullScale(A3G4250D_Object_t *pObj, int32_t *FullScale)
  */
 int32_t A3G4250D_GYRO_SetFullScale(A3G4250D_Object_t *pObj, int32_t FullScale)
 {
+  (void)pObj;
+  (void)FullScale;
 
-  if (l3g4200d_data_scale_set(&(pObj->Ctx), DPS250) != A3G4250D_OK)
-  {
-    return A3G4250D_ERROR;
-  }
+  /* This device has fixed Full Scale */
   return A3G4250D_OK;
 }
 
@@ -415,7 +409,7 @@ int32_t A3G4250D_GYRO_GetAxesRaw(A3G4250D_Object_t *pObj, A3G4250D_AxesRaw_t *Va
   }
 
   /* Check data overrun */
-  if (a3g4250d_read_reg(&(pObj->Ctx), A3G4250D_STATUS_REG, (uint8_t *)&status_reg, 1) != A3G4250D_OK)
+  if (a3g4250d_read_reg(&(pObj->Ctx), A3G4250D_STATUS_REG, (uint8_t*)&status_reg, 1) != A3G4250D_OK)
   {
     return A3G4250D_ERROR;
   }
@@ -533,9 +527,9 @@ static int32_t A3G4250D_GYRO_SetOutputDataRate_When_Enabled(A3G4250D_Object_t *p
   a3g4250d_dr_t new_odr;
 
   new_odr = (Odr <= 105.0f) ? A3G4250D_ODR_100Hz
-                            : (Odr <= 208.0f) ? A3G4250D_ODR_200Hz
-                                              : (Odr <= 420.0f) ? A3G4250D_ODR_400Hz
-                                                                : A3G4250D_ODR_800Hz;
+          : (Odr <= 208.0f) ? A3G4250D_ODR_200Hz
+          : (Odr <= 420.0f) ? A3G4250D_ODR_400Hz
+          :                   A3G4250D_ODR_800Hz;
 
   /* Output data rate selection. */
   if (a3g4250d_data_rate_set(&(pObj->Ctx), new_odr) != A3G4250D_OK)
@@ -559,9 +553,9 @@ static int32_t A3G4250D_GYRO_SetOutputDataRate_When_Disabled(A3G4250D_Object_t *
 {
   /* Store the new output data rate value */
   pObj->gyro_odr = (Odr <= 105.0f) ? A3G4250D_ODR_100Hz
-                                   : (Odr <= 208.0f) ? A3G4250D_ODR_200Hz
-                                                     : (Odr <= 420.0f) ? A3G4250D_ODR_400Hz
-                                                                       : A3G4250D_ODR_800Hz;
+                 : (Odr <= 208.0f) ? A3G4250D_ODR_200Hz
+                 : (Odr <= 420.0f) ? A3G4250D_ODR_400Hz
+                 :                   A3G4250D_ODR_800Hz;
 
   return A3G4250D_OK;
 }
@@ -583,7 +577,7 @@ static int32_t ReadRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16_t L
     /* Enable Multi-byte read */
     return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
   }
-  else /* SPI 3-Wires */
+  else   /* SPI 3-Wires */
   {
     /* Enable Multi-byte read */
     return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);
@@ -607,7 +601,7 @@ static int32_t WriteRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16_t 
     /* Enable Multi-byte write */
     return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
   }
-  else /* SPI 3-Wires */
+  else   /* SPI 3-Wires */
   {
     /* Enable Multi-byte write */
     return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);

@@ -278,8 +278,8 @@ void StartIMUTask(void const *argument)
                 {
                     IMUTelemetry.altitude = altitude;
                     IMUTelemetry.yaw = OutMFX.rotation_9X[0];
-                    IMUTelemetry.pitch = OutMFX.rotation_9X[1];
-                    IMUTelemetry.roll = OutMFX.rotation_9X[2];
+                    IMUTelemetry.pitch = OutMFX.rotation_9X[2];//OutMFX.rotation_9X[1];
+                    IMUTelemetry.roll = (-1)*OutMFX.rotation_9X[1];//OutMFX.rotation_9X[2];
                     if (xSemaphoreGive(SemaphoreForSendTelemetry) != pdTRUE)
                     {
                     }
