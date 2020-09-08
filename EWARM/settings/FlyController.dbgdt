@@ -947,7 +947,7 @@
                     <item>PropultionParameters</item>
                     <item>KnobsMFX</item>
                     <item>OutMotionVC</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

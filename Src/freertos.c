@@ -24,7 +24,7 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+/* USER CODE BEGIN Includes */     
 //#include "queue. h"
 #include "cmsis_os.h"
 #include "usb_device.h"
@@ -85,7 +85,7 @@ void StopMotorHandler(uint8_t *pbuf);       // Обработчик команд
 /* USER CODE END FunctionPrototypes */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -111,7 +111,7 @@ void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackTyp
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const *argument)
 {
-
+  vTaskDelay(1000);
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
 
@@ -119,6 +119,7 @@ void StartDefaultTask(void const *argument)
 
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
+  extern IWDG_HandleTypeDef hiwdg;
 
   extern IMUTelemetryTypeDef IMUTelemetry;
   struct netbuf *nb_send_raspberry;
@@ -131,6 +132,7 @@ void StartDefaultTask(void const *argument)
   /* Infinite loop */
   for (;;)
   {
+    HAL_IWDG_Refresh(&hiwdg);
     HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
     HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
@@ -228,7 +230,6 @@ void ethernetif_notify_conn_changed(struct netif *netif)
 void StartConGroundStation(void const *argument)
 {
   /* USER CODE BEGIN StartConGroundStation */
-
   int8_t res;
 
   volatile uint16_t len;
