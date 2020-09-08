@@ -390,7 +390,7 @@ int32_t A3G4250D_GYRO_GetFullScale(A3G4250D_Object_t *pObj, int32_t *FullScale)
 int32_t A3G4250D_GYRO_SetFullScale(A3G4250D_Object_t *pObj, int32_t FullScale)
 {
 
-  if (l3g4200d_data_scale_set(&(pObj->Ctx), DPS250) != A3G4250D_OK)
+  if (l3g4200d_data_scale_set(&(pObj->Ctx), DPS500) != A3G4250D_OK)
   {
     return A3G4250D_ERROR;
   }

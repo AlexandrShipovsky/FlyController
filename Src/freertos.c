@@ -116,9 +116,10 @@ void StartDefaultTask(void const *argument)
   MX_USB_DEVICE_Init();
 
   /* init code for LWIP */
-
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
+  extern IWDG_HandleTypeDef hiwdg;
+
   extern IWDG_HandleTypeDef hiwdg;
 
   extern IMUTelemetryTypeDef IMUTelemetry;
@@ -188,6 +189,7 @@ void StartDefaultTask(void const *argument)
     {
     }
 
+    HAL_IWDG_Refresh(&hiwdg);
     vTaskDelay(500);
   };
 
@@ -230,6 +232,11 @@ void ethernetif_notify_conn_changed(struct netif *netif)
 void StartConGroundStation(void const *argument)
 {
   /* USER CODE BEGIN StartConGroundStation */
+<<<<<<< HEAD
+=======
+
+  vTaskDelay(1000);
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   int8_t res;
 
   volatile uint16_t len;

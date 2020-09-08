@@ -145,8 +145,14 @@
     <Breakpoints2>
         <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.2.1" 0 0 1 "" 0 "" 0</Bp0>
         <Bp1>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.2.1" 0 0 1 "" 0 "" 0</Bp1>
+<<<<<<< HEAD
         <Bp2>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\freertos.c}.738.3" 0 0 1 "" 0 "" 0</Bp2>
         <Count>3</Count>
+=======
+        <Bp2>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\freertos.c}.423.9" 0 0 1 "" 0 "" 0</Bp2>
+        <Bp3>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\freertos.c}.738.3" 0 0 1 "" 0 "" 0</Bp3>
+        <Count>4</Count>
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
     </Breakpoints2>
     <Aliases>
         <Count>0</Count>

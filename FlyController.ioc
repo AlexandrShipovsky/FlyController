@@ -1,15 +1,17 @@
 #MicroXplorer Configuration settings - do not modify
+CAN1.AWUM=ENABLE
 CAN1.BS1=CAN_BS1_13TQ
 CAN1.BS2=CAN_BS2_2TQ
 CAN1.CalculateTimeQuantum=250.0
-CAN1.IPParameters=CalculateTimeQuantum,Prescaler,BS1,BS2,SJW,NART
+CAN1.IPParameters=CalculateTimeQuantum,Prescaler,BS1,BS2,SJW,NART,AWUM
 CAN1.NART=ENABLE
 CAN1.Prescaler=12
 CAN1.SJW=CAN_SJW_2TQ
+CAN2.AWUM=ENABLE
 CAN2.BS1=CAN_BS1_13TQ
 CAN2.BS2=CAN_BS2_2TQ
 CAN2.CalculateTimeQuantum=250.0
-CAN2.IPParameters=CalculateTimeQuantum,Prescaler,BS1,BS2,SJW,NART
+CAN2.IPParameters=CalculateTimeQuantum,Prescaler,BS1,BS2,SJW,NART,AWUM
 CAN2.NART=ENABLE
 CAN2.Prescaler=12
 CAN2.SJW=CAN_SJW_2TQ

@@ -1,6 +1,10 @@
 ###############################################################################
 #
+<<<<<<< HEAD
 # IAR ELF Linker V8.30.1.114/W32 for ARM                  08/Sep/2020  12:10:31
+=======
+# IAR ELF Linker V8.30.1.114/W32 for ARM                  04/Sep/2020  10:52:12
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 # Copyright 2007-2018 IAR Systems AB.
 #
 #    Output file  =  
@@ -12,7 +16,11 @@
 #        Беспилотный мотодельтаплан\Полетный
 #        контроллер\firmware\FlyController\EWARM\FlyController\List\FlyController.map
 #    Command line =  
+<<<<<<< HEAD
 #        -f C:\Users\A146~1\AppData\Local\Temp\EW1372.tmp
+=======
+#        -f C:\Users\A146~1\AppData\Local\Temp\EW3CFF.tmp
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 #        ("C:\Users\Чистое небо\Desktop\Э.01.00.00
 #        Беспилотный мотодельтаплан\Полетный
 #        контроллер\firmware\FlyController\EWARM\FlyController\Obj\a3g4250d.o"
@@ -535,7 +543,11 @@ initialize by copy { rw };
   .intvec                 ro code   0x800'0000    0x1f8  startup_stm32f767xx.o [1]
                                   - 0x800'01f8    0x1f8
 
+<<<<<<< HEAD
 "P1":                                           0x29071
+=======
+"P1":                                           0x2903c
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   .text.m_kalman_3gyro.isra.6.constprop.36
                           ro code   0x800'01f8   0x3ac0  motion_fx.o [2]
   .text.m_mldivide        ro code   0x800'3cb8    0x38c  motion_fx.o [2]
@@ -623,18 +635,30 @@ initialize by copy { rw };
   CODE                    ro code   0x801'5210     0xb4  portasm.o [1]
   .text                   ro code   0x801'52c4     0x58  usb_device.o [1]
   .text                   ro code   0x801'531c     0xbc  lwip.o [1]
+<<<<<<< HEAD
   .text                   ro code   0x801'53d8     0x70  stm32f7xx_hal_iwdg.o [1]
   .text                   ro code   0x801'5448    0x470  stm32f7xx_hal_gpio.o [1]
   .text                   ro code   0x801'58b8     0x90  netbuf.o [1]
   .text                   ro code   0x801'5948    0x288  api_lib.o [1]
+=======
+  .text                   ro code   0x801'53d8    0x470  stm32f7xx_hal_gpio.o [1]
+  .text                   ro code   0x801'5848     0x90  netbuf.o [1]
+  .text                   ro code   0x801'58d8    0x288  api_lib.o [1]
+  .text                   ro code   0x801'5b60     0x70  stm32f7xx_hal_iwdg.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   .text                   ro code   0x801'5bd0    0x7f0  stm32f7xx_hal_can.o [1]
   .text                   ro code   0x801'63c0    0x1b8  cli_port.o [1]
   .text                   ro code   0x801'6578    0x3bc  usbd_core.o [1]
   .text                   ro code   0x801'6934    0x6a0  main.o [1]
   .text                   ro code   0x801'6fd4    0x3d4  usbd_cdc.o [1]
   .text                   ro code   0x801'73a8    0x1d0  tcpip.o [1]
+<<<<<<< HEAD
   .text                   ro code   0x801'7578      0xc  stm32f7xx_hal.o [1]
   .text                   ro code   0x801'7584    0x27c  api_msg.o [1]
+=======
+  .text                   ro code   0x801'7578    0x27c  api_msg.o [1]
+  .text                   ro code   0x801'77f4      0xc  stm32f7xx_hal.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   .text                   ro code   0x801'7800    0x378  stm32f7xx_hal_msp.o [1]
   .text                   ro code   0x801'7b78      0x2  stm32f7xx_hal_can.o [1]
   .text                   ro code   0x801'7b7a      0x2  stm32f7xx_hal_can.o [1]
@@ -741,10 +765,17 @@ initialize by copy { rw };
   .text                   ro code   0x802'2240    0x118  xatan.o [7]
   .text                   ro code   0x802'2358    0x9ca  stm32f7xx_hal_i2c.o [1]
   .text                   ro code   0x802'2d22      0x2  stm32f7xx_hal_i2c.o [1]
+<<<<<<< HEAD
   .text                   ro code   0x802'2d24    0x880  IMU.o [1]
   .text                   ro code   0x802'35a4    0x3c8  lis3mdl.o [1]
   .text                   ro code   0x802'396c    0x296  h3lis331dl.o [1]
   .text                   ro code   0x802'3c04    0x2c4  a3g4250d.o [1]
+=======
+  .text                   ro code   0x802'2d24    0x88c  IMU.o [1]
+  .text                   ro code   0x802'35b0    0x3c8  lis3mdl.o [1]
+  .text                   ro code   0x802'3978    0x29e  h3lis331dl.o [1]
+  .text                   ro code   0x802'3c18    0x2b0  a3g4250d.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   .text                   ro code   0x802'3ec8    0x28e  lps331.o [1]
   .text.MotionVC_Initialize
                           ro code   0x802'4158    0x510  motion_vc.o [4]
@@ -766,6 +797,7 @@ initialize by copy { rw };
   .text.MotionMC_Update   ro code   0x802'5638    0x1e8  motion_mc.o [3]
   .text                   ro code   0x802'5820    0x1ae  lis3mdl_reg.o [1]
   .text                   ro code   0x802'59d0    0x174  h3lis331dl_reg.o [1]
+<<<<<<< HEAD
   .text                   ro code   0x802'5b44     0xf8  a3g4250d_reg.o [1]
   .text                   ro code   0x802'5c3c     0xe2  lps331_reg.o [1]
   .text.rt_InitInfAndNaN.isra.3
@@ -895,6 +927,150 @@ initialize by copy { rw };
   .rodata                 const     0x802'8eb4      0x8  system_stm32f7xx.o [1]
   .rodata                 const     0x802'8ebc      0x8  tasks.o [1]
   .rodata                 const     0x802'8ec4      0x6  xlocale_c.o [5]
+=======
+  .text                   ro code   0x802'5b44     0xc2  a3g4250d_reg.o [1]
+  .text                   ro code   0x802'5c08     0xe2  lps331_reg.o [1]
+  .text.rt_InitInfAndNaN.isra.3
+                          ro code   0x802'5cec     0x20  motion_fx.o [2]
+  .text.iNemo_setOrientation.constprop.40
+                          ro code   0x802'5d0c    0x3b0  motion_fx.o [2]
+  .text.iNemo_setOrientation_6X.constprop.41
+                          ro code   0x802'60bc    0x3b0  motion_fx.o [2]
+  .text.iNemo_update_6X.constprop.34
+                          ro code   0x802'646c    0x3d4  motion_fx.o [2]
+  .text.iNemo_update.constprop.35
+                          ro code   0x802'6840    0x4e4  motion_fx.o [2]
+  .rodata                 const     0x802'6d24     0x2c  memp.o [1]
+  .text.quatErr2EulerErr  ro code   0x802'6d50    0x184  motion_fx.o [2]
+  .rodata                 const     0x802'6ed4     0x24  cli_cmd.o [1]
+  .text.iNemo_quat2heading
+                          ro code   0x802'6ef8    0x3e0  motion_fx.o [2]
+  .text.SpacePointAlgorithm.isra.7
+                          ro code   0x802'72d8    0x390  motion_fx.o [2]
+  .rodata                 const     0x802'7668    0x42c  cli_port.o [1]
+  .rodata                 const     0x802'7a94    0x330  cli_port.o [1]
+  .text                   ro code   0x802'7dc4    0x220  stm32f7xx_nucleo_bus.o [1]
+  .text                   ro code   0x802'7fe4     0xc6  stm32f7xx_hal_i2c_ex.o [1]
+  .text                   ro code   0x802'80ac    0x21c  cli_cmd.o [1]
+  .rodata                 const     0x802'82c8    0x1bb  motion_fx.o [2]
+  .text                   ro code   0x802'8484    0x16a  usbd_desc.o [1]
+  .text                   ro code   0x802'85f0     0x90  usbd_cdc_if.o [1]
+  .text                   ro code   0x802'8680     0x7c  stm32f7xx_it.o [1]
+  .rodata                 const     0x802'86fc     0x78  cli_port.o [1]
+  .rodata                 const     0x802'8774     0x48  cli_port.o [1]
+  .rodata                 const     0x802'87bc     0x48  cli_port.o [1]
+  .rodata                 const     0x802'8804     0x48  cli_port.o [1]
+  .rodata                 const     0x802'884c     0x28  cli_cmd.o [1]
+  .rodata                 const     0x802'8874     0x28  timeouts.o [1]
+  .text                   ro code   0x802'889c     0x28  data_init.o [8]
+  .rodata                 const     0x802'88c4     0x24  cli_cmd.o [1]
+  .text                   ro code   0x802'88e8     0x22  fpinit_M.o [7]
+  .iar.init_table         const     0x802'890c     0x24  - Linker created -
+  .rodata                 const     0x802'8930     0x20  cli_cmd.o [1]
+  .rodata                 const     0x802'8950     0x20  cli_cmd.o [1]
+  .rodata                 const     0x802'8970     0x20  cli_cmd.o [1]
+  .rodata                 const     0x802'8990     0x20  cli_cmd.o [1]
+  .rodata                 const     0x802'89b0     0x20  cli_port.o [1]
+  .rodata                 const     0x802'89d0     0x20  cli_port.o [1]
+  .text                   ro code   0x802'89f0     0x20  cmain_call_ctors.o [8]
+  .text                   ro code   0x802'8a10     0x18  cppinit.o [5]
+  .text                   ro code   0x802'8a28     0x1e  cmain.o [8]
+  .text                   ro code   0x802'8a46      0x4  low_level_init.o [5]
+  .text                   ro code   0x802'8a4a      0x4  exit.o [5]
+  .text                   ro code   0x802'8a50      0xa  cexit.o [8]
+  .rodata                 const     0x802'8a5c     0x1c  cli_cmd.o [1]
+  .rodata                 const     0x802'8a78     0x1c  cli_port.o [1]
+  .rodata                 const     0x802'8a94     0x1c  ethernetif.o [1]
+  .rodata                 const     0x802'8ab0     0x1c  lwip.o [1]
+  .rodata                 const     0x802'8acc     0x1c  main.o [1]
+  .rodata                 const     0x802'8ae8     0x1c  main.o [1]
+  .rodata                 const     0x802'8b04     0x1c  main.o [1]
+  .rodata                 const     0x802'8b20     0x1c  main.o [1]
+  .rodata                 const     0x802'8b3c     0x1c  main.o [1]
+  .rodata                 const     0x802'8b58     0x1c  main.o [1]
+  .text                   ro code   0x802'8b74     0x1c  system_stm32f7xx.o [1]
+  .rodata                 const     0x802'8b90     0x18  usbd_desc.o [1]
+  .rodata                 const     0x802'8ba8     0x14  cli_port.o [1]
+  .rodata                 const     0x802'8bbc     0x14  cli_port.o [1]
+  .rodata                 const     0x802'8bd0     0x14  usbd_desc.o [1]
+  .rodata                 const     0x802'8be4     0x10  cli_cmd.o [1]
+  .rodata                 const     0x802'8bf4     0x10  cli_cmd.o [1]
+  .rodata                 const     0x802'8c04     0x10  cli_port.o [1]
+  .rodata                 const     0x802'8c14     0x10  freertos.o [1]
+  .rodata                 const     0x802'8c24     0x10  freertos.o [1]
+  .rodata                 const     0x802'8c34     0x10  main.o [1]
+  .rodata                 const     0x802'8c44     0x10  main.o [1]
+  .rodata                 const     0x802'8c54     0x10  sys_arch.o [1]
+  .rodata                 const     0x802'8c64     0x10  system_stm32f7xx.o [1]
+  .rodata                 const     0x802'8c74     0x10  tcpip.o [1]
+  .rodata                 const     0x802'8c84     0x10  usbd_desc.o [1]
+  .text                   ro code   0x802'8c94     0x10  startup_stm32f767xx.o [1]
+  .rodata                 const     0x802'8ca4      0xc  cli_cmd.o [1]
+  .rodata                 const     0x802'8cb0      0xc  cli_cmd.o [1]
+  .rodata                 const     0x802'8cbc      0xc  cli_cmd.o [1]
+  .rodata                 const     0x802'8cc8      0xc  cli_port.o [1]
+  .rodata                 const     0x802'8cd4      0xc  freertos.o [1]
+  .rodata                 const     0x802'8ce0      0xc  freertos.o [1]
+  .rodata                 const     0x802'8cec      0xc  freertos.o [1]
+  .rodata                 const     0x802'8cf8      0xc  main.o [1]
+  .rodata                 const     0x802'8d04      0xc  memp.o [1]
+  .rodata                 const     0x802'8d10      0xc  memp.o [1]
+  .rodata                 const     0x802'8d1c      0xc  memp.o [1]
+  .rodata                 const     0x802'8d28      0xc  memp.o [1]
+  .rodata                 const     0x802'8d34      0xc  memp.o [1]
+  .rodata                 const     0x802'8d40      0xc  memp.o [1]
+  .rodata                 const     0x802'8d4c      0xc  memp.o [1]
+  .rodata                 const     0x802'8d58      0xc  memp.o [1]
+  .rodata                 const     0x802'8d64      0xc  memp.o [1]
+  .rodata                 const     0x802'8d70      0xc  memp.o [1]
+  .rodata                 const     0x802'8d7c      0xc  memp.o [1]
+  .rodata                 const     0x802'8d88      0xc  usbd_desc.o [1]
+  .text                   ro code   0x802'8d94      0xc  cstartup_M.o [8]
+  .rodata                 const     0x802'8da0      0x8  cli_cmd.o [1]
+  .rodata                 const     0x802'8da8      0x8  cli_cmd.o [1]
+  .rodata                 const     0x802'8db0      0x8  cli_cmd.o [1]
+  .rodata                 const     0x802'8db8      0x8  cli_cmd.o [1]
+  .rodata                 const     0x802'8dc0      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8dc8      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8dd0      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8dd8      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8de0      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8de8      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8df0      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8df8      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8e00      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8e08      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8e10      0x8  cli_port.o [1]
+  .rodata                 const     0x802'8e18      0x8  ethernet.o [1]
+  .rodata                 const     0x802'8e20      0x8  ethernet.o [1]
+  .rodata                 const     0x802'8e28      0x8  ethernetif.o [1]
+  .rodata                 const     0x802'8e30      0x8  ethernetif.o [1]
+  .rodata                 const     0x802'8e38      0x8  lwip.o [1]
+  .rodata                 const     0x802'8e40      0x8  lwip.o [1]
+  .rodata                 const     0x802'8e48      0x8  main.o [1]
+  .rodata                 const     0x802'8e50      0x8  main.o [1]
+  .rodata                 const     0x802'8e58      0x8  main.o [1]
+  .rodata                 const     0x802'8e60      0x8  stm32f7xx_hal_dma.o [1]
+  .rodata                 const     0x802'8e68      0x8  sys_arch.o [1]
+  .rodata                 const     0x802'8e70      0x8  sys_arch.o [1]
+  .rodata                 const     0x802'8e78      0x8  sys_arch.o [1]
+  .rodata                 const     0x802'8e80      0x8  system_stm32f7xx.o [1]
+  .rodata                 const     0x802'8e88      0x8  tasks.o [1]
+  .rodata                 const     0x802'8e90      0x6  xlocale_c.o [5]
+  .rodata                 const     0x802'8e98      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8e9c      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8ea0      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8ea4      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8ea8      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8eac      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8eb0      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8eb4      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8eb8      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8ebc      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8ec0      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8ec4      0x4  cli_port.o [1]
+  .rodata                 const     0x802'8ec8      0x4  cli_port.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   .rodata                 const     0x802'8ecc      0x4  cli_port.o [1]
   .rodata                 const     0x802'8ed0      0x4  cli_port.o [1]
   .rodata                 const     0x802'8ed4      0x4  cli_port.o [1]
@@ -902,6 +1078,7 @@ initialize by copy { rw };
   .rodata                 const     0x802'8edc      0x4  cli_port.o [1]
   .rodata                 const     0x802'8ee0      0x4  cli_port.o [1]
   .rodata                 const     0x802'8ee4      0x4  cli_port.o [1]
+<<<<<<< HEAD
   .rodata                 const     0x802'8ee8      0x4  cli_port.o [1]
   .rodata                 const     0x802'8eec      0x4  cli_port.o [1]
   .rodata                 const     0x802'8ef0      0x4  cli_port.o [1]
@@ -919,6 +1096,25 @@ initialize by copy { rw };
   .rodata                 const     0x802'8f20      0x4  ip4_addr.o [1]
   .rodata                 const     0x802'8f24      0x4  ip4_addr.o [1]
   .rodata                 const     0x802'8f28      0x4  port.o [1]
+=======
+  .rodata                 const     0x802'8ee8      0x4  heap_4.o [1]
+  .rodata                 const     0x802'8eec      0x4  ip4_addr.o [1]
+  .rodata                 const     0x802'8ef0      0x4  ip4_addr.o [1]
+  .rodata                 const     0x802'8ef4      0x4  port.o [1]
+  .text                   ro code   0x802'8ef8      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8efc      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f00      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f04      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f08      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f0c      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f10      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f14      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f18      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f1c      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f20      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f24      0x4  startup_stm32f767xx.o [1]
+  .text                   ro code   0x802'8f28      0x4  startup_stm32f767xx.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   .text                   ro code   0x802'8f2c      0x4  startup_stm32f767xx.o [1]
   .text                   ro code   0x802'8f30      0x4  startup_stm32f767xx.o [1]
   .text                   ro code   0x802'8f34      0x4  startup_stm32f767xx.o [1]
@@ -1006,6 +1202,7 @@ initialize by copy { rw };
   .text                   ro code   0x802'907c      0x4  startup_stm32f767xx.o [1]
   .text                   ro code   0x802'9080      0x4  startup_stm32f767xx.o [1]
   .text                   ro code   0x802'9084      0x4  startup_stm32f767xx.o [1]
+<<<<<<< HEAD
   .text                   ro code   0x802'9088      0x4  startup_stm32f767xx.o [1]
   .text                   ro code   0x802'908c      0x4  startup_stm32f767xx.o [1]
   .text                   ro code   0x802'9090      0x4  startup_stm32f767xx.o [1]
@@ -1027,6 +1224,16 @@ initialize by copy { rw };
   .rodata                 const     0x802'90c0      0x0  lz77_init_single.o [8]
   Initializer bytes       const     0x802'90c0    0x1a9  <for P2-1>
                                   - 0x802'9269  0x29071
+=======
+  SHT$$PREINIT_ARRAY                0x802'9088      0x0  <Block>
+  SHT$$INIT_ARRAY                   0x802'9088      0x4  <Block>
+    .init_array           const     0x802'9088      0x4  cli_port.o [1]
+  __iar_tls$$INIT_ARRAY             0x802'908c      0x0  <Block>
+  .rodata                 const     0x802'908c      0x0  zero_init3.o [8]
+  .rodata                 const     0x802'908c      0x0  lz77_init_single.o [8]
+  Initializer bytes       const     0x802'908c    0x1a8  <for P2-1>
+                                  - 0x802'9234  0x2903c
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 
 "P2", part 1 of 3:                               0x13e3
   P2-1                             0x2000'0000   0x13e3  <Init block>
@@ -1241,7 +1448,11 @@ Unused ranges:
 
          From           To       Size
          ----           --       ----
+<<<<<<< HEAD
    0x802'9269   0x81f'ffff  0x1d'6d97
+=======
+   0x802'9234   0x81f'ffff  0x1d'6dcc
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   0x2000'13e3  0x2000'13e3        0x1
   0x2005'cd48  0x2007'ffff   0x2'32b8
 
@@ -1257,8 +1468,13 @@ Zero (__iar_zero_init3)
           0x2000'13e4  0x4c163
 
 Copy/lz77 (__iar_lz77_init_single3)
+<<<<<<< HEAD
     1 source range, total size 0x1a9 (8% of destination):
            0x802'90c0    0x1a9
+=======
+    1 source range, total size 0x1a8 (8% of destination):
+           0x802'908c    0x1a8
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
     1 destination range, total size 0x13e3:
           0x2000'0000   0x13e3
 
@@ -1277,9 +1493,9 @@ command line/config:
     Total:
 
 C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный контроллер\firmware\FlyController\EWARM\FlyController\Obj: [1]
-    IMU.o                           2 176               712
-    a3g4250d.o                        708
-    a3g4250d_reg.o                    248
+    IMU.o                           2 188               712
+    a3g4250d.o                        688
+    a3g4250d_reg.o                    194
     api_lib.o                         648
     api_msg.o                         636
     cli.o                             274
@@ -1293,7 +1509,11 @@ C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный конт
     ethernet.o                        316       16
     ethernetif.o                    1 628       44   12 524
     freertos.o                      3 188       68      653
+<<<<<<< HEAD
     h3lis331dl.o                      662
+=======
+    h3lis331dl.o                      670
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
     h3lis331dl_reg.o                  372
     heap_4.o                          648        4  262 168
     icmp.o                            644
@@ -1359,12 +1579,21 @@ C:\Users\Чистое небо\Desktop\Э.01.00.00 Беспилотный мотодельтаплан\Полетный конт
     usbd_desc.o                       362       80      608
     usbd_ioreq.o                      172
     -------------------------------------------------------
+<<<<<<< HEAD
     Total:                         83 986    3 869  301 362
 
 MotionFX_CM7F_wc32_ot.a: [2]
     motion_fx.o                    29 904      822    8 105
     -------------------------------------------------------
     Total:                         29 904      822    8 105
+=======
+    Total:                         83 932    3 869  301 362
+
+MotionFX_CM7F_wc32_ot.a: [2]
+    motion_fx.o                    29 904      821    8 105
+    -------------------------------------------------------
+    Total:                         29 904      821    8 105
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 
 MotionMC_CM7F_wc32_ot.a: [3]
     motion_mc.o                    15 162             2 449
@@ -1476,10 +1705,14 @@ shb_l.a: [9]
     -------------------------------------------------------
     Total:                             20        1
 
-    Gaps                               54       10        6
+    Gaps                               56       10        6
     Linker created                              36   63 488
 -----------------------------------------------------------
+<<<<<<< HEAD
     Grand Total:                  163 798    4 755  380 230
+=======
+    Grand Total:                  163 746    4 754  380 230
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 
 
 *******************************************************************************
@@ -1488,26 +1721,41 @@ shb_l.a: [9]
 
 Entry                       Address     Size  Type      Object
 -----                       -------     ----  ----      ------
+<<<<<<< HEAD
 .iar.init_table$$Base    0x802'8940            --   Gb  - Linker created -
 .iar.init_table$$Limit   0x802'8964            --   Gb  - Linker created -
 ?main                    0x802'8a5d           Code  Gb  cmain.o [8]
+=======
+.iar.init_table$$Base    0x802'890c            --   Gb  - Linker created -
+.iar.init_table$$Limit   0x802'8930            --   Gb  - Linker created -
+?main                    0x802'8a29           Code  Gb  cmain.o [8]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 A3G4250D_GYRO_Enable     0x802'3cdb     0x30  Code  Gb  a3g4250d.o [1]
 A3G4250D_GYRO_GetAxes    0x802'3d75     0x82  Code  Gb  a3g4250d.o [1]
 A3G4250D_GYRO_GetAxesRaw
                          0x802'3d15     0x60  Code  Gb  a3g4250d.o [1]
 A3G4250D_GYRO_GetSensitivity
                          0x802'3d0b      0xa  Code  Gb  a3g4250d.o [1]
+<<<<<<< HEAD
 A3G4250D_Init            0x802'3c8b     0x50  Code  Gb  a3g4250d.o [1]
 A3G4250D_RegisterBusIO   0x802'3c05     0x86  Code  Gb  a3g4250d.o [1]
 A3G4250D_Write_Reg       0x802'3df7     0x24  Code  Gb  a3g4250d.o [1]
 AHBPrescTable            0x802'8c98     0x10  Data  Gb  system_stm32f7xx.o [1]
 APBPrescTable            0x802'8eb4      0x8  Data  Gb  system_stm32f7xx.o [1]
+=======
+A3G4250D_Init            0x802'3c9f     0x3c  Code  Gb  a3g4250d.o [1]
+A3G4250D_RegisterBusIO   0x802'3c19     0x86  Code  Gb  a3g4250d.o [1]
+A3G4250D_Write_Reg       0x802'3df7     0x24  Code  Gb  a3g4250d.o [1]
+AHBPrescTable            0x802'8c64     0x10  Data  Gb  system_stm32f7xx.o [1]
+APBPrescTable            0x802'8e80      0x8  Data  Gb  system_stm32f7xx.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 AccelAxes               0x2004'd3d4      0xc  Data  Gb  IMU.o [1]
 AccelIO                 0x2004'd220     0x1c  Data  Gb  IMU.o [1]
 AccelObj                0x2004'd09c     0x2c  Data  Gb  IMU.o [1]
 AltitudeZero            0x2004'd448      0x4  Data  Gb  IMU.o [1]
 AssistEquipmentCANQueueHandle
                         0x2004'd424      0x4  Data  Gb  freertos.o [1]
+<<<<<<< HEAD
 BSP_I2C4_DeInit          0x802'7e2d     0x34  Code  Gb  stm32f7xx_nucleo_bus.o [1]
 BSP_I2C4_Init            0x802'7dd5     0x58  Code  Gb  stm32f7xx_nucleo_bus.o [1]
 BSP_I2C4_ReadReg         0x802'7eb5     0x54  Code  Gb  stm32f7xx_nucleo_bus.o [1]
@@ -1529,29 +1777,68 @@ CLI_STR_INVALID_KEYWORD
                          0x802'8a04     0x20  Data  Lc  cli_port.o [1]
 CLI_STR_UNKNOWN_COMMAND
                          0x802'89a4     0x20  Data  Lc  cli_cmd.o [1]
+=======
+BSP_I2C4_DeInit          0x802'7e1d     0x34  Code  Gb  stm32f7xx_nucleo_bus.o [1]
+BSP_I2C4_Init            0x802'7dc5     0x58  Code  Gb  stm32f7xx_nucleo_bus.o [1]
+BSP_I2C4_ReadReg         0x802'7ea5     0x54  Code  Gb  stm32f7xx_nucleo_bus.o [1]
+BSP_I2C4_WriteReg        0x802'7e51     0x54  Code  Gb  stm32f7xx_nucleo_bus.o [1]
+BusFault_Handler         0x802'8687      0x2  Code  Gb  stm32f7xx_it.o [1]
+CAN1_RX0_IRQHandler      0x802'8697      0xa  Code  Gb  stm32f7xx_it.o [1]
+CAN2_RX0_IRQHandler      0x802'86bf      0xa  Code  Gb  stm32f7xx_it.o [1]
+CANTaskHandle           0x2004'd47c      0x4  Data  Gb  main.o [1]
+CDC_Control_FS           0x802'860f     0x42  Code  Lc  usbd_cdc_if.o [1]
+CDC_DeInit_FS            0x802'860b      0x4  Code  Lc  usbd_cdc_if.o [1]
+CDC_Init_FS              0x802'85f1     0x1a  Code  Lc  usbd_cdc_if.o [1]
+CDC_Receive_FS           0x802'8651     0x1a  Code  Lc  usbd_cdc_if.o [1]
+CDC_TransmitCplt_FS      0x802'8679      0x8  Code  Lc  usbd_cdc_if.o [1]
+CLI_CommandsParser       0x802'80ad    0x21c  Code  Gb  cli_cmd.o [1]
+CLI_HLP                  0x802'7668    0x42c  Data  Lc  cli_port.o [1]
+CLI_STR_INVALID_KEYWORD
+                         0x802'8990     0x20  Data  Lc  cli_cmd.o [1]
+CLI_STR_INVALID_KEYWORD
+                         0x802'89d0     0x20  Data  Lc  cli_port.o [1]
+CLI_STR_UNKNOWN_COMMAND
+                         0x802'8970     0x20  Data  Lc  cli_cmd.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 CSTACK$$Base            0x2004'd548            --   Gb  - Linker created -
 CSTACK$$Limit           0x2005'c548            --   Gb  - Linker created -
 CacheMore                0x800'bb31     0x24  Code  Lc  xlocale_c.o [5]
 CalibrationHandler       0x801'50e7     0x84  Code  Gb  freertos.o [1]
 CliTaskHandle           0x2004'd480      0x4  Data  Gb  main.o [1]
+<<<<<<< HEAD
 CommandSize              0x802'8d20      0xc  Data  Gb  freertos.o [1]
+=======
+CommandSize              0x802'8cec      0xc  Data  Gb  freertos.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 CompassAxes             0x2004'd3b0      0xc  Data  Gb  IMU.o [1]
 CompassAxesCalib        0x2004'd3bc      0xc  Data  Gb  IMU.o [1]
 CompassAxesRawmT        0x2004'd3c8      0xc  Data  Gb  IMU.o [1]
 CompassIO               0x2004'd204     0x1c  Data  Gb  IMU.o [1]
 CompassObj              0x2004'd070     0x2c  Data  Gb  IMU.o [1]
 ConGndStatTaskHandle    0x2004'd474      0x4  Data  Gb  main.o [1]
+<<<<<<< HEAD
 DBG_CLI_IOStruct         0x802'8c38     0x10  Data  Lc  cli_port.o [1]
 DBG_CLI_Serial_Task      0x801'653b     0x14  Code  Gb  cli_port.o [1]
 DBG_CLI_UART            0x2004'9df0    0x5d0  Data  Gb  cli_port.o [1]
 DMA1_Stream6_IRQHandler
                          0x802'869d      0xa  Code  Gb  stm32f7xx_it.o [1]
+=======
+DBG_CLI_IOStruct         0x802'8c04     0x10  Data  Lc  cli_port.o [1]
+DBG_CLI_Serial_Task      0x801'653b     0x14  Code  Gb  cli_port.o [1]
+DBG_CLI_UART            0x2004'9df0    0x5d0  Data  Gb  cli_port.o [1]
+DMA1_Stream6_IRQHandler
+                         0x802'868d      0xa  Code  Gb  stm32f7xx_it.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 DMARxDscrTab            0x2004'ca98     0x80  Data  Gb  ethernetif.o [1]
 DMATxDscrTab            0x2004'cb18     0x80  Data  Gb  ethernetif.o [1]
 DMA_CalcBaseAndBitshift
                          0x801'a94f     0x30  Code  Lc  stm32f7xx_hal_dma.o [1]
 DMA_CalcBaseAndBitshift::flagBitshiftOffset
+<<<<<<< HEAD
                          0x802'8e94      0x8  Data  Lc  stm32f7xx_hal_dma.o [1]
+=======
+                         0x802'8e60      0x8  Data  Lc  stm32f7xx_hal_dma.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 DMA_CheckFifoParam       0x801'a98d     0x9c  Code  Lc  stm32f7xx_hal_dma.o [1]
 DbgPrintf                0x801'63fd     0x94  Code  Gb  cli_port.o [1]
 DbgPrintf::printf_buff  0x2004'b594    0x400  Data  Lc  cli_port.o [1]
@@ -1559,7 +1846,11 @@ DbgPutChar               0x801'63eb     0x12  Code  Gb  cli_port.o [1]
 DbgReadChar              0x801'6491     0x1e  Code  Gb  cli_port.o [1]
 DbgScanf                 0x801'64af     0x8c  Code  Gb  cli_port.o [1]
 DbgScanf::scanf_buff    0x2004'ced8     0x40  Data  Lc  cli_port.o [1]
+<<<<<<< HEAD
 DebugMon_Handler         0x802'869b      0x2  Code  Gb  stm32f7xx_it.o [1]
+=======
+DebugMon_Handler         0x802'868b      0x2  Code  Gb  stm32f7xx_it.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 Dtentox                  0x800'a401    0x14e  Code  Lc  strto64.o [7]
 ETH_DMAReceptionDisable
                          0x802'0fd7     0x12  Code  Lc  stm32f7xx_hal_eth.o [1]
@@ -1569,7 +1860,11 @@ ETH_DMATransmissionDisable
 ETH_DMATransmissionEnable
                          0x802'0fa1     0x12  Code  Lc  stm32f7xx_hal_eth.o [1]
 ETH_FlushTransmitFIFO    0x802'0fe9     0x2c  Code  Lc  stm32f7xx_hal_eth.o [1]
+<<<<<<< HEAD
 ETH_IRQHandler           0x802'86c5      0xa  Code  Gb  stm32f7xx_it.o [1]
+=======
+ETH_IRQHandler           0x802'86b5      0xa  Code  Gb  stm32f7xx_it.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 ETH_MACAddressConfig     0x802'0ea5     0x2e  Code  Lc  stm32f7xx_hal_eth.o [1]
 ETH_MACDMAConfig         0x802'0c1d    0x288  Code  Lc  stm32f7xx_hal_eth.o [1]
 ETH_MACReceptionDisable
@@ -1591,12 +1886,17 @@ FLASH_SetErrorCode       0x802'528f     0x58  Code  Lc  stm32f7xx_hal_flash.o [1
 FLASH_WaitForLastOperation
                          0x802'51b3     0x50  Code  Gb  stm32f7xx_hal_flash.o [1]
 FS_Desc                 0x2000'12f4     0x20  Data  Gb  usbd_desc.o [1]
+<<<<<<< HEAD
 Get_SerialNum            0x802'8553     0x2e  Code  Lc  usbd_desc.o [1]
+=======
+Get_SerialNum            0x802'8543     0x2e  Code  Lc  usbd_desc.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 GroundStationDataQueueHandle
                         0x2004'd41c      0x4  Data  Gb  freertos.o [1]
 GyroAxes                0x2004'd3e0      0xc  Data  Gb  IMU.o [1]
 GyroIO                  0x2004'd23c     0x1c  Data  Gb  IMU.o [1]
 GyroObj                 0x2004'd0c8     0x2c  Data  Gb  IMU.o [1]
+<<<<<<< HEAD
 H3LIS331DL_ACC_Enable    0x802'3a3f     0x30  Code  Gb  h3lis331dl.o [1]
 H3LIS331DL_ACC_GetAxes   0x802'3b23     0x82  Code  Gb  h3lis331dl.o [1]
 H3LIS331DL_ACC_GetAxesRaw
@@ -1606,6 +1906,17 @@ H3LIS331DL_ACC_GetSensitivity
 H3LIS331DL_Init          0x802'39ef     0x50  Code  Gb  h3lis331dl.o [1]
 H3LIS331DL_RegisterBusIO
                          0x802'396d     0x82  Code  Gb  h3lis331dl.o [1]
+=======
+H3LIS331DL_ACC_Enable    0x802'3a4b     0x30  Code  Gb  h3lis331dl.o [1]
+H3LIS331DL_ACC_GetAxes   0x802'3b2f     0x82  Code  Gb  h3lis331dl.o [1]
+H3LIS331DL_ACC_GetAxesRaw
+                         0x802'3ad1     0x5e  Code  Gb  h3lis331dl.o [1]
+H3LIS331DL_ACC_GetSensitivity
+                         0x802'3a7b     0x56  Code  Gb  h3lis331dl.o [1]
+H3LIS331DL_Init          0x802'39fb     0x50  Code  Gb  h3lis331dl.o [1]
+H3LIS331DL_RegisterBusIO
+                         0x802'3979     0x82  Code  Gb  h3lis331dl.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 HAL_CAN_ActivateNotification
                          0x801'6169     0x34  Code  Gb  stm32f7xx_hal_can.o [1]
 HAL_CAN_AddTxMessage     0x801'5ed9    0x138  Code  Gb  stm32f7xx_hal_can.o [1]
@@ -1646,6 +1957,7 @@ HAL_ETH_WritePHYRegister
 HAL_FLASH_Lock           0x802'51a5      0xe  Code  Gb  stm32f7xx_hal_flash.o [1]
 HAL_FLASH_Program        0x802'50e9     0x9a  Code  Gb  stm32f7xx_hal_flash.o [1]
 HAL_FLASH_Unlock         0x802'5183     0x22  Code  Gb  stm32f7xx_hal_flash.o [1]
+<<<<<<< HEAD
 HAL_GPIO_DeInit          0x801'5677    0x1b4  Code  Gb  stm32f7xx_hal_gpio.o [1]
 HAL_GPIO_Init            0x801'5449    0x22e  Code  Gb  stm32f7xx_hal_gpio.o [1]
 HAL_GPIO_ReadPin         0x801'582b     0x16  Code  Gb  stm32f7xx_hal_gpio.o [1]
@@ -1656,6 +1968,18 @@ HAL_I2CEx_ConfigAnalogFilter
                          0x802'7ff5     0x64  Code  Gb  stm32f7xx_hal_i2c_ex.o [1]
 HAL_I2CEx_ConfigDigitalFilter
                          0x802'8059     0x62  Code  Gb  stm32f7xx_hal_i2c_ex.o [1]
+=======
+HAL_GPIO_DeInit          0x801'5607    0x1b4  Code  Gb  stm32f7xx_hal_gpio.o [1]
+HAL_GPIO_Init            0x801'53d9    0x22e  Code  Gb  stm32f7xx_hal_gpio.o [1]
+HAL_GPIO_ReadPin         0x801'57bb     0x16  Code  Gb  stm32f7xx_hal_gpio.o [1]
+HAL_GPIO_TogglePin       0x801'57eb     0x1c  Code  Gb  stm32f7xx_hal_gpio.o [1]
+HAL_GPIO_WritePin        0x801'57d1     0x1a  Code  Gb  stm32f7xx_hal_gpio.o [1]
+HAL_GetTick              0x801'77f5      0xc  Code  Wk  stm32f7xx_hal.o [1]
+HAL_I2CEx_ConfigAnalogFilter
+                         0x802'7fe5     0x64  Code  Gb  stm32f7xx_hal_i2c_ex.o [1]
+HAL_I2CEx_ConfigDigitalFilter
+                         0x802'8049     0x62  Code  Gb  stm32f7xx_hal_i2c_ex.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 HAL_I2C_DeInit           0x802'2425     0x42  Code  Gb  stm32f7xx_hal_i2c.o [1]
 HAL_I2C_GetError         0x802'2a07      0x4  Code  Gb  stm32f7xx_hal_i2c.o [1]
 HAL_I2C_GetState         0x802'2a01      0x6  Code  Gb  stm32f7xx_hal_i2c.o [1]
@@ -1663,8 +1987,13 @@ HAL_I2C_Init             0x802'2359     0xcc  Code  Gb  stm32f7xx_hal_i2c.o [1]
 HAL_I2C_IsDeviceReady    0x802'2861    0x198  Code  Gb  stm32f7xx_hal_i2c.o [1]
 HAL_I2C_Mem_Read         0x802'265f    0x202  Code  Gb  stm32f7xx_hal_i2c.o [1]
 HAL_I2C_Mem_Write        0x802'2467    0x1f8  Code  Gb  stm32f7xx_hal_i2c.o [1]
+<<<<<<< HEAD
 HAL_IWDG_Init            0x801'53d9     0x62  Code  Gb  stm32f7xx_hal_iwdg.o [1]
 HAL_IWDG_Refresh         0x801'543b      0xe  Code  Gb  stm32f7xx_hal_iwdg.o [1]
+=======
+HAL_IWDG_Init            0x801'5b61     0x62  Code  Gb  stm32f7xx_hal_iwdg.o [1]
+HAL_IWDG_Refresh         0x801'5bc3      0xe  Code  Gb  stm32f7xx_hal_iwdg.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 HAL_IncTick              0x801'a465     0x18  Code  Wk  stm32f7xx_hal.o [1]
 HAL_Init                 0x801'9531     0x28  Code  Gb  stm32f7xx_hal.o [1]
 HAL_InitTick             0x801'debd     0x84  Code  Gb  stm32f7xx_hal_timebase_tim.o [1]
@@ -1742,12 +2071,21 @@ HAL_UART_Receive         0x801'7d19    0x146  Code  Gb  stm32f7xx_hal_uart.o [1]
 HAL_UART_Transmit        0x801'7c3f     0xda  Code  Gb  stm32f7xx_hal_uart.o [1]
 HEAP$$Base              0x2005'c548            --   Gb  - Linker created -
 HEAP$$Limit             0x2005'cd48            --   Gb  - Linker created -
+<<<<<<< HEAD
 HardFault_Handler        0x802'8693      0x2  Code  Gb  stm32f7xx_it.o [1]
 Hessenberg_Form_Orthogonal
                          0x800'709d    0x2a4  Code  Lc  motion_mc.o [3]
 I2C4InitCounter         0x2004'd4d8      0x4  Data  Lc  stm32f7xx_nucleo_bus.o [1]
 I2C4_MspDeInit           0x802'7f59     0x1a  Code  Lc  stm32f7xx_nucleo_bus.o [1]
 I2C4_MspInit             0x802'7f09     0x50  Code  Lc  stm32f7xx_nucleo_bus.o [1]
+=======
+HardFault_Handler        0x802'8683      0x2  Code  Gb  stm32f7xx_it.o [1]
+Hessenberg_Form_Orthogonal
+                         0x800'709d    0x2a4  Code  Lc  motion_mc.o [3]
+I2C4InitCounter         0x2004'd4d8      0x4  Data  Lc  stm32f7xx_nucleo_bus.o [1]
+I2C4_MspDeInit           0x802'7f49     0x1a  Code  Lc  stm32f7xx_nucleo_bus.o [1]
+I2C4_MspInit             0x802'7ef9     0x50  Code  Lc  stm32f7xx_nucleo_bus.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 I2C_Flush_TXDR           0x802'2b31     0x24  Code  Lc  stm32f7xx_hal_i2c.o [1]
 I2C_IsAcknowledgeFailed
                          0x802'2c5d     0x8a  Code  Lc  stm32f7xx_hal_i2c.o [1]
@@ -1763,6 +2101,7 @@ I2C_WaitOnTXISFlagUntilTimeout
 IMUTaskHandle           0x2004'd484      0x4  Data  Gb  main.o [1]
 IMUTelemetry            0x2004'd384     0x10  Data  Gb  IMU.o [1]
 InMFX                   0x2004'd198     0x24  Data  Gb  IMU.o [1]
+<<<<<<< HEAD
 IntToUnicode             0x802'85b1     0x4e  Code  Lc  usbd_desc.o [1]
 KnobsMFX                0x2004'cf98     0x3c  Data  Gb  IMU.o [1]
 LIS3MDL_Init             0x802'362d     0x5c  Code  Gb  lis3mdl.o [1]
@@ -1776,6 +2115,21 @@ LIS3MDL_MAG_SetOutputDataRate
                          0x802'3705     0xaa  Code  Gb  lis3mdl.o [1]
 LIS3MDL_RegisterBusIO    0x802'35a5     0x86  Code  Gb  lis3mdl.o [1]
 LIS3MDL_Write_Reg        0x802'389f     0x24  Code  Gb  lis3mdl.o [1]
+=======
+IntToUnicode             0x802'85a1     0x4e  Code  Lc  usbd_desc.o [1]
+KnobsMFX                0x2004'cf98     0x3c  Data  Gb  IMU.o [1]
+LIS3MDL_Init             0x802'3639     0x5c  Code  Gb  lis3mdl.o [1]
+LIS3MDL_MAG_Enable       0x802'3695     0x2e  Code  Gb  lis3mdl.o [1]
+LIS3MDL_MAG_GetAxes      0x802'3823     0x88  Code  Gb  lis3mdl.o [1]
+LIS3MDL_MAG_GetSensitivity
+                         0x802'36c3     0x4a  Code  Gb  lis3mdl.o [1]
+LIS3MDL_MAG_SetFullScale
+                         0x802'37e9     0x3a  Code  Gb  lis3mdl.o [1]
+LIS3MDL_MAG_SetOutputDataRate
+                         0x802'3711     0xaa  Code  Gb  lis3mdl.o [1]
+LIS3MDL_RegisterBusIO    0x802'35b1     0x86  Code  Gb  lis3mdl.o [1]
+LIS3MDL_Write_Reg        0x802'38ab     0x24  Code  Gb  lis3mdl.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 LPS33HW_Init             0x802'3f4f     0x26  Code  Gb  lps331.o [1]
 LPS33HW_Initialize       0x802'40c1     0x36  Code  Lc  lps331.o [1]
 LPS33HW_PRESS_Enable     0x802'3f75     0x44  Code  Gb  lps331.o [1]
@@ -1803,11 +2157,19 @@ MX_UART5_Init            0x801'6ca3     0x3c  Code  Lc  main.o [1]
 MX_UART8_Init            0x801'6cdf     0x3e  Code  Lc  main.o [1]
 MX_USART3_UART_Init      0x801'6d1d     0x46  Code  Lc  main.o [1]
 MX_USB_DEVICE_Init       0x801'52c5     0x58  Code  Gb  usb_device.o [1]
+<<<<<<< HEAD
 MagCalibButton           0x802'345d     0xac  Code  Gb  IMU.o [1]
 MagCalibIn              0x2004'd364     0x10  Data  Gb  IMU.o [1]
 MagCalibOut             0x2004'd00c     0x34  Data  Gb  IMU.o [1]
 MagLoadCalib             0x802'3599      0xc  Code  Gb  IMU.o [1]
 MemManage_Handler        0x802'8695      0x2  Code  Gb  stm32f7xx_it.o [1]
+=======
+MagCalibButton           0x802'3469     0xac  Code  Gb  IMU.o [1]
+MagCalibIn              0x2004'd364     0x10  Data  Gb  IMU.o [1]
+MagCalibOut             0x2004'd00c     0x34  Data  Gb  IMU.o [1]
+MagLoadCalib             0x802'35a5      0xc  Code  Gb  IMU.o [1]
+MemManage_Handler        0x802'8685      0x2  Code  Gb  stm32f7xx_it.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 MotionFX_enable_9X       0x802'4d19     0x44  Code  Gb  motion_fx.o [2]
 MotionFX_getKnobs        0x802'4ba9     0xa8  Code  Gb  motion_fx.o [2]
 MotionFX_initialize      0x802'46d9    0x4d0  Code  Gb  motion_fx.o [2]
@@ -1817,6 +2179,7 @@ MotionFX_update          0x802'4d5d    0x38c  Code  Gb  motion_fx.o [2]
 MotionMC_GetCalParams    0x802'5599     0xa0  Code  Gb  motion_mc.o [3]
 MotionMC_Initialize      0x802'5301    0x298  Code  Gb  motion_mc.o [3]
 MotionMC_LoadCalFromNVM
+<<<<<<< HEAD
                          0x802'32d1     0xbe  Code  Gb  IMU.o [1]
 MotionMC_SaveCalInNVM    0x802'3399     0xbc  Code  Gb  IMU.o [1]
 MotionMC_Update          0x802'5639    0x1e8  Code  Gb  motion_mc.o [3]
@@ -1826,6 +2189,17 @@ NMI_Handler              0x802'8691      0x2  Code  Gb  stm32f7xx_it.o [1]
 NVIC_EncodePriority      0x801'a3cd     0x40  Code  Lc  stm32f7xx_hal_cortex.o [1]
 Netif_LinkSemaphore     0x2004'd460      0x4  Data  Gb  lwip.o [1]
 OTG_FS_IRQHandler        0x802'86d9      0xa  Code  Gb  stm32f7xx_it.o [1]
+=======
+                         0x802'32dd     0xbe  Code  Gb  IMU.o [1]
+MotionMC_SaveCalInNVM    0x802'33a5     0xbc  Code  Gb  IMU.o [1]
+MotionMC_Update          0x802'5639    0x1e8  Code  Gb  motion_mc.o [3]
+MotionVC_Initialize      0x802'4159    0x50e  Code  Gb  motion_vc.o [4]
+MotionVC_Update          0x802'4669     0x70  Code  Gb  motion_vc.o [4]
+NMI_Handler              0x802'8681      0x2  Code  Gb  stm32f7xx_it.o [1]
+NVIC_EncodePriority      0x801'a3cd     0x40  Code  Lc  stm32f7xx_hal_cortex.o [1]
+Netif_LinkSemaphore     0x2004'd460      0x4  Data  Gb  lwip.o [1]
+OTG_FS_IRQHandler        0x802'86c9      0xa  Code  Gb  stm32f7xx_it.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 OutMFX                  0x2004'cd18     0x78  Data  Gb  IMU.o [1]
 OutMotionVC             0x2004'd274     0x1c  Data  Gb  IMU.o [1]
 PCD_EP_OutSetupPacket_int
@@ -1843,6 +2217,7 @@ PropultionParameters    0x2004'd434      0x4  Data  Gb  freertos.o [1]
 QR_Hessenberg_Matrix.constprop.25
                          0x800'7341    0x7ec  Code  Lc  motion_mc.o [3]
 ReadRegWrap              0x802'3e21     0x54  Code  Lc  a3g4250d.o [1]
+<<<<<<< HEAD
 ReadRegWrap              0x802'3bad     0x2a  Code  Lc  h3lis331dl.o [1]
 ReadRegWrap              0x802'38c5     0x54  Code  Lc  lis3mdl.o [1]
 ReadRegWrap              0x802'40f9     0x2e  Code  Lc  lps331.o [1]
@@ -1856,12 +2231,28 @@ SHT$$PREINIT_ARRAY$$Base
                          0x802'90bc            --   Gb  - Linker created -
 SHT$$PREINIT_ARRAY$$Limit
                          0x802'90bc            --   Gb  - Linker created -
+=======
+ReadRegWrap              0x802'3bc1     0x2a  Code  Lc  h3lis331dl.o [1]
+ReadRegWrap              0x802'38d1     0x54  Code  Lc  lis3mdl.o [1]
+ReadRegWrap              0x802'40f9     0x2e  Code  Lc  lps331.o [1]
+Region$$Table$$Base      0x802'890c            --   Gb  - Linker created -
+Region$$Table$$Limit     0x802'8930            --   Gb  - Linker created -
+Rx_Buff                 0x2004'39e8   0x17d0  Data  Gb  ethernetif.o [1]
+SCB_EnableICache         0x801'6935     0x2e  Code  Lc  main.o [1]
+SHT$$INIT_ARRAY$$Base    0x802'9088            --   Gb  - Linker created -
+SHT$$INIT_ARRAY$$Limit   0x802'908c            --   Gb  - Linker created -
+SHT$$PREINIT_ARRAY$$Base
+                         0x802'9088            --   Gb  - Linker created -
+SHT$$PREINIT_ARRAY$$Limit
+                         0x802'9088            --   Gb  - Linker created -
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 SVC_Handler              0x801'526d           Code  Gb  portasm.o [1]
 SWAPBYTE                 0x801'8bb1     0x16  Code  Lc  usbd_ctlreq.o [1]
 SemaphoreForSendTelemetry
                         0x2004'd458      0x4  Data  Gb  IMU.o [1]
 SerialMutex             0x2004'd40c      0x4  Data  Gb  cli_port.o [1]
 SpacePointAlgorithm.isra.7
+<<<<<<< HEAD
                          0x802'72e9    0x390  Code  Lc  motion_fx.o [2]
 SpacePointGyroProp       0x802'1fe1    0x100  Code  Lc  motion_fx.o [2]
 StartCANTask             0x801'4b2f    0x244  Code  Gb  freertos.o [1]
@@ -1869,6 +2260,15 @@ StartCliTask             0x801'4de1      0xa  Code  Gb  freertos.o [1]
 StartConGroundStation    0x801'48f5    0x120  Code  Gb  freertos.o [1]
 StartDefaultTask         0x801'45af    0x2ea  Code  Gb  freertos.o [1]
 StartIMUTask             0x802'2d25    0x5ac  Code  Gb  IMU.o [1]
+=======
+                         0x802'72d9    0x390  Code  Lc  motion_fx.o [2]
+SpacePointGyroProp       0x802'1fe1    0x100  Code  Lc  motion_fx.o [2]
+StartCANTask             0x801'4b2f    0x244  Code  Gb  freertos.o [1]
+StartCliTask             0x801'4de1      0xa  Code  Gb  freertos.o [1]
+StartConGroundStation    0x801'48ed    0x128  Code  Gb  freertos.o [1]
+StartDefaultTask         0x801'45af    0x2e2  Code  Gb  freertos.o [1]
+StartIMUTask             0x802'2d25    0x5b8  Code  Gb  IMU.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 StartParserGroundStation
                          0x801'4a15    0x11a  Code  Gb  freertos.o [1]
 StopMotorHandler         0x801'516b     0x2c  Code  Gb  freertos.o [1]
@@ -1877,6 +2277,7 @@ SystemClockConfig_Resume
                          0x801'8b79      0x8  Code  Lc  usbd_conf.o [1]
 SystemClock_Config       0x801'6a39     0xe2  Code  Gb  main.o [1]
 SystemCoreClock         0x2000'11cc      0x4  Data  Gb  system_stm32f7xx.o [1]
+<<<<<<< HEAD
 SystemInit               0x802'8ba9     0x14  Code  Gb  system_stm32f7xx.o [1]
 TIM8_TRG_COM_TIM14_IRQHandler
                          0x802'86bb      0xa  Code  Gb  stm32f7xx_it.o [1]
@@ -1884,6 +2285,15 @@ TIM_Base_SetConfig       0x802'024d     0xc6  Code  Gb  stm32f7xx_hal_tim.o [1]
 TestModeHandler          0x801'50b7     0x30  Code  Gb  freertos.o [1]
 Tx_Buff                 0x2004'51b8   0x17d0  Data  Gb  ethernetif.o [1]
 UART8_IRQHandler         0x802'86e3      0xa  Code  Gb  stm32f7xx_it.o [1]
+=======
+SystemInit               0x802'8b75     0x14  Code  Gb  system_stm32f7xx.o [1]
+TIM8_TRG_COM_TIM14_IRQHandler
+                         0x802'86ab      0xa  Code  Gb  stm32f7xx_it.o [1]
+TIM_Base_SetConfig       0x802'024d     0xc6  Code  Gb  stm32f7xx_hal_tim.o [1]
+TestModeHandler          0x801'50b7     0x30  Code  Gb  freertos.o [1]
+Tx_Buff                 0x2004'51b8   0x17d0  Data  Gb  ethernetif.o [1]
+UART8_IRQHandler         0x802'86d3      0xa  Code  Gb  stm32f7xx_it.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 UART_AdvFeatureConfig    0x801'842d     0xda  Code  Gb  stm32f7xx_hal_uart.o [1]
 UART_CheckIdleState      0x801'8507     0x68  Code  Gb  stm32f7xx_hal_uart.o [1]
 UART_DMAAbortOnError     0x801'8641     0x1a  Code  Lc  stm32f7xx_hal_uart.o [1]
@@ -1892,7 +2302,11 @@ UART_EndTransmit_IT      0x801'865b     0x20  Code  Lc  stm32f7xx_hal_uart.o [1]
 UART_SetConfig           0x801'800b    0x3f2  Code  Gb  stm32f7xx_hal_uart.o [1]
 UART_WaitOnFlagUntilTimeout
                          0x801'856f     0xb0  Code  Gb  stm32f7xx_hal_uart.o [1]
+<<<<<<< HEAD
 USART3_IRQHandler        0x802'86b1      0xa  Code  Gb  stm32f7xx_it.o [1]
+=======
+USART3_IRQHandler        0x802'86a1      0xa  Code  Gb  stm32f7xx_it.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 USBD_CDC                0x2000'11dc     0x38  Data  Gb  usbd_cdc.o [1]
 USBD_CDC_CfgFSDesc      0x2000'1258     0x44  Data  Lc  usbd_cdc.o [1]
 USBD_CDC_CfgHSDesc      0x2000'1214     0x44  Data  Lc  usbd_cdc.o [1]
@@ -1929,6 +2343,7 @@ USBD_CtlSendData         0x801'9485     0x22  Code  Gb  usbd_ioreq.o [1]
 USBD_CtlSendStatus       0x801'94fd     0x1a  Code  Gb  usbd_ioreq.o [1]
 USBD_FS_BOSDesc         0x2000'1328      0xc  Data  Gb  usbd_desc.o [1]
 USBD_FS_ConfigStrDescriptor
+<<<<<<< HEAD
                          0x802'84f9     0x28  Code  Gb  usbd_desc.o [1]
 USBD_FS_DeviceDesc      0x2000'1314     0x14  Data  Gb  usbd_desc.o [1]
 USBD_FS_DeviceDescriptor
@@ -1945,6 +2360,24 @@ USBD_FS_SerialStrDescriptor
                          0x802'84e7     0x12  Code  Gb  usbd_desc.o [1]
 USBD_FS_USR_BOSDescriptor
                          0x802'8549      0xa  Code  Gb  usbd_desc.o [1]
+=======
+                         0x802'84e9     0x28  Code  Gb  usbd_desc.o [1]
+USBD_FS_DeviceDesc      0x2000'1314     0x14  Data  Gb  usbd_desc.o [1]
+USBD_FS_DeviceDescriptor
+                         0x802'8485      0xa  Code  Gb  usbd_desc.o [1]
+USBD_FS_InterfaceStrDescriptor
+                         0x802'8511     0x28  Code  Gb  usbd_desc.o [1]
+USBD_FS_LangIDStrDescriptor
+                         0x802'848f      0xa  Code  Gb  usbd_desc.o [1]
+USBD_FS_ManufacturerStrDescriptor
+                         0x802'84c1     0x16  Code  Gb  usbd_desc.o [1]
+USBD_FS_ProductStrDescriptor
+                         0x802'8499     0x28  Code  Gb  usbd_desc.o [1]
+USBD_FS_SerialStrDescriptor
+                         0x802'84d7     0x12  Code  Gb  usbd_desc.o [1]
+USBD_FS_USR_BOSDescriptor
+                         0x802'8539      0xa  Code  Gb  usbd_desc.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 USBD_GetConfig           0x801'92e1     0x4e  Code  Lc  usbd_ctlreq.o [1]
 USBD_GetDescriptor       0x801'8f4b    0x232  Code  Lc  usbd_ctlreq.o [1]
 USBD_GetLen              0x801'946f     0x16  Code  Lc  usbd_ctlreq.o [1]
@@ -2028,13 +2461,22 @@ USB_SetDevAddress        0x801'fe4d     0x34  Code  Gb  stm32f7xx_ll_usb.o [1]
 USB_SetDevSpeed          0x801'f50d     0x1e  Code  Gb  stm32f7xx_ll_usb.o [1]
 USB_SetTurnaroundTime    0x801'f175     0xec  Code  Gb  stm32f7xx_ll_usb.o [1]
 USB_WritePacket          0x801'fca7     0x50  Code  Gb  stm32f7xx_ll_usb.o [1]
+<<<<<<< HEAD
 UsageFault_Handler       0x802'8699      0x2  Code  Gb  stm32f7xx_it.o [1]
+=======
+UsageFault_Handler       0x802'8689      0x2  Code  Gb  stm32f7xx_it.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 UserRxBufferFS          0x2004'879c    0x800  Data  Gb  usbd_cdc_if.o [1]
 UserTxBufferFS          0x2004'8f9c    0x800  Data  Gb  usbd_cdc_if.o [1]
 VerticalConextIn        0x2004'd374     0x10  Data  Gb  IMU.o [1]
 WriteRegWrap             0x802'3e75     0x54  Code  Lc  a3g4250d.o [1]
+<<<<<<< HEAD
 WriteRegWrap             0x802'3bd9     0x2a  Code  Lc  h3lis331dl.o [1]
 WriteRegWrap             0x802'3919     0x54  Code  Lc  lis3mdl.o [1]
+=======
+WriteRegWrap             0x802'3bed     0x2a  Code  Lc  h3lis331dl.o [1]
+WriteRegWrap             0x802'3925     0x54  Code  Lc  lis3mdl.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 WriteRegWrap             0x802'4129     0x2e  Code  Lc  lps331.o [1]
 _Encoding_8859_1_Mbrlen
                          0x800'44dd      0x2  Code  Gb  xencoding_8859_1.o [5]
@@ -2095,8 +2537,13 @@ __aeabi_memmove8         0x800'a209           Code  Gb  ABImemmove.o [8]
 __aeabi_memset           0x800'433d           Code  Gb  ABImemset.o [8]
 __aeabi_ui2d             0x801'e9dd      0xe  Code  Gb  U32ToDbl.o [7]
 __aeabi_uldivmod         0x801'df51           Code  Gb  I64DivMod.o [8]
+<<<<<<< HEAD
 __call_ctors             0x802'8a45     0x18  Code  Gb  cppinit.o [5]
 __cmain                  0x802'8a5d           Code  Gb  cmain.o [8]
+=======
+__call_ctors             0x802'8a11     0x18  Code  Gb  cppinit.o [5]
+__cmain                  0x802'8a29           Code  Gb  cmain.o [8]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 __data_GetMemChunk       0x800'd135     0x2c  Code  Gb  xgetmemchunk.o [5]
 __data_GetMemChunk::start
                         0x2004'd53c      0x4  Data  Lc  xgetmemchunk.o [5]
@@ -2127,8 +2574,13 @@ __iar_cos32              0x800'7f2d      0x4  Code  Gb  cos_sin32.o [7]
 __iar_cos_medium32       0x800'7f2d      0x4  Code  Gb  cos_sin32.o [7]
 __iar_cos_mediumf        0x800'7f2d      0x4  Code  Gb  cos_sin32.o [7]
 __iar_cstart_call_ctors
+<<<<<<< HEAD
                          0x802'8a25     0x20  Code  Gb  cmain_call_ctors.o [8]
 __iar_data_init3         0x802'88ad     0x28  Code  Gb  data_init.o [8]
+=======
+                         0x802'89f1     0x20  Code  Gb  cmain_call_ctors.o [8]
+__iar_data_init3         0x802'889d     0x28  Code  Gb  data_init.o [8]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 __iar_debug_exceptions   0x800'e58e      0x1  Data  Gb  unwind_debug.o [9]
 __iar_dlfree             0x800'cc2b    0x4f6  Code  Gb  dlmalloc.o [5]
 __iar_dlmalloc           0x800'c975    0x2b6  Code  Gb  dlmalloc.o [5]
@@ -2137,7 +2589,11 @@ __iar_frexp64            0x800'b0b1           Code  Gb  frexp.o [7]
 __iar_frexpl             0x800'b0d5           Code  Gb  frexp.o [7]
 __iar_globLocale        0x2000'1398     0x48  Data  Lc  xlocale_c.o [5]
 __iar_global_Locale      0x800'bb2d      0x4  Code  Gb  xlocale_c.o [5]
+<<<<<<< HEAD
 __iar_init_vfp           0x802'891d           Code  Gb  fpinit_M.o [7]
+=======
+__iar_init_vfp           0x802'88e9           Code  Gb  fpinit_M.o [7]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 __iar_ldexp64            0x800'b14d           Code  Gb  ldexp.o [7]
 __iar_lz77_init_single3
                          0x800'43a3     0x7a  Code  Gb  lz77_init_single.o [8]
@@ -2145,7 +2601,11 @@ __iar_pow64              0x800'ac89      0x4  Code  Gb  pow64.o [7]
 __iar_pow_medium         0x800'ac89      0x4  Code  Gb  pow64.o [7]
 __iar_pow_medium64       0x800'ac89      0x4  Code  Gb  pow64.o [7]
 __iar_pow_mediuml        0x800'ac89      0x4  Code  Gb  pow64.o [7]
+<<<<<<< HEAD
 __iar_program_start      0x802'8dc9           Code  Gb  cstartup_M.o [8]
+=======
+__iar_program_start      0x802'8d95           Code  Gb  cstartup_M.o [8]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 __iar_scalbln64          0x800'b14d           Code  Gb  ldexp.o [7]
 __iar_scalbn64           0x800'b14d           Code  Gb  ldexp.o [7]
 __iar_sin32              0x800'7f31      0x4  Code  Gb  cos_sin32.o [7]
@@ -2188,6 +2648,7 @@ __iar_tan32              0x800'7ba1    0x1b4  Code  Gb  tan32.o [7]
 __iar_tan_medium32       0x800'7ba1    0x1b4  Code  Gb  tan32.o [7]
 __iar_tan_mediumf        0x800'7ba1    0x1b4  Code  Gb  tan32.o [7]
 __iar_tls$$INIT_ARRAY$$Base
+<<<<<<< HEAD
                          0x802'90c0            --   Gb  - Linker created -
 __iar_tls$$INIT_ARRAY$$Limit
                          0x802'90c0            --   Gb  - Linker created -
@@ -2199,6 +2660,19 @@ __sti__routine           0x801'63c1     0x10  Code  Lc  cli_port.o [1]
 __vector_table           0x800'0000           Data  Gb  startup_stm32f767xx.o [1]
 _call_main               0x802'8a69           Code  Gb  cmain.o [8]
 _exit                    0x802'8a85           Code  Gb  cexit.o [8]
+=======
+                         0x802'908c            --   Gb  - Linker created -
+__iar_tls$$INIT_ARRAY$$Limit
+                         0x802'908c            --   Gb  - Linker created -
+__iar_xatan              0x802'2241           Code  Gb  xatan.o [7]
+__iar_xatanf             0x800'7f35           Code  Gb  xatanf.o [7]
+__iar_zero_init3         0x800'a1cf     0x3a  Code  Gb  zero_init3.o [8]
+__low_level_init         0x802'8a47      0x4  Code  Gb  low_level_init.o [5]
+__sti__routine           0x801'63c1     0x10  Code  Lc  cli_port.o [1]
+__vector_table           0x800'0000           Data  Gb  startup_stm32f767xx.o [1]
+_call_main               0x802'8a35           Code  Gb  cmain.o [8]
+_exit                    0x802'8a51           Code  Gb  cexit.o [8]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 _gLocale_mblen           0x800'bbd3      0x4  Code  Gb  xlocale_c.o [5]
 _gLocale_mblenInt        0x800'bb55     0x2c  Code  Gb  xlocale_c.o [5]
 _gLocale_mbtowc          0x800'bbd7      0xc  Code  Gb  xlocale_c.o [5]
@@ -2206,9 +2680,15 @@ _gLocale_mbtowcInt       0x800'bb81     0x42  Code  Gb  xlocale_c.o [5]
 _gLocale_wctomb          0x800'bbe3      0x4  Code  Gb  xlocale_c.o [5]
 _gLocale_wctombInt       0x800'bbcf      0x4  Code  Gb  xlocale_c.o [5]
 _gm_                    0x2004'c064    0x1d8  Data  Lc  dlmalloc.o [5]
+<<<<<<< HEAD
 _main                    0x802'8a77           Code  Gb  cmain.o [8]
 a3g4250d_data_rate_set   0x802'5b81     0x4c  Code  Gb  a3g4250d_reg.o [1]
 a3g4250d_fifo_mode_set   0x802'5c03     0x3a  Code  Gb  a3g4250d_reg.o [1]
+=======
+_main                    0x802'8a43           Code  Gb  cmain.o [8]
+a3g4250d_data_rate_set   0x802'5b81     0x4c  Code  Gb  a3g4250d_reg.o [1]
+a3g4250d_fifo_mode_set   0x802'5bcd     0x3a  Code  Gb  a3g4250d_reg.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 a3g4250d_read_reg        0x802'5b45     0x1e  Code  Gb  a3g4250d_reg.o [1]
 a3g4250d_write_reg       0x802'5b63     0x1e  Code  Gb  a3g4250d_reg.o [1]
 abort                    0x800'd12d      0x6  Code  Gb  abort.o [5]
@@ -2229,6 +2709,7 @@ buff_ind.8726           0x2004'81e8      0x1  Data  Lc  motion_fx.o [2]
 cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)
                          0x801'ceb9    0x240  Code  Gb  cli_port.o [1]
 cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string
+<<<<<<< HEAD
                          0x802'8e2c      0x8  Data  Gb  cli_port.o [1]
 cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 10)
                          0x802'8784     0x48  Data  Gb  cli_port.o [1]
@@ -2252,11 +2733,37 @@ cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 8)
                          0x802'103c     0x34  Data  Gb  cli_port.o [1]
 cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 9)
                          0x802'8e3c      0x8  Data  Gb  cli_port.o [1]
+=======
+                         0x802'8df8      0x8  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 10)
+                         0x802'8774     0x48  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 11)
+                         0x802'8e10      0x8  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 12)
+                         0x802'87bc     0x48  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 2)
+                         0x800'd132      0x2  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 3)
+                         0x802'8eb0      0x4  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 4)
+                         0x802'8cc8      0xc  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 5)
+                         0x802'8e00      0x8  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 6)
+                         0x802'86fc     0x78  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 7)
+                         0x802'8eb4      0x4  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 8)
+                         0x802'103c     0x34  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::Pars(char *, int)::string (instance 9)
+                         0x802'8e08      0x8  Data  Gb  cli_port.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 cli::TT_CLI<(int)64, (signed char)8>::Process()
                          0x801'86d1     0x36  Code  Gb  cli_port.o [1]
 cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)
                          0x801'c911    0x5a8  Code  Gb  cli_port.o [1]
 cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string
+<<<<<<< HEAD
                          0x802'8ecc      0x4  Data  Gb  cli_port.o [1]
 cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 10)
                          0x802'8ed8      0x4  Data  Gb  cli_port.o [1]
@@ -2280,6 +2787,31 @@ cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 8)
                          0x802'8e14      0x8  Data  Gb  cli_port.o [1]
 cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 9)
                          0x802'8e1c      0x8  Data  Gb  cli_port.o [1]
+=======
+                         0x802'8e98      0x4  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 10)
+                         0x802'8ea4      0x4  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 11)
+                         0x802'8df0      0x8  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 12)
+                         0x802'8ea8      0x4  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 2)
+                         0x802'8dc0      0x8  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 3)
+                         0x802'8dc8      0x8  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 4)
+                         0x802'8e9c      0x4  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 5)
+                         0x802'8ea0      0x4  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 6)
+                         0x802'8dd0      0x8  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 7)
+                         0x802'8dd8      0x8  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 8)
+                         0x802'8de0      0x8  Data  Gb  cli_port.o [1]
+cli::TT_CLI<(int)64, (signed char)8>::ReadString(char *)::string (instance 9)
+                         0x802'8de8      0x8  Data  Gb  cli_port.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 cli::TT_CLI<(int)64, (signed char)8>::TT_CLI(TCLI_IO const *, char const *, void (*)(TCLI_IO const *, char *, int))
                          0x801'7b91     0x34  Code  Gb  cli_port.o [1]
 cli::TT_CLI_Binder<(int)64>::ReadFromBinder(cli::TT_CLI_Binder<(int)64>::FuncKeys_t, char *)
@@ -2291,6 +2823,7 @@ cli::TT_CLI_Binder<(int)64>::TT_CLI_Binder(TCLI_IO const *) [subobject]
 cli::TT_CLI_Binder<(int)64>::bind(char const *, char const *, int)
                          0x801'efe1     0x90  Code  Gb  cli_port.o [1]
 cli::TT_CLI_Binder<(int)64>::bind(char const *, char const *, int)::string
+<<<<<<< HEAD
                          0x802'89e4     0x20  Data  Gb  cli_port.o [1]
 cli::TT_CLI_Binder<(int)64>::unbind(char const *)
                          0x801'f071     0x94  Code  Gb  cli_port.o [1]
@@ -2300,6 +2833,17 @@ cli::TT_CLI_Binder<(int)64>::unbind(char const *)::string (instance 2)
                          0x802'8bdc     0x14  Data  Gb  cli_port.o [1]
 cli::TT_CLI_Binder<(int)64>::unbind(char const *)::string (instance 3)
                          0x802'8bf0     0x14  Data  Gb  cli_port.o [1]
+=======
+                         0x802'89b0     0x20  Data  Gb  cli_port.o [1]
+cli::TT_CLI_Binder<(int)64>::unbind(char const *)
+                         0x801'f071     0x94  Code  Gb  cli_port.o [1]
+cli::TT_CLI_Binder<(int)64>::unbind(char const *)::string
+                         0x802'8eac      0x4  Data  Gb  cli_port.o [1]
+cli::TT_CLI_Binder<(int)64>::unbind(char const *)::string (instance 2)
+                         0x802'8ba8     0x14  Data  Gb  cli_port.o [1]
+cli::TT_CLI_Binder<(int)64>::unbind(char const *)::string (instance 3)
+                         0x802'8bbc     0x14  Data  Gb  cli_port.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 cli::TT_CLI_CycleCmd<(int)64>::TT_CLI_CycleCmd(TCLI_IO const *)
                          0x801'e8b1      0xc  Code  Gb  cli_port.o [1]
 cli::TT_CLI_CycleCmd<(int)64>::TT_CLI_CycleCmd(TCLI_IO const *) [subobject]
@@ -2420,18 +2964,31 @@ etharp_request_dst       0x800'f885     0x2a  Code  Lc  etharp.o [1]
 etharp_tmr               0x800'ef8d     0xba  Code  Gb  etharp.o [1]
 etharp_update_arp_entry
                          0x800'f20f     0xce  Code  Lc  etharp.o [1]
+<<<<<<< HEAD
 ethbroadcast             0x802'8e4c      0x8  Data  Gb  ethernet.o [1]
+=======
+ethbroadcast             0x802'8e18      0x8  Data  Gb  ethernet.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 ethernet_input           0x801'14bd     0xc2  Code  Gb  ethernet.o [1]
 ethernet_output          0x801'1585     0x74  Code  Gb  ethernet.o [1]
 ethernetif_init          0x801'e6db     0x24  Code  Gb  ethernetif.o [1]
 ethernetif_input         0x801'e693     0x48  Code  Gb  ethernetif.o [1]
 ethernetif_notify_conn_changed
+<<<<<<< HEAD
                          0x801'4899     0x5c  Code  Gb  freertos.o [1]
 ethernetif_set_link      0x801'e707     0x52  Code  Gb  ethernetif.o [1]
 ethernetif_update_config
                          0x801'e759     0xb2  Code  Gb  ethernetif.o [1]
 ethzero                  0x802'8e54      0x8  Data  Gb  ethernet.o [1]
 exit                     0x802'8a7f      0x4  Code  Gb  exit.o [5]
+=======
+                         0x801'4891     0x5c  Code  Gb  freertos.o [1]
+ethernetif_set_link      0x801'e707     0x52  Code  Gb  ethernetif.o [1]
+ethernetif_update_config
+                         0x801'e759     0xb2  Code  Gb  ethernetif.o [1]
+ethzero                  0x802'8e20      0x8  Data  Gb  ethernet.o [1]
+exit                     0x802'8a4b      0x4  Code  Gb  exit.o [5]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 free                     0x801'a4a5      0x4  Code  Gb  heaptramp0.o [5]
 frexp                    0x800'b0b1           Code  Gb  frexp.o [7]
 frexpl                   0x800'b0b1           Code  Gb  frexp.o [7]
@@ -2473,6 +3030,7 @@ iNemoEngine_Knobs_6X    0x2004'8374     0x3c  Data  Lc  motion_fx.o [2]
 iNemoEngine_Knobs_9X    0x2004'85b4     0x3c  Data  Lc  motion_fx.o [2]
 iNemoEngine_Output_6X   0x2004'83b0    0x108  Data  Lc  motion_fx.o [2]
 iNemoEngine_Output_9X   0x2004'85f0    0x108  Data  Lc  motion_fx.o [2]
+<<<<<<< HEAD
 iNemo_quat2heading       0x802'6f09    0x3e0  Code  Lc  motion_fx.o [2]
 iNemo_setOrientation.constprop.40
                          0x802'5d41    0x3b0  Code  Lc  motion_fx.o [2]
@@ -2482,6 +3040,17 @@ iNemo_update.constprop.35
                          0x802'6875    0x4e4  Code  Lc  motion_fx.o [2]
 iNemo_update_6X.constprop.34
                          0x802'64a1    0x3d4  Code  Lc  motion_fx.o [2]
+=======
+iNemo_quat2heading       0x802'6ef9    0x3e0  Code  Lc  motion_fx.o [2]
+iNemo_setOrientation.constprop.40
+                         0x802'5d0d    0x3b0  Code  Lc  motion_fx.o [2]
+iNemo_setOrientation_6X.constprop.41
+                         0x802'60bd    0x3b0  Code  Lc  motion_fx.o [2]
+iNemo_update.constprop.35
+                         0x802'6841    0x4e4  Code  Lc  motion_fx.o [2]
+iNemo_update_6X.constprop.34
+                         0x802'646d    0x3d4  Code  Lc  motion_fx.o [2]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 icmp_dest_unreach        0x801'0f0d     0x14  Code  Gb  icmp.o [1]
 icmp_input               0x801'0d41    0x1c6  Code  Gb  icmp.o [1]
 icmp_send_response       0x801'0f35     0x90  Code  Lc  icmp.o [1]
@@ -2499,8 +3068,13 @@ ip4_output_if_src        0x801'12cb     0xf0  Code  Gb  ip4.o [1]
 ip4_reass                0x801'1c31    0x268  Code  Gb  ip4_frag.o [1]
 ip4_route                0x801'0fc5     0x80  Code  Gb  ip4.o [1]
 ip4addr_aton             0x801'0b81    0x1be  Code  Gb  ip4_addr.o [1]
+<<<<<<< HEAD
 ip_addr_any              0x802'8f20      0x4  Data  Gb  ip4_addr.o [1]
 ip_addr_broadcast        0x802'8f24      0x4  Data  Gb  ip4_addr.o [1]
+=======
+ip_addr_any              0x802'8eec      0x4  Data  Gb  ip4_addr.o [1]
+ip_addr_broadcast        0x802'8ef0      0x4  Data  Gb  ip4_addr.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 ip_data                 0x2004'd2ac     0x18  Data  Gb  ip.o [1]
 ip_frag_alloc_pbuf_custom_ref
                          0x801'1e99      0xa  Code  Lc  ip4_frag.o [1]
@@ -2528,8 +3102,11 @@ islower                  0x801'184b     0x14  Code  Gb  islower.o [5]
 isspace                  0x800'bac9     0x14  Code  Gb  isspace.o [5]
 isxdigit                 0x801'182d     0x1e  Code  Gb  isxdigit.o [5]
 joystick                0x2004'd3f4      0x8  Data  Gb  freertos.o [1]
+<<<<<<< HEAD
 l3g4200d_data_scale_set
                          0x802'5bcd     0x36  Code  Gb  a3g4250d_reg.o [1]
+=======
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 ldexp                    0x800'b14d           Code  Gb  ldexp.o [7]
 ldexpl                   0x800'b14d           Code  Gb  ldexp.o [7]
 lfree                   0x2004'd494      0x4  Data  Lc  mem.o [1]
@@ -2555,6 +3132,7 @@ low_level_init           0x801'e34d    0x12c  Code  Lc  ethernetif.o [1]
 low_level_input          0x801'e56d    0x126  Code  Lc  ethernetif.o [1]
 low_level_output         0x801'e479     0xf4  Code  Lc  ethernetif.o [1]
 lps33hw_block_data_update_set
+<<<<<<< HEAD
                          0x802'5c79     0x36  Code  Gb  lps331_reg.o [1]
 lps33hw_data_rate_set    0x802'5caf     0x36  Code  Gb  lps331_reg.o [1]
 lps33hw_power_set        0x802'5ce5     0x3a  Code  Gb  lps331_reg.o [1]
@@ -2571,6 +3149,24 @@ lwip_netconn_do_connect
 lwip_netconn_do_newconn
                          0x801'7683     0x1a  Code  Gb  api_msg.o [1]
 lwip_netconn_do_send     0x801'778d     0x6e  Code  Gb  api_msg.o [1]
+=======
+                         0x802'5c45     0x36  Code  Gb  lps331_reg.o [1]
+lps33hw_data_rate_set    0x802'5c7b     0x36  Code  Gb  lps331_reg.o [1]
+lps33hw_power_set        0x802'5cb1     0x3a  Code  Gb  lps331_reg.o [1]
+lps33hw_read_reg         0x802'5c09     0x1e  Code  Gb  lps331_reg.o [1]
+lps33hw_write_reg        0x802'5c27     0x1e  Code  Gb  lps331_reg.o [1]
+lwip_cyclic_timer        0x801'a515     0x3a  Code  Lc  timeouts.o [1]
+lwip_cyclic_timers       0x802'8874     0x28  Data  Gb  timeouts.o [1]
+lwip_htonl               0x800'f8e1     0x1c  Code  Gb  def.o [1]
+lwip_htons               0x800'f8d1     0x10  Code  Gb  def.o [1]
+lwip_init                0x801'a611     0x2a  Code  Gb  init.o [1]
+lwip_netconn_do_bind     0x801'7715     0x36  Code  Gb  api_msg.o [1]
+lwip_netconn_do_connect
+                         0x801'774b     0x36  Code  Gb  api_msg.o [1]
+lwip_netconn_do_newconn
+                         0x801'7677     0x1a  Code  Gb  api_msg.o [1]
+lwip_netconn_do_send     0x801'7781     0x6e  Code  Gb  api_msg.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 lwip_sys_mutex          0x2004'd4dc      0x4  Data  Gb  sys_arch.o [1]
 m_dcm2q_eml              0x800'4045    0x180  Code  Lc  motion_fx.o [2]
 m_kalman_3gyro.isra.6.constprop.36
@@ -2594,6 +3190,7 @@ memchr                   0x800'bbf5           Code  Gb  memchr.o [8]
 memcmp                   0x801'20f9           Code  Gb  memcmp.o [8]
 memcpy                   0x800'41d9      0xc  Code  Gb  memcpy.o [8]
 memmove                  0x800'a1a5      0xc  Code  Gb  memmove.o [8]
+<<<<<<< HEAD
 memp_FRAG_PBUF           0x802'8d50      0xc  Data  Gb  memp.o [1]
 memp_NETBUF              0x802'8d5c      0xc  Data  Gb  memp.o [1]
 memp_NETCONN             0x802'8d68      0xc  Data  Gb  memp.o [1]
@@ -2605,6 +3202,19 @@ memp_SYS_TIMEOUT         0x802'8d8c      0xc  Data  Gb  memp.o [1]
 memp_TCPIP_MSG_API       0x802'8d74      0xc  Data  Gb  memp.o [1]
 memp_TCPIP_MSG_INPKT     0x802'8d80      0xc  Data  Gb  memp.o [1]
 memp_UDP_PCB             0x802'8d38      0xc  Data  Gb  memp.o [1]
+=======
+memp_FRAG_PBUF           0x802'8d1c      0xc  Data  Gb  memp.o [1]
+memp_NETBUF              0x802'8d28      0xc  Data  Gb  memp.o [1]
+memp_NETCONN             0x802'8d34      0xc  Data  Gb  memp.o [1]
+memp_NETDB               0x802'8d64      0xc  Data  Gb  memp.o [1]
+memp_PBUF                0x802'8d70      0xc  Data  Gb  memp.o [1]
+memp_PBUF_POOL           0x802'8d7c      0xc  Data  Gb  memp.o [1]
+memp_REASSDATA           0x802'8d10      0xc  Data  Gb  memp.o [1]
+memp_SYS_TIMEOUT         0x802'8d58      0xc  Data  Gb  memp.o [1]
+memp_TCPIP_MSG_API       0x802'8d40      0xc  Data  Gb  memp.o [1]
+memp_TCPIP_MSG_INPKT     0x802'8d4c      0xc  Data  Gb  memp.o [1]
+memp_UDP_PCB             0x802'8d04      0xc  Data  Gb  memp.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 memp_free                0x801'1493     0x24  Code  Gb  memp.o [1]
 memp_init                0x801'13fb     0x20  Code  Gb  memp.o [1]
 memp_init_pool           0x801'13d1     0x2a  Code  Gb  memp.o [1]
@@ -2629,7 +3239,11 @@ memp_memory_TCPIP_MSG_INPKT_base
                         0x2004'c990     0x84  Data  Gb  memp.o [1]
 memp_memory_UDP_PCB_base
                         0x2004'c804     0x84  Data  Gb  memp.o [1]
+<<<<<<< HEAD
 memp_pools               0x802'6edc     0x2c  Data  Gb  memp.o [1]
+=======
+memp_pools               0x802'6d24     0x2c  Data  Gb  memp.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 memp_tab_FRAG_PBUF      0x2004'd4a0      0x4  Data  Lc  memp.o [1]
 memp_tab_NETBUF         0x2004'd4a4      0x4  Data  Lc  memp.o [1]
 memp_tab_NETCONN        0x2004'd4a8      0x4  Data  Lc  memp.o [1]
@@ -2651,6 +3265,7 @@ nb_send                 0x2004'd430      0x4  Data  Gb  freertos.o [1]
 nc                      0x2004'd428      0x4  Data  Gb  freertos.o [1]
 ndigs                    0x801'ec5c     0x28  Data  Lc  iar_Stoullx.o [5]
 net_state               0x2004'd543      0x1  Data  Gb  freertos.o [1]
+<<<<<<< HEAD
 netbuf_alloc             0x801'5901     0x48  Code  Gb  netbuf.o [1]
 netbuf_delete            0x801'58db     0x26  Code  Gb  netbuf.o [1]
 netbuf_new               0x801'58b9     0x22  Code  Gb  netbuf.o [1]
@@ -2665,6 +3280,22 @@ netconn_recv             0x801'5b1d     0x2a  Code  Gb  api_lib.o [1]
 netconn_recv_data        0x801'5a51     0xcc  Code  Lc  api_lib.o [1]
 netconn_send             0x801'5b73     0x24  Code  Gb  api_lib.o [1]
 netconn_sendto           0x801'5b47     0x2c  Code  Gb  api_lib.o [1]
+=======
+netbuf_alloc             0x801'5891     0x48  Code  Gb  netbuf.o [1]
+netbuf_delete            0x801'586b     0x26  Code  Gb  netbuf.o [1]
+netbuf_new               0x801'5849     0x22  Code  Gb  netbuf.o [1]
+netconn_alloc            0x801'7691     0x84  Code  Gb  api_msg.o [1]
+netconn_apimsg           0x801'58d9     0x2a  Code  Lc  api_lib.o [1]
+netconn_bind             0x801'5975     0x36  Code  Gb  api_lib.o [1]
+netconn_connect          0x801'59ab     0x36  Code  Gb  api_lib.o [1]
+netconn_err              0x801'5b27     0x26  Code  Gb  api_lib.o [1]
+netconn_new_with_proto_and_callback
+                         0x801'5903     0x72  Code  Gb  api_lib.o [1]
+netconn_recv             0x801'5aad     0x2a  Code  Gb  api_lib.o [1]
+netconn_recv_data        0x801'59e1     0xcc  Code  Lc  api_lib.o [1]
+netconn_send             0x801'5b03     0x24  Code  Gb  api_lib.o [1]
+netconn_sendto           0x801'5ad7     0x2c  Code  Gb  api_lib.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 netif_add                0x800'ec0b    0x10e  Code  Gb  netif.o [1]
 netif_default           0x2004'd4c8      0x4  Data  Gb  netif.o [1]
 netif_do_ip_addr_changed
@@ -2708,7 +3339,11 @@ osSemaphoreRelease       0x801'23df     0x54  Code  Gb  cmsis_os.o [1]
 osSemaphoreWait          0x801'2361     0x7e  Code  Gb  cmsis_os.o [1]
 osThreadCreate           0x801'21a9     0x60  Code  Gb  cmsis_os.o [1]
 os_mutex_def_lwip_sys_mutex
+<<<<<<< HEAD
                          0x802'8ea4      0x8  Data  Gb  sys_arch.o [1]
+=======
+                         0x802'8e70      0x8  Data  Gb  sys_arch.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 output_update            0x802'1b31    0x4b0  Code  Lc  motion_fx.o [2]
 pFlash                  0x2004'd290     0x1c  Data  Gb  stm32f7xx_hal_flash.o [1]
 pbuf_add_header          0x800'fc3b     0x12  Code  Gb  pbuf.o [1]
@@ -2735,8 +3370,13 @@ pbuf_skip_const          0x800'ff5f     0x28  Code  Lc  pbuf.o [1]
 pbuf_take                0x800'ff9d     0x98  Code  Gb  pbuf.o [1]
 pbuf_take_at             0x801'0035     0xa4  Code  Gb  pbuf.o [1]
 pcInterruptPriorityRegisters
+<<<<<<< HEAD
                          0x802'8f28      0x4  Data  Lc  port.o [1]
 pcb_new                  0x801'761f     0x64  Code  Lc  api_msg.o [1]
+=======
+                         0x802'8ef4      0x4  Data  Lc  port.o [1]
+pcb_new                  0x801'7613     0x64  Code  Lc  api_msg.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 plug_holes               0x801'0595     0x9c  Code  Lc  mem.o [1]
 pow                      0x800'ac89      0x4  Code  Gb  pow64.o [7]
 powl                     0x800'ac89      0x4  Code  Gb  pow64.o [7]
@@ -2780,14 +3420,22 @@ pxOverflowDelayedTaskList
                         0x2004'd4e8      0x4  Data  Lc  tasks.o [1]
 pxPortInitialiseStack    0x801'4359     0x28  Code  Gb  port.o [1]
 pxReadyTasksLists       0x2004'c778     0x8c  Data  Lc  tasks.o [1]
+<<<<<<< HEAD
 quatErr2EulerErr         0x802'6d59    0x184  Code  Lc  motion_fx.o [2]
+=======
+quatErr2EulerErr         0x802'6d51    0x184  Code  Lc  motion_fx.o [2]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 ram                     0x2004'd488      0x4  Data  Lc  mem.o [1]
 ram_end                 0x2004'd48c      0x4  Data  Lc  mem.o [1]
 ram_heap                0x2004'979c    0x654  Data  Gb  mem.o [1]
 rand                     0x801'0a8d     0x94  Code  Gb  rand.o [5]
 ranmatch                 0x801'bd3d     0x44  Code  Lc  xscanffull.o [5]
 reassdatagrams          0x2004'd45c      0x4  Data  Lc  ip4_frag.o [1]
+<<<<<<< HEAD
 recv_udp                 0x801'7585     0x9a  Code  Lc  api_msg.o [1]
+=======
+recv_udp                 0x801'7579     0x9a  Code  Lc  api_msg.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 rotAcc                  0x2004'7dc8      0x9  Data  Lc  motion_fx.o [2]
 rotAcc6X                0x2004'7dec      0x9  Data  Lc  motion_fx.o [2]
 rotGyro                 0x2004'7de0      0x9  Data  Lc  motion_fx.o [2]
@@ -2797,7 +3445,11 @@ rotMag6X                0x2004'7df8      0x9  Data  Lc  motion_fx.o [2]
 rtInfF                  0x2004'7dc0      0x4  Data  Lc  motion_fx.o [2]
 rtMinusInfF             0x2004'7dc4      0x4  Data  Lc  motion_fx.o [2]
 rt_InitInfAndNaN.isra.3
+<<<<<<< HEAD
                          0x802'5d21     0x20  Code  Lc  motion_fx.o [2]
+=======
+                         0x802'5ced     0x20  Code  Lc  motion_fx.o [2]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 s_xSemaphore            0x2004'd418      0x4  Data  Gb  ethernetif.o [1]
 samp_to_discard.7618    0x2000'11b8      0x4  Data  Lc  motion_fx.o [2]
 sampleIndex             0x2004'8798      0x1  Data  Lc  motion_fx.o [2]
@@ -2934,7 +3586,11 @@ xBlockAllocatedBit      0x2004'd444      0x4  Data  Lc  heap_4.o [1]
 xDelayedTaskList1       0x2004'd2f0     0x14  Data  Lc  tasks.o [1]
 xDelayedTaskList2       0x2004'd304     0x14  Data  Lc  tasks.o [1]
 xFreeBytesRemaining     0x2004'd43c      0x4  Data  Lc  heap_4.o [1]
+<<<<<<< HEAD
 xHeapStructSize          0x802'8f1c      0x4  Data  Lc  heap_4.o [1]
+=======
+xHeapStructSize          0x802'8ee8      0x4  Data  Lc  heap_4.o [1]
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
 xIdleStack              0x2004'bc64    0x200  Data  Lc  freertos.o [1]
 xIdleTaskHandle         0x2004'd514      0x4  Data  Lc  tasks.o [1]
 xIdleTaskTCBBuffer      0x2004'6988     0x54  Data  Lc  freertos.o [1]
@@ -2993,8 +3649,13 @@ xYieldPending           0x2004'd504      0x4  Data  Lc  tasks.o [1]
 [8] = rt7M_tl.a
 [9] = shb_l.a
 
+<<<<<<< HEAD
   163 798 bytes of readonly  code memory
     4 755 bytes of readonly  data memory
+=======
+  163 746 bytes of readonly  code memory
+    4 754 bytes of readonly  data memory
+>>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   380 230 bytes of readwrite data memory
 
 Errors: none
