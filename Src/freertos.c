@@ -111,7 +111,7 @@ void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackTyp
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const *argument)
 {
-  vTaskDelay(1000);
+  vTaskDelay(2000);
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
 
@@ -232,11 +232,8 @@ void ethernetif_notify_conn_changed(struct netif *netif)
 void StartConGroundStation(void const *argument)
 {
   /* USER CODE BEGIN StartConGroundStation */
-<<<<<<< HEAD
-=======
 
   vTaskDelay(1000);
->>>>>>> 5b8fcdc38456bd5578aed38a59b4b8c26e6872e4
   int8_t res;
 
   volatile uint16_t len;
