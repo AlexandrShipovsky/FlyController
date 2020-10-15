@@ -1,8 +1,5 @@
 /*
  * cli_cmd.cpp
- *
- *  Created on: 03 ���. 2019 �.
- *      Author: d.semenyuk
  */
 
 #include <stdint.h>
