@@ -1,8 +1,5 @@
 /*
  * cli.cpp
- *
- *  Created on: 12 ˜˜˜˜. 2019 ˜.
- *      Author: d.semenyuk (injen-d)
  */
 
 #include <stdlib.h>
@@ -10,7 +7,7 @@
 #include "cli_base.h"
 
 
-//˜˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜˜˜˜˜˜ strcmp() ˜ ˜˜˜, ˜˜˜ cmd_cmp() ˜˜˜˜˜˜˜˜˜˜ false ˜˜˜˜˜ ˜˜ ˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜˜˜˜
+//ËœËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœËœËœËœËœËœËœËœ strcmp() Ëœ ËœËœËœ, ËœËœËœ cmd_cmp() ËœËœËœËœËœËœËœËœËœËœ false ËœËœËœËœËœ ËœËœ ËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœËœËœËœ
 extern "C" bool cli_cmd_cmp(const char * str1, const char * str2)
 {
 	while(1)
@@ -22,7 +19,7 @@ extern "C" bool cli_cmd_cmp(const char * str1, const char * str2)
 	}
 }
 
-// ˜˜˜˜˜˜˜˜ ˜˜˜ ˜˜˜˜˜ ˜ ˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜˜˜
+// ËœËœËœËœËœËœËœËœ ËœËœËœ ËœËœËœËœËœ Ëœ ËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœËœËœËœËœ
 extern "C" void cli_strupr(char *s)
 {
 	do{
@@ -31,8 +28,8 @@ extern "C" void cli_strupr(char *s)
 	}while(*s != '\0');
 }
 
-// ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜
-// ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜, ˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ '\0'
+// ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœ ËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ
+// ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ, ËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ '\0'
 extern "C" bool cli_prepare_str(char* const ps, CLI_InputStrLen_t* const len)
 {
 	*len = strlen(ps);
@@ -46,7 +43,7 @@ extern "C" bool cli_prepare_str(char* const ps, CLI_InputStrLen_t* const len)
 	return true;
 }
 
-// ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ps ˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜, ˜˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜ len
+// ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ps ËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœ Ëœ ËœËœËœËœËœËœËœ, ËœËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœ len
 extern "C" bool cli_seek_first_word(char**const ps, CLI_InputStrLen_t* const len)
 //extern "C" bool cli_seek_first_word(char* &ps, CLI_InputStrLen_t &len)
 {
@@ -59,7 +56,7 @@ extern "C" bool cli_seek_first_word(char**const ps, CLI_InputStrLen_t* const len
 	}
 }
 
-// ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ps ˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜, ˜˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜ len
+// ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ps ËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœ Ëœ ËœËœËœËœËœËœËœ, ËœËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœ len
 extern "C" bool cli_seek_next_word(char**const ps, CLI_InputStrLen_t* const len)
 //extern "C" bool cli_seek_next_word(char* &ps, CLI_InputStrLen_t &len)
 {
