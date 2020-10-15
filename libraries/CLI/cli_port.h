@@ -1,8 +1,5 @@
 /*
  * cli_port.h
- *
- *  Created on: 12 ����. 2019 �.
- *      Author: d.semenyuk
  */
 
 #ifndef APP_CLI_CLI_PORT_H_
