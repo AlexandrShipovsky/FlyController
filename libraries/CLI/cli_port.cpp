@@ -1,8 +1,5 @@
 /*
  * cli_port.cpp
- *
- *  Created on: 12 ����. 2019 �.
- *      Author: d.semenyuk
  */
 
 #include <stdint.h>
