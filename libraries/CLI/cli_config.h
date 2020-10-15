@@ -1,8 +1,5 @@
 /*
  * cli_config.h
- *
- *  Created on: 12 ����. 2019 �.
- *      Author: d.semenyuk
  */
 
 #ifndef APP_CLI_CLI_CONFIG_H_
