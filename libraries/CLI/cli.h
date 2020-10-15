@@ -1,8 +1,5 @@
 /*
  * cli.h
- *
- *  Created on: 12 ����. 2019 �.
- *      Author: d.semenyuk
  */
 
 #ifndef APP_CLI_H_
