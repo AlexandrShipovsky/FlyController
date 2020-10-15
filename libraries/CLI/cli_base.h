@@ -1,8 +1,5 @@
 /*
  * cli_base.h
- *
- *  Created on: 19 ˜˜˜˜. 2019 ˜.
- *      Author: d.semenyuk
  */
 
 #ifndef APP_CLI_CLI_BASE_H_
@@ -24,7 +21,7 @@ void cli_sleep(uint32_t time_ms);
 //	CLI Plugins
 
 //------------------------------------------------------------------------------------------------------------------------------
-// ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜
+// ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ
 template<int8_t max_history_strings,  CLI_InputStrLen_t max_history_string_len>
 class TT_CLI_History
 {
@@ -92,7 +89,7 @@ class TT_CLI_History
 };
 
 //------------------------------------------------------------------------------------------------------------------------------
-// ˜˜˜˜˜˜˜˜˜˜ "˜˜˜˜˜˜˜ ˜˜˜˜˜˜"
+// ËœËœËœËœËœËœËœËœËœËœ "ËœËœËœËœËœËœËœ ËœËœËœËœËœËœ"
 template <CLI_InputStrLen_t cmd_max_len>
 class TT_CLI_Binder
 {
@@ -168,7 +165,7 @@ class TT_CLI_Binder
 };
 
 //------------------------------------------------------------------------------------------------------------------------------
-// ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜
+// ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ
 template <CLI_InputStrLen_t cmd_max_len>
 class TT_CLI_CycleCmd
 {
@@ -193,7 +190,7 @@ class TT_CLI_CycleCmd
 		Rpt = repeats;
 	}
 
-	//˜˜˜˜˜˜˜˜˜˜ true ˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜, ˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜
+	//ËœËœËœËœËœËœËœËœËœËœ true ËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ, ËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ Ëœ ËœËœËœËœËœ
 	CLI_InputStrLen_t cycle_cmd(char* const cli_cmd_string, const char break_char)
 	{
 		static bool not_first_repeat = false;
@@ -208,7 +205,7 @@ class TT_CLI_CycleCmd
 					char c;
 					if(io->read_char(&c, 0))
 					{
-						if(c == break_char)	//˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜
+						if(c == break_char)	//ËœËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœ
 						{
 							Rpt = 0;
 							not_first_repeat = false;
@@ -226,7 +223,7 @@ class TT_CLI_CycleCmd
 			not_first_repeat = true;
 			rpt_tmp--;
 			Rpt = rpt_tmp;
-			//˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜
+			//ËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ Ëœ ËœËœËœËœËœ
 			strcpy(cli_cmd_string, cmd);
 			return strlen(cli_cmd_string);
 		}
@@ -269,7 +266,7 @@ public:
 		TT_CLI_CycleCmd<cmd_max_len>(io)
 	{}
 
-	CLI_InputStrLen_t ReadString(char* const s)				//˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜
+	CLI_InputStrLen_t ReadString(char* const s)				//ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœËœËœËœ Ëœ ËœËœËœËœËœËœËœËœËœËœ Ëœ ËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ
 	{
 		CLI_InputStrLen_t length = 0;
 		CLI_InputStrLen_t cursor = 0;
@@ -278,16 +275,16 @@ public:
 		{
 			char c;
 			if(!io->read_char(&c, CLI_MAX_DELAY)) {return 0;}
-			if(c == '\x1b') // ESC (˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜)
+			if(c == '\x1b') // ESC (ËœËœËœËœËœËœ ËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœ)
 			{
 				if(!io->read_char(&c, 100))
-				{//˜˜˜˜ ˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜ - ˜˜˜˜˜˜˜˜ ˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜ Esc
+				{//ËœËœËœËœ ËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœ - ËœËœËœËœËœËœËœËœ ËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœ Esc
 
 					continue;
 				}
 				switch(c)
 				{
-				case '[':	//CSI-˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜ "\x1b["
+				case '[':	//CSI-ËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœ "\x1b["
 				{
 					if(!io->read_char(&c, CLI_MAX_DELAY)) {return 0;}
 					switch(c)
@@ -296,14 +293,14 @@ public:
 					case 'A': //UP
 						length = TT_CLI_History_t::ReadFromHistoryTop(s);
 						cursor = length;
-						io->printf("\x1b[2K\r");		//˜˜˜˜˜˜˜ ˜˜˜ ˜˜˜˜˜˜
+						io->printf("\x1b[2K\r");		//ËœËœËœËœËœËœËœ ËœËœËœ ËœËœËœËœËœËœ
 						io->printf("\r%s%s", invite, s);
 						break;
 	//DOWN
 					case 'B': //DOWN
 						length = TT_CLI_History_t::ReadFromHistoryBottom(s);
 						cursor = length;
-						io->printf("\x1b[2K\r"); 	//˜˜˜˜˜˜˜ ˜˜˜ ˜˜˜˜˜˜
+						io->printf("\x1b[2K\r"); 	//ËœËœËœËœËœËœËœ ËœËœËœ ËœËœËœËœËœËœ
 						io->printf("\r%s%s", invite, s);
 						break;
 	//RIGHT
@@ -311,7 +308,7 @@ public:
 						if(cursor < length)
 						{
 							cursor++;
-							io->printf("\x1b[C");	//˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜ 1 ˜˜˜˜˜˜˜ ˜˜˜˜˜˜
+							io->printf("\x1b[C");	//ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœ 1 ËœËœËœËœËœËœËœ ËœËœËœËœËœËœ
 						}
 						break;
 	//LEFT
@@ -319,12 +316,12 @@ public:
 						if(cursor)
 						{
 							cursor--;
-							io->printf("\x1b[D"); 	//˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜ 1 ˜˜˜˜˜˜˜ ˜˜˜˜˜
+							io->printf("\x1b[D"); 	//ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœ 1 ËœËœËœËœËœËœËœ ËœËœËœËœËœ
 						}
 						break;
 	//HOME
 					case 'H': //HOME
-						if(cursor) {io->printf("\x1b[%uD", cursor);}  //˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜
+						if(cursor) {io->printf("\x1b[%uD", cursor);}  //ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ Ëœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ
 						cursor=0;
 						break;
 					case '1': //F5-F8, HOME
@@ -332,7 +329,7 @@ public:
 						if(!io->read_char(&c, CLI_MAX_DELAY))  {break;}
 						if(c == '~') //HOME
 						{
-							if(cursor) {io->printf("\x1b[%uD", cursor);}  //˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜
+							if(cursor) {io->printf("\x1b[%uD", cursor);}  //ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ Ëœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ
 							cursor=0;
 							break;
 						}
@@ -438,7 +435,7 @@ public:
 					case 'F': //END
 						if(cursor < length)
 						{
-							if(length - cursor) {io->printf("\x1b[%uC", length-cursor);} //˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜ ˜˜˜˜˜˜
+							if(length - cursor) {io->printf("\x1b[%uC", length-cursor);} //ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ Ëœ ËœËœËœËœËœ ËœËœËœËœËœËœ
 							cursor = length;
 						}
 						break;
@@ -449,17 +446,17 @@ public:
 						{
 							if(cursor < length)
 							{
-								for(unsigned int i = cursor; i < length; i++) {s[i] = s[i+1];}	//˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜ ˜˜ 1 ˜˜˜˜˜˜˜ ˜˜˜˜˜
+								for(unsigned int i = cursor; i < length; i++) {s[i] = s[i+1];}	//ËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœ ËœËœ 1 ËœËœËœËœËœËœËœ ËœËœËœËœËœ
 								length--;
 								io->printf("%s \b", &s[cursor]);
-								if(length - cursor) {io->printf("\x1b[%uD", length-cursor);}		//˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜ ˜˜˜˜˜
+								if(length - cursor) {io->printf("\x1b[%uD", length-cursor);}		//ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœ ËœËœËœËœËœ
 							}
 						}
 						break;
 					}//switch(c)
 					break;
 				}
-				case 'O':	//SS3-˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜ "\x1bO"
+				case 'O':	//SS3-ËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœ "\x1bO"
 				{
 					if(!io->read_char(&c, CLI_MAX_DELAY)) {return 0;}
 					switch(c)
@@ -567,11 +564,11 @@ public:
 					{
 						if(cursor)
 						{
-							for(CLI_InputStrLen_t i = cursor; i <= length; i++) {s[i-1] = s[i];} //˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜ (˜˜˜˜˜˜˜ ˜˜˜˜˜˜) ˜˜˜˜˜˜˜˜ ˜˜ 1 ˜˜˜˜˜˜˜ ˜˜˜˜˜
+							for(CLI_InputStrLen_t i = cursor; i <= length; i++) {s[i-1] = s[i];} //ËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœËœËœ (ËœËœËœËœËœËœËœ ËœËœËœËœËœËœ) ËœËœËœËœËœËœËœËœ ËœËœ 1 ËœËœËœËœËœËœËœ ËœËœËœËœËœ
 							cursor--;
 							length--;
 							io->printf("\b%s \b", &s[cursor]);
-							if(length-cursor) {io->printf("\x1b[%uD", length-cursor);} 		//˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜ ˜˜˜˜˜
+							if(length-cursor) {io->printf("\x1b[%uD", length-cursor);} 		//ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœ ËœËœËœËœËœ
 						}
 					}
 					break;
@@ -581,10 +578,10 @@ public:
 				{
 					if(cursor < length)
 					{
-						for(CLI_InputStrLen_t i = cursor; i < length; i++) {s[i] = s[i+1];}		//˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜ ˜˜ 1 ˜˜˜˜˜˜˜ ˜˜˜˜˜
+						for(CLI_InputStrLen_t i = cursor; i < length; i++) {s[i] = s[i+1];}		//ËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœ ËœËœ 1 ËœËœËœËœËœËœËœ ËœËœËœËœËœ
 						length--;
 						io->printf("%s \b", &s[cursor]);
-						if(length-cursor) {io->printf("\x1b[%uD", length-cursor);}			//˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜ ˜˜˜˜˜
+						if(length-cursor) {io->printf("\x1b[%uD", length-cursor);}			//ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœ ËœËœËœËœËœ
 					}
 					break;
 				}
@@ -604,12 +601,12 @@ public:
 							}
 							else if(cursor < length)
 							{
-								for(CLI_InputStrLen_t i = length; i >= cursor; i--) {s[i+1] = s[i];}	//˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜ ˜˜ 1 ˜˜˜˜˜˜˜ ˜˜˜˜˜˜
+								for(CLI_InputStrLen_t i = length; i >= cursor; i--) {s[i+1] = s[i];}	//ËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœ ËœËœ 1 ËœËœËœËœËœËœËœ ËœËœËœËœËœËœ
 								s[cursor] = c;
 								io->printf("%s", &s[cursor]);
 								cursor++;
 								length++;
-								if(length-cursor) {io->printf("\x1b[%uD", length-cursor);}		//˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜ ˜˜˜˜˜ ˜˜˜˜˜
+								if(length-cursor) {io->printf("\x1b[%uD", length-cursor);}		//ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœ ËœËœËœËœËœ ËœËœËœËœËœ
 							}
 						}
 					}
@@ -620,7 +617,7 @@ public:
 		}//while(1)
 	}
 
-	//˜˜˜˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜, ˜˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜, ˜ ˜˜˜˜˜ ˜˜˜˜˜˜˜˜ UserCommands()
+	//ËœËœËœËœËœËœËœËœËœËœËœËœ Ëœ ËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ, ËœËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ, Ëœ ËœËœËœËœËœ ËœËœËœËœËœËœËœËœ UserCommands()
 	void Pars(char* ps, CLI_InputStrLen_t len)
 	{
 		if(!cli_prepare_str(ps, &len)){return;}
@@ -634,15 +631,15 @@ public:
 		}
 
 		//##################################################################################
-		//xxx CLI ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜
+		//xxx CLI ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ
                 /*
 		//----------------------------------------------------------------------------------
-		CLI_IF_CMD("SAVECFG", "˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜ ˜˜˜")
+		CLI_IF_CMD("SAVECFG", "ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ Ëœ ËœËœËœ")
 		{
 			CLI_NEXT_WORD();
 			TypeSavedSettings_t TypeSavedSettings = TypeSavedSettings_invalid_val;
-			CLI_IF_CMD("MAIN", "˜˜˜˜˜˜˜˜") {TypeSavedSettings = TypeSavedSettings_main;}
-			CLI_IF_CMD("RSRV", "˜˜˜˜˜˜˜˜˜") {TypeSavedSettings = TypeSavedSettings_alt1;}
+			CLI_IF_CMD("MAIN", "ËœËœËœËœËœËœËœËœ") {TypeSavedSettings = TypeSavedSettings_main;}
+			CLI_IF_CMD("RSRV", "ËœËœËœËœËœËœËœËœËœ") {TypeSavedSettings = TypeSavedSettings_alt1;}
 			if(TypeSavedSettings != TypeSavedSettings_invalid_val)
 			{
 				uint32_t status = SaveSettings(TypeSavedSettings);
@@ -654,12 +651,12 @@ public:
 			return;
 		}
 		//----------------------------------------------------------------------------------
-		CLI_IF_CMD("LOADCFG", "˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜ ˜˜˜")
+		CLI_IF_CMD("LOADCFG", "ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœ ËœËœËœ")
 		{
 			CLI_NEXT_WORD();
 			TypeSavedSettings_t TypeSavedSettings = TypeSavedSettings_invalid_val;
-			CLI_IF_CMD("MAIN", "˜˜˜˜˜˜˜˜") {TypeSavedSettings = TypeSavedSettings_main;}
-			CLI_IF_CMD("RSRV", "˜˜˜˜˜˜˜˜˜") {TypeSavedSettings = TypeSavedSettings_alt1;}
+			CLI_IF_CMD("MAIN", "ËœËœËœËœËœËœËœËœ") {TypeSavedSettings = TypeSavedSettings_main;}
+			CLI_IF_CMD("RSRV", "ËœËœËœËœËœËœËœËœËœ") {TypeSavedSettings = TypeSavedSettings_alt1;}
 			if(TypeSavedSettings != TypeSavedSettings_invalid_val)
 			{
 				uint32_t status = LoadSettings(TypeSavedSettings);
@@ -671,21 +668,21 @@ public:
 			return;
 		}
 		//----------------------------------------------------------------------------------
-		CLI_IF_CMD("DEFCFG", "˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜-˜˜˜˜˜˜˜˜˜")
+		CLI_IF_CMD("DEFCFG", "ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœ ËœËœ-ËœËœËœËœËœËœËœËœËœ")
 		{
 			LoadDefaultSettings();
 			io->printf("Default settings is loaded!\n");
 			return;
 		}
 		//----------------------------------------------------------------------------------
-		CLI_IF_CMD("GETCFG", "˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜")
+		CLI_IF_CMD("GETCFG", "ËœËœËœËœËœ ËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœ")
 		{
 			PrintSettings(io->printf);
 			ClbrPrint(io->printf);
 			return;
 		}*/
 		//----------------------------------------------------------------------------------
-		CLI_IF_CMD("CYCLE", "˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜, ˜˜˜˜˜˜: cycle 10 50 get param1\n\t (˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ \"get param1\" 10 ˜˜˜ ˜ ˜˜˜˜˜˜ 50 ˜˜)")
+		CLI_IF_CMD("CYCLE", "ËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ, ËœËœËœËœËœËœ: cycle 10 50 get param1\n\t (ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ \"get param1\" 10 ËœËœËœ Ëœ ËœËœËœËœËœËœ 50 ËœËœ)")
 		{
 			uint32_t val1;
 			CLI_NEXT_WORD();
@@ -696,11 +693,11 @@ public:
 			sscanf(ps, "%u", &val2);
 			CLI_NEXT_WORD();
 			TT_CLI_CycleCmd<cmd_max_len>::cycle_cmd_init(ps, len, val1, val2);
-			io->printf("˜ommand \"%s\" repeat %u times with pause %u ms ...\n", TT_CLI_CycleCmd<cmd_max_len>::cmd, val1, val2);
+			io->printf("Ëœommand \"%s\" repeat %u times with pause %u ms ...\n", TT_CLI_CycleCmd<cmd_max_len>::cmd, val1, val2);
 			return;
 		}
 		//----------------------------------------------------------------------------------
-		CLI_IF_CMD("BIND", "˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ (F1...F12), ˜˜˜˜˜˜: bind f1 set param1 123")
+		CLI_IF_CMD("BIND", "ËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ (F1...F12), ËœËœËœËœËœËœ: bind f1 set param1 123")
 		{
 			CLI_NEXT_WORD();
 			char* key_name = ps;
@@ -709,7 +706,7 @@ public:
 			return;
 		}
 		//----------------------------------------------------------------------------------
-		CLI_IF_CMD("UNBIND", "˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ (F1...F12, all - ˜˜˜ ˜˜˜˜˜), ˜˜˜˜˜˜: unbind f1")
+		CLI_IF_CMD("UNBIND", "ËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ ËœËœËœËœËœËœËœ (F1...F12, all - ËœËœËœ ËœËœËœËœËœ), ËœËœËœËœËœËœ: unbind f1")
 		{
 			CLI_NEXT_WORD();
 			TT_CLI_Binder<cmd_max_len>::unbind(ps);
@@ -717,7 +714,7 @@ public:
 		}
 		//----------------------------------------------------------------------------------
 		//##################################################################################
-		UserParser(io, ps, len);	//˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜
+		UserParser(io, ps, len);	//ËœËœËœËœËœËœ ËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœËœ ËœËœËœËœËœËœ
 	}
 
 	void Process()
